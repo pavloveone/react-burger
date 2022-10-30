@@ -1,0 +1,22 @@
+.header {
+    width: 1280px;
+    margin: 0 auto;
+    background: #1C1C21;
+}
+
+.navigation {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    padding-left: 112px;
+    padding-right: 289px;
+}

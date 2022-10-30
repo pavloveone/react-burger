@@ -1,0 +1,61 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: scroll;
+    height: 800px;
+}
+
+.title {
+    text-align: left;
+    padding-left: 0;
+    padding-top: 40px;
+}
+
+.tabs {
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.element {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 32px;
+}
+
+.element_title {
+    composes: title;
+    padding-bottom: 24px;
+}
+
+.card_container {
+
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 272px; 
+}
+
+.card_image {
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 240px;
+    height: 120px;
+}
+
+.price_container {
+    display: flex;
+    align-items: center;
+}
+
+.price_text {
+    padding-right: 9px;
+}
