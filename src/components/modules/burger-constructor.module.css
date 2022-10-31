@@ -13,6 +13,8 @@
     height: 620px;
     overflow: scroll;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .order_info {

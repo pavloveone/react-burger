@@ -1,5 +1,5 @@
 .header {
-    width: 1280px;
+    width: 100%;
     margin: 0 auto;
     background: #1C1C21;
 }
@@ -8,6 +8,7 @@
     display: flex;
     list-style-type: none;
     align-items: center;
+    justify-content: center;
 }
 
 .link {
@@ -19,4 +20,12 @@
 .logo {
     padding-left: 112px;
     padding-right: 289px;
+}
+
+.text:active {
+    color: #F2F2F3;
+}
+
+a:active {
+    color: #F2F2F3;
 }

@@ -6,13 +6,7 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from '../modules/burger-ingredients.module.css';
 
-import bun_1 from '../../images/bun-02.png';
-import bun_2 from '../../images/bun-01.png';
-import sauce_1 from '../../images/sauce-02.png';
-import sauce_2 from '../../images/sauce-04.png';
-import sauce_3 from '../../images/sauce-03.png';
-import sauce_4 from '../../images/sauce-01.png';
-
+import { data } from '../../utils/data';
 
 export const BurgerIngredients = () => {
     const [current, setCurrent] = React.useState('one')
@@ -35,22 +29,22 @@ export const BurgerIngredients = () => {
             <div className={styles.card_container}>
                 <div className={styles.card}>
                     <Counter count={1} size="default" />
-                    <img src={bun_1} className={`${styles.card_image} p-4`}/>
+                    <img src={data[0].image} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>20</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[0].price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>Краторная булка N-200i</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[0].name}</p>
                 </div>
             </div>
                 <div className={styles.card}>
                     <Counter count={1} size="default" />
-                    <img src={bun_2} className={`${styles.card_image} p-4`}/>
+                    <img src={data[14].image} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>20</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[14].price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>Флюоресцентная булка R2-D3</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[14].name}</p>
                 </div>
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Соусы</h2>
@@ -58,42 +52,128 @@ export const BurgerIngredients = () => {
             <div className={styles.card_container}>
                 <div className={styles.card}>
                     <Counter count={1} size="default" />
-                    <img src={sauce_1} className={`${styles.card_image} p-4`}/>
+                    <img src={data[3].image} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>30</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[3].price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>Соус Spicy-X</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[3].name}</p>
                 </div>
             </div>
                 <div className={styles.card}>
                     <Counter count={1} size="default" />
-                    <img src={sauce_2} className={`${styles.card_image} p-4`}/>
+                    <img src={data[6].image} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>30</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[6].price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>Соус фирменный Space Sauce</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[6].name}</p>
                 </div>
                 <div className={styles.card}>
                     <Counter count={1} size="default" />
-                    <img src={sauce_3} className={`${styles.card_image} p-4`}/>
+                    <img src={data[5].image} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>30</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[5].price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>Соус</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[5].name}</p>
                 </div>
                 <div className={styles.card}>
                     <Counter count={1} size="default" />
-                    <img src={sauce_4} className={`${styles.card_image} p-4`}/>
+                    <img src={data[9].image} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>30</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[9].price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>Соус</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[9].name}</p>
                 </div>
-        </div>      
+        </div>
+        <h2 className={`${styles.element_title} text text_type_main-medium`}>Начинки</h2>
+        <div className={styles.element}>
+            <div className={styles.card_container}>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[2].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[2].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[2].name}</p>
+                </div>
+            </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[4].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[4].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[4].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[7].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[7].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[7].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[8].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[8].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[8].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[10].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[10].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[10].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[11].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[11].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[11].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[12].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[12].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[12].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[13].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[13].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[13].name}</p>
+                </div>
+                <div className={styles.card}>
+                    <Counter count={1} size="default" />
+                    <img src={data[1].image} className={`${styles.card_image} p-4`}/>
+                    <div className={`${styles.price_container} p-1`}>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{data[1].price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{data[1].name}</p>
+                </div>
+        </div>           
     </section>
     )
   }
