@@ -6,10 +6,9 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from '../modules/burger-constructor.module.css';
 
-import { data } from '../../utils/data';
+export const BurgerConstructor = ({data, onOpen}) => {
+    
 
-
-export const BurgerConstructor = ({data}) => {
     return (
       <div className={styles.burger_constructor}>
           <ConstructorElement
@@ -98,7 +97,7 @@ export const BurgerConstructor = ({data}) => {
                 <p className={`${styles.price} text text_type_digits-medium`}>610</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button type="primary" size="medium">Нажми на меня</Button>
+            <Button type="primary" size="medium" onClick={onOpen}>Нажми на меня</Button>
         </div>
       </div>
     )

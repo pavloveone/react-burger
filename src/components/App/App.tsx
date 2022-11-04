@@ -1,9 +1,12 @@
 import React from 'react';
+import '../../App.css';
+
+import { AppHeader } from '../app-header/app-header';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
-import '../../App.css';
-import { AppHeader } from '../app-header/app-header';
-import { useEffect } from 'react';
+import { Modal } from '../modal/modal';
+import { OrderDetails } from '../order-details/order-details';
+
 
 function App() {
 
@@ -24,16 +27,31 @@ function App() {
   }, []);
 
   const { data } = state;
-  console.log(`posle montirovaniya: ${state.data}`);
+
+
+  const [isVisible, setIsVisible] = React.useState(false)
+
+  function handleOpen() {
+      setIsVisible(true);
+  };
+
+  function handleClose() {
+      setIsVisible(false);
+  };
+
+
   return (
     <div className="App">
       <AppHeader />
       { state.data.length && (
         <div className="content">
-          <BurgerIngredients  data={state.data} />
-          <BurgerConstructor data={state.data} />
+          <BurgerIngredients onOpen={handleOpen} data={state.data} />
+          <BurgerConstructor onOpen={handleOpen} data={state.data} />
         </div>
       )}
+      <Modal isVisible={isVisible} onClose={handleClose}>
+        <OrderDetails />
+      </Modal>
     </div>
   );
 }
