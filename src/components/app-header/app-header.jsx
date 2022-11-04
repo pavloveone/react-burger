@@ -9,7 +9,7 @@ import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-export const AppHeader = () => {
+export function AppHeader() {
     return (
         <header className={styles.header}>
             <nav className={`${styles.navigation} p-4`}>

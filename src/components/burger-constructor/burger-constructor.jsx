@@ -9,7 +9,7 @@ import styles from '../modules/burger-constructor.module.css';
 import { data } from '../../utils/data';
 
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = ({data}) => {
     return (
       <div className={styles.burger_constructor}>
           <ConstructorElement
