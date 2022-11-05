@@ -10,7 +10,7 @@ const modalRootElement = document.getElementById("modal-root");
 export function Modal(props) {
 
     return ReactDOM.createPortal(
-        <ModalOverlay>
+        <>
             <div className={styles.container}>
                 <div className={`${styles.header} p-10`}>
                     <h2 className={`${styles.title} text text_type_main-large`}>{props.header}</h2>
@@ -18,6 +18,7 @@ export function Modal(props) {
                 </div>
                 {props.children}
             </div> 
-        </ModalOverlay>,
+            <ModalOverlay />
+        </>,
         modalRootElement)
 }

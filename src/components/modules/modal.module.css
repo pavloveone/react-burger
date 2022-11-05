@@ -10,7 +10,7 @@
     border-radius: 40px;
     margin: 0 auto;
     align-items: center;
-    position: absolute;
+    position: fixed;
     left: 0%;
     right: 0%;
     top: 2%;
