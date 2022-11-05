@@ -1,0 +1,21 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.image {
+    width: 480px;
+    height: 240px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}

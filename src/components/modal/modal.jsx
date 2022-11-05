@@ -6,22 +6,17 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const modalRootElement = document.getElementById("modal-root");
 
-export function Modal(props) {
 
-    if(!props.isVisible) {  
-        return null
-    }
+export function Modal(props) {
 
     return ReactDOM.createPortal(
         <ModalOverlay>
             <div className={styles.container}>
-                <div className={`${styles.header} p-40`}>
-                    <h2 className={`${styles.title} text text_type_main-large`}>Детали ингредиента</h2>
+                <div className={`${styles.header} p-10`}>
+                    <h2 className={`${styles.title} text text_type_main-large`}>{props.header}</h2>
                     <CloseIcon type="primary" onClick={props.onClose}/>
                 </div>
-                <div className={styles.body}>
-                    {props.children}
-                </div>
+                {props.children}
             </div> 
         </ModalOverlay>,
         modalRootElement)

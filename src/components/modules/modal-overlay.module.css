@@ -1,5 +1,7 @@
 .overlay {
     background-color: #000000;
+    position: relative;
+    z-index: 0;
     opacity:  .6;
     width: 100%;
     height: 100%;

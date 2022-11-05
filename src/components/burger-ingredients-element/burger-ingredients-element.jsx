@@ -7,18 +7,22 @@ import styles from '../modules/burger-ingredients.module.css';
 
 
 
-export function BurgerIngredientsElement({ image, price, name, onOpen }) {
+export function BurgerIngredientsElement({item, onOpen}) {
+    
+    const handleClick=() => {
+        onOpen(item);
+    }
 
     return(
-        <div className={styles.card_container}>
-                <div className={styles.card}>
+        <div className={styles.card_container} onClick={handleClick}>
+                <div className={styles.card} >
                     <Counter count={1} size="default" />
-                    <img src={image} className={`${styles.card_image} p-4`} onClick={onOpen}/>
+                    <img src={item.image} alt={item.name} className={`${styles.card_image} p-4`}/>
                     <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>{price}</p>
+                        <p className={`${styles.price_text} text text_type_digits-default`}>{item.price}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>{name}</p>
+                    <p className={`${styles.card_caption} text text_type_main-default`}>{item.name}</p>
                 </div>
             </div>
     );

@@ -28,30 +28,15 @@ function App() {
 
   const { data } = state;
 
-
-  const [isVisible, setIsVisible] = React.useState(false)
-
-  function handleOpen() {
-      setIsVisible(true);
-  };
-
-  function handleClose() {
-      setIsVisible(false);
-  };
-
-
   return (
     <div className="App">
       <AppHeader />
       { state.data.length && (
         <div className="content">
-          <BurgerIngredients onOpen={handleOpen} data={state.data} />
-          <BurgerConstructor onOpen={handleOpen} data={state.data} />
+          <BurgerIngredients data={state.data} />
+          <BurgerConstructor data={state.data} />
         </div>
       )}
-      <Modal isVisible={isVisible} onClose={handleClose}>
-        <OrderDetails />
-      </Modal>
     </div>
   );
 }

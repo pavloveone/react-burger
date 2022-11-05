@@ -4,9 +4,28 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from '../modules/burger-ingredients.module.css';
 
+import { Modal } from '../modal/modal';
 import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
-export function BurgerIngredients({data, onOpen}) {
+export function BurgerIngredients({data}) {
+
+    const bunArr = [data][0].filter((item) => item.type === 'bun');
+    const sauceArr = [data][0].filter((item) => item.type === 'sauce');
+    const mainArr = [data][0].filter((item) => item.type === 'main');
+
+    const [isVisibleIngredient, setIsVisibleIngredient] = React.useState(false)
+    const [currentItem, setCurrentItem] = React.useState()
+
+    const showDetails = React.useCallback((item) => {
+        setCurrentItem(item);
+        setIsVisibleIngredient(true);
+    }, [])
+
+    function handleCloseIngredient() {
+        setIsVisibleIngredient(false);
+    };
+
 
     const [current, setCurrent] = React.useState('one')
     return (
@@ -24,29 +43,28 @@ export function BurgerIngredients({data, onOpen}) {
             </Tab>
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Булки</h2>
-        <div className={styles.element}>
-           <BurgerIngredientsElement name={data[0].name} image={data[0].image} price={data[0].price} onOpen={onOpen} />
-           <BurgerIngredientsElement price={data[14].price} name={data[14].name} image={data[14].image} onOpen={onOpen} />
+        <div className={styles.element}> {
+            bunArr.map((item) => (
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+            ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Соусы</h2>
-        <div className={styles.element}>
-            <BurgerIngredientsElement price={data[3].price} name={data[3].name} image={data[3].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[6].price} name={data[6].name} image={data[6].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[5].price} name={data[5].name} image={data[5].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[9].price} name={data[9].name} image={data[9].image} onOpen={onOpen} />
+        <div className={styles.element}> {
+            sauceArr.map((item) => (
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+            ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Начинки</h2>
-        <div className={styles.element}>
-            <BurgerIngredientsElement price={data[1].price} name={data[1].name} image={data[1].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[2].price} name={data[2].name} image={data[2].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[4].price} name={data[4].name} image={data[4].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[7].price} name={data[7].name} image={data[7].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[8].price} name={data[8].name} image={data[8].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[10].price} name={data[10].name} image={data[10].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[11].price} name={data[11].name} image={data[11].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[12].price} name={data[12].name} image={data[12].image} onOpen={onOpen} />
-            <BurgerIngredientsElement price={data[13].price} name={data[13].name} image={data[13].image} onOpen={onOpen} />
-        </div>           
+        <div className={styles.element}> {
+            mainArr.map((item) => (
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+            ))}
+        </div>
+        {isVisibleIngredient &&(
+            <Modal onClose={handleCloseIngredient} header={'Детали ингредиента'}>
+                <IngredientDetails ingredient={currentItem} />
+            </Modal>
+        )}         
     </section>
     )
   }
