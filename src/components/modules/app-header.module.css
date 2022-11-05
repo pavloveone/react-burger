@@ -22,10 +22,6 @@
     padding-right: 289px;
 }
 
-.text:active {
-    color: #F2F2F3;
-}
-
-a:active {
+.text:hover {
     color: #F2F2F3;
 }

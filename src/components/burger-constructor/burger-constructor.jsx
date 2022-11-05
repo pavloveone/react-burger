@@ -14,12 +14,20 @@ export const BurgerConstructor = ({data}) => {
 
     const [isVisibleOrder, setIsVisibleOrder] = React.useState(false)
 
+    function handleEscCloseOrder(e) {
+        if(e.key === 'Escape') {
+            handleCloseOrder();
+        }
+    }
+
     function handleOpenOrder(e) {
         setIsVisibleOrder(true);
+        e.target.addEventListener('keydown', handleEscCloseOrder)
     };
 
     function handleCloseOrder(e) {
         setIsVisibleOrder(false);
+        e.target.removeEventListener('keydown', handleEscCloseOrder)
     };
 
     return (

@@ -9,7 +9,7 @@ import styles from '../modules/burger-ingredients.module.css';
 
 export function BurgerIngredientsElement({item, onOpen}) {
     
-    const handleClick=() => {
+    const handleClick=(e) => {
         onOpen(item);
     }
 
