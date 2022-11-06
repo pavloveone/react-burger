@@ -1,24 +1,25 @@
 import React from 'react';
-import '../../App.css';
+import './App.css';
+
+import { burgerApiUrl } from '../../utils/variables.js'
+import { checkReponse } from '../../utils/variables.js';
 
 import { AppHeader } from '../app-header/app-header';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
-import { Modal } from '../modal/modal';
-import { OrderDetails } from '../order-details/order-details';
 
 
 function App() {
 
-  const url = 'https://norma.nomoreparties.space/api/ingredients';
+
 
   const [state, setState] = React.useState({
     data: []
   });
 
   React.useEffect(() => {
-    fetch(url)
-    .then(res => res.json())
+    fetch(burgerApiUrl)
+    .then(checkReponse)
     .then(data => setState({
       ...state,
       data: data.data
@@ -31,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <AppHeader />
-      { state.data.length && (
+      { state.data.length > 0 && (
         <div className="content">
           <BurgerIngredients data={state.data} />
           <BurgerConstructor data={state.data} />

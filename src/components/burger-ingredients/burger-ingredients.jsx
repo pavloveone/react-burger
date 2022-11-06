@@ -1,8 +1,9 @@
 import React from "react";
+import  propTypes  from 'prop-types';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import styles from '../modules/burger-ingredients.module.css';
+import styles from './burger-ingredients.module.css';
 
 import { Modal } from '../modal/modal';
 import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
@@ -10,19 +11,29 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
 export function BurgerIngredients({data}) {
 
-    const bunArr = [data][0].filter((item) => item.type === 'bun');
-    const sauceArr = [data][0].filter((item) => item.type === 'sauce');
-    const mainArr = [data][0].filter((item) => item.type === 'main');
+    const bunArr = React.useMemo(() => 
+        data.filter((item) => 
+            item.type === 'bun')
+        );
+    const sauceArr = React.useMemo(() => 
+        data.filter((item) => 
+            item.type === 'sauce')
+        );
+    const mainArr = React.useMemo(() => 
+        data.filter((item) => 
+            item.type === 'main')
+        );
 
     const [isVisibleIngredient, setIsVisibleIngredient] = React.useState(false)
-    const [currentItem, setCurrentItem] = React.useState()
+    const [currentItem, setCurrentItem] = React.useState(null)
 
-    const showDetails = React.useCallback((item) => {
+    const showDetails = (item) => {
         setCurrentItem(item);
         setIsVisibleIngredient(true);
-    }, [])
+    };
 
     function handleCloseIngredient() {
+        setCurrentItem(null)
         setIsVisibleIngredient(false);
     };
 
@@ -68,3 +79,7 @@ export function BurgerIngredients({data}) {
     </section>
     )
   }
+
+BurgerIngredients.ReactPropTypes = {
+    data: propTypes.arrayOf.isRequired
+}

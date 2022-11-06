@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../modules/order-details.module.css';
+import styles from './order-details.module.css';
 
 import imageOrder from '../../images/graphics.svg';
 

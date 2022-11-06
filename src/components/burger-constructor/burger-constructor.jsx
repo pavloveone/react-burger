@@ -1,33 +1,28 @@
 import React from "react";
+import  propTypes  from 'prop-types';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import styles from '../modules/burger-constructor.module.css';
+import styles from './burger-constructor.module.css';
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 
 export const BurgerConstructor = ({data}) => {
 
-    const notBunArr = [data][0].filter((item) => item.type != 'bun');
+    const withOutBunArr = data.filter((item) => item.type !== 'bun');
+    const bun = data.find((item) => item.name === 'Краторная булка N-200i');
 
     const [isVisibleOrder, setIsVisibleOrder] = React.useState(false)
 
-    function handleEscCloseOrder(e) {
-        if(e.key === 'Escape') {
-            handleCloseOrder();
-        }
-    }
 
     function handleOpenOrder(e) {
         setIsVisibleOrder(true);
-        e.target.addEventListener('keydown', handleEscCloseOrder)
     };
 
     function handleCloseOrder(e) {
         setIsVisibleOrder(false);
-        e.target.removeEventListener('keydown', handleEscCloseOrder)
     };
 
     return (
@@ -35,13 +30,13 @@ export const BurgerConstructor = ({data}) => {
           <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={data[0].name + ' (верх)'}
-                price={data[0].price}
-                thumbnail={data[0].image}
+                text={bun.name + ' (верх)'}
+                price={bun.price}
+                thumbnail={bun.image}
             />
           <div className={styles.content}>
               {
-                  notBunArr.map((item) => (
+                  withOutBunArr.map((item) => (
                       <ConstructorElement
                       key={item._id}
                       text={item.name}
@@ -51,10 +46,10 @@ export const BurgerConstructor = ({data}) => {
                   ))}
             </div>
             <ConstructorElement
-                text={data[0].name + ' (низ)'}
-                thumbnail={data[0].image}
+                text={bun.name + ' (низ)'}
+                thumbnail={bun.image}
                 isLocked={true}
-                price={data[0].price}
+                price={bun.price}
                 type="bottom"
             />
         <div className={styles.order_info}>
@@ -71,4 +66,8 @@ export const BurgerConstructor = ({data}) => {
         )}
       </div>
     )
+  }
+
+  BurgerConstructor.ReactPropTypes = {
+      data: propTypes.arrayOf.isRequired
   }

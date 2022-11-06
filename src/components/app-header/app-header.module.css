@@ -22,6 +22,7 @@
     padding-right: 289px;
 }
 
-.text:hover {
+.text {
+    text-decoration: none;
     color: #F2F2F3;
 }

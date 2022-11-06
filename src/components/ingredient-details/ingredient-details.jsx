@@ -1,11 +1,12 @@
 import React from 'react';
+import  propTypes  from 'prop-types';
 
-import styles from '../modules/ingredient-details.module.css';
+import styles from './ingredient-details.module.css';
 
 export function IngredientDetails({ingredient}) {
     return (
         <div className={styles.body}>
-            <img className={styles.image} alt='image' src={ingredient.image}/>
+            <img className={styles.image} alt={`изображение ${ingredient.name}`} src={ingredient.image}/>
             <span className={`${styles.title} text text_type_main-medium`}>{ingredient.name}</span>
             <div className={`${styles.container} pb-15`}>
                 <div className={`${styles.info} pl-5`}>
@@ -27,3 +28,7 @@ export function IngredientDetails({ingredient}) {
             </div>
         </div>)
 }
+
+IngredientDetails.ReactPropTypes = {
+    ingredient: propTypes.arrayOf.isRequired 
+};
