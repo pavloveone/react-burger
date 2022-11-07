@@ -4,10 +4,11 @@ import  propTypes  from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import styles from './burger-constructor.module.css';
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
+import { ingredientTypes } from '../../utils/variables';
+
+import styles from './burger-constructor.module.css';
 
 export const BurgerConstructor = ({data}) => {
 
@@ -69,5 +70,5 @@ export const BurgerConstructor = ({data}) => {
   }
 
   BurgerConstructor.ReactPropTypes = {
-      data: propTypes.arrayOf.isRequired
+      data: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
   }

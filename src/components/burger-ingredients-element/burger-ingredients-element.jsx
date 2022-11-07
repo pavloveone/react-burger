@@ -1,6 +1,8 @@
 import React from 'react';
 import  propTypes  from 'prop-types';
 
+import { ingredientTypes } from '../../utils/variables';
+
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -30,6 +32,6 @@ export function BurgerIngredientsElement({item, onOpen}) {
 }
 
 BurgerIngredientsElement.ReactPropTypes = {
-    item: propTypes.arrayOf.isRequired,
+    item: propTypes.arrayOf(ingredientTypes.isRequired).isRequired,
     onOpen: propTypes.func.isRequired
 }

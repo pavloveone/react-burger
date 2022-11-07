@@ -8,6 +8,7 @@ import styles from './burger-ingredients.module.css';
 import { Modal } from '../modal/modal';
 import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { ingredientTypes } from '../../utils/variables';
 
 export function BurgerIngredients({data}) {
 
@@ -81,5 +82,5 @@ export function BurgerIngredients({data}) {
   }
 
 BurgerIngredients.ReactPropTypes = {
-    data: propTypes.arrayOf.isRequired
+    data: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import  propTypes  from 'prop-types';
 
+import { ingredientTypes } from '../../utils/variables';
+
 import styles from './ingredient-details.module.css';
 
 export function IngredientDetails({ingredient}) {
@@ -30,5 +32,5 @@ export function IngredientDetails({ingredient}) {
 }
 
 IngredientDetails.ReactPropTypes = {
-    ingredient: propTypes.arrayOf.isRequired 
+    ingredient: propTypes.arrayOf(ingredientTypes.isRequired).isRequired 
 };

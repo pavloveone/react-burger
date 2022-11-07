@@ -17,7 +17,7 @@ export function Modal (props) {
         return (e) => {
             document.removeEventListener('keydown', handleEscCloseModal)
         }
-    })
+    }, [])
 
     function handleEscCloseModal(e) {
         if(e.key === 'Escape') {
