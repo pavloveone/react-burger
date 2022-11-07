@@ -54,6 +54,7 @@ export function BurgerIngredients({data}) {
             Начинки
             </Tab>
         </div>
+        <div className={styles.content}>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Булки</h2>
         <div className={styles.element}> {
             bunArr.map((item) => (
@@ -76,7 +77,8 @@ export function BurgerIngredients({data}) {
             <Modal onClose={handleCloseIngredient} header={'Детали ингредиента'}>
                 <IngredientDetails ingredient={currentItem} />
             </Modal>
-        )}         
+        )}
+        </div>         
     </section>
     )
   }
