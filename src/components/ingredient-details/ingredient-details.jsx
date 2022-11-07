@@ -32,5 +32,5 @@ export function IngredientDetails({ingredient}) {
 }
 
 IngredientDetails.ReactPropTypes = {
-    ingredient: propTypes.arrayOf(ingredientTypes.isRequired).isRequired 
+    ingredient: ingredientTypes.isRequired
 };

@@ -32,6 +32,6 @@ export function BurgerIngredientsElement({item, onOpen}) {
 }
 
 BurgerIngredientsElement.ReactPropTypes = {
-    item: propTypes.arrayOf(ingredientTypes.isRequired).isRequired,
+    item: ingredientTypes.isRequired,
     onOpen: propTypes.func.isRequired
 }
