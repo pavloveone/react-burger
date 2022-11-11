@@ -1,0 +1,37 @@
+.burger_constructor {
+    width: 100%;
+    padding-top: 100px;
+    padding-left: 56px;
+
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    height: 620px;
+    overflow: scroll;
+    overflow-x: hidden;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.order_info {
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 106px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.price_container {
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.price {
+    padding-right: 10px;
+}

@@ -1,0 +1,28 @@
+.header {
+    width: 100%;
+    margin: 0 auto;
+    background: #1C1C21;
+}
+
+.navigation {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    padding-left: 112px;
+    padding-right: 289px;
+}
+
+.text {
+    text-decoration: none;
+    color: #F2F2F3;
+}
