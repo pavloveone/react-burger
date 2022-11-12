@@ -8,34 +8,37 @@ import { AppHeader } from '../app-header/app-header';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 
+import { DataContext } from '../../services/data-context';
+
 
 function App() {
 
-
-
-  const [state, setState] = React.useState({
+  const [ingredients, setIngredients] = React.useState({
     data: []
   });
 
   React.useEffect(() => {
     fetch(burgerApiUrl)
     .then(checkReponse)
-    .then(data => setState({
-      ...state,
+    .then(data => setIngredients({
+      ...ingredients,
       data: data.data
     }))
     .catch(err => console.log(`Произошла ошибка при загрузке данных, текст ошибки: ${err}`));
   }, []);
 
-  const { data } = state;
+  const { data } = ingredients;
 
   return (
     <div className="App">
+      {/* {console.log(setIngredients)} */}
       <AppHeader />
-      { state.data.length > 0 && (
+      { ingredients.data.length > 0 && (
         <div className="content">
-          <BurgerIngredients data={state.data} />
-          <BurgerConstructor data={state.data} />
+          <DataContext.Provider value={{data}}>
+            <BurgerIngredients/>
+            <BurgerConstructor />
+          </DataContext.Provider>
         </div>
       )}
     </div>

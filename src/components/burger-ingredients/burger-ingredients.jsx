@@ -10,7 +10,11 @@ import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ing
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { ingredientTypes } from '../../utils/variables';
 
-export function BurgerIngredients({data}) {
+import { DataContext } from '../../services/data-context';
+
+export function BurgerIngredients() {
+
+    const { data }  = React.useContext(DataContext);
 
     const bunArr = React.useMemo(() => 
         data.filter((item) => 
