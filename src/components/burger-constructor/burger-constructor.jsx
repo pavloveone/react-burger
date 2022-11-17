@@ -10,7 +10,7 @@ import { ingredientTypes } from '../../utils/variables';
 
 import { checkReponse } from "../../utils/variables";
 
-import { DataContext } from '../../services/data-context';
+import { DataContext } from '../../contexts/data-context';
 
 import styles from './burger-constructor.module.css';
 
@@ -28,7 +28,7 @@ export const BurgerConstructor = () => {
     const getOrder = () => {
 
         const ingredientsId = data.map((item) => item._id);
-        console.log(ingredientsId)
+
         fetch('https://norma.nomoreparties.space/api/orders', {
             method: 'POST',
             headers: {

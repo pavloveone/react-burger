@@ -10,7 +10,7 @@ import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ing
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { ingredientTypes } from '../../utils/variables';
 
-import { DataContext } from '../../services/data-context';
+import { DataContext } from '../../contexts/data-context';
 
 export function BurgerIngredients() {
 

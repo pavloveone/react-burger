@@ -8,7 +8,7 @@ import { AppHeader } from '../app-header/app-header';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 
-import { DataContext } from '../../services/data-context';
+import { DataContext } from '../../contexts/data-context';
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {console.log(setIngredients)} */}
+
       <AppHeader />
       { ingredients.data.length > 0 && (
         <div className="content">
