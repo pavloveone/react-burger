@@ -5,6 +5,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from "../modal/modal";
+import { MainIngredientsContainer } from '../main-ingredients-container/main-ingredients-container';
 import { OrderDetails } from "../order-details/order-details";
 import { ingredientTypes } from '../../utils/variables';
 
@@ -17,8 +18,6 @@ import styles from './burger-constructor.module.css';
 export const BurgerConstructor = () => {
 
     const { data } = React.useContext(DataContext);
-
-    const withOutBunArr = data.filter((item) => item.type !== 'bun');
     const bun = data.find((item) => item.type === 'bun');
 
     const getSum = () => 
@@ -63,17 +62,7 @@ export const BurgerConstructor = () => {
                 price={bun.price}
                 thumbnail={bun.image}
             />
-          <div className={styles.content}>
-              {
-                  withOutBunArr.map((item) => (
-                      <ConstructorElement
-                        key={item._id}
-                        text={item.name}
-                        price={item.price}
-                        thumbnail={item.image}
-                      />
-                  ))}
-            </div>
+            <MainIngredientsContainer />
             <ConstructorElement
                 text={bun.name + ' (низ)'}
                 thumbnail={bun.image}

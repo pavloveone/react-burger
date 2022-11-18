@@ -1,46 +1,42 @@
 import React from 'react';
-import './App.css';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 
-import { burgerApiUrl } from '../../utils/variables.js'
-import { checkReponse } from '../../utils/variables.js';
+import './App.css';
 
 import { AppHeader } from '../app-header/app-header';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
-
-import { DataContext } from '../../contexts/data-context';
-
+import { fetchBurgerIngredients } from '../../services/burger-ingredients-slice';
+import { Loading } from '../loading/loading';
+import { ErrorLoading } from '../error-loading/error-loading';
 
 function App() {
 
-  const [ingredients, setIngredients] = React.useState({
-    data: []
-  });
+  const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
+
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    fetch(burgerApiUrl)
-    .then(checkReponse)
-    .then(data => setIngredients({
-      ...ingredients,
-      data: data.data
-    }))
-    .catch(err => console.log(`Произошла ошибка при загрузке данных, текст ошибки: ${err}`));
+    dispatch(fetchBurgerIngredients());
   }, []);
-
-  const { data } = ingredients;
 
   return (
     <div className="App">
-
       <AppHeader />
-      { ingredients.data.length > 0 && (
         <div className="content">
-          <DataContext.Provider value={{data}}>
-            <BurgerIngredients/>
-            <BurgerConstructor />
-          </DataContext.Provider>
+          {isLoading && (
+            <Loading />
+          )}
+          {hasError && (
+            <ErrorLoading />
+          )}
+          {!isLoading && !hasError && ingredients.length > 0 && (
+            <>
+              <BurgerIngredients/>
+              <BurgerConstructor />
+            </>
+          )}
         </div>
-      )}
     </div>
   );
 }
