@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import  propTypes  from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -10,40 +11,35 @@ import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ing
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { ingredientTypes } from '../../utils/variables';
 
-import { DataContext } from '../../contexts/data-context';
+import { showDetails, closeDetails } from '../../services/ingredients-details-slice';
 
 export function BurgerIngredients() {
 
-    const { data }  = React.useContext(DataContext);
+    const { ingredients } = useSelector((state) => state.ingredients);
+    const  { visibleModal }  = useSelector((state) => state.ingredientsDetails);
+
 
     const bunArr = React.useMemo(() => 
-        data.filter((item) => 
+    ingredients.filter((item) => 
             item.type === 'bun')
         );
     const sauceArr = React.useMemo(() => 
-        data.filter((item) => 
+    ingredients.filter((item) => 
             item.type === 'sauce')
         );
     const mainArr = React.useMemo(() => 
-        data.filter((item) => 
+    ingredients.filter((item) => 
             item.type === 'main')
         );
 
-    const [isVisibleIngredient, setIsVisibleIngredient] = React.useState(false)
-    const [currentItem, setCurrentItem] = React.useState(null)
-
-    const showDetails = (item) => {
-        setCurrentItem(item);
-        setIsVisibleIngredient(true);
+    const handleShowDetails = (item) => {
+        dispatch(showDetails(item));
     };
 
-    function handleCloseIngredient() {
-        setCurrentItem(null)
-        setIsVisibleIngredient(false);
-    };
+    const dispatch = useDispatch();
 
+    const [current, setCurrent] = React.useState('one');
 
-    const [current, setCurrent] = React.useState('one')
     return (
     <section className={styles.section}>
         <h1 className={`${styles.title} p-5 text text_type_main-large`}>Соберите бургер</h1>
@@ -62,24 +58,24 @@ export function BurgerIngredients() {
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Булки</h2>
         <div className={styles.element}> {
             bunArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
             ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Соусы</h2>
         <div className={styles.element}> {
             sauceArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
             ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`}>Начинки</h2>
         <div className={styles.element}> {
             mainArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
             ))}
         </div>
-        {isVisibleIngredient &&(
-            <Modal onClose={handleCloseIngredient} header={'Детали ингредиента'}>
-                <IngredientDetails ingredient={currentItem} />
+        {visibleModal &&(
+            <Modal onClose={() => dispatch(closeDetails())} header={'Детали ингредиента'}>
+                <IngredientDetails />
             </Modal>
         )}
         </div>         
@@ -88,5 +84,5 @@ export function BurgerIngredients() {
   }
 
 BurgerIngredients.ReactPropTypes = {
-    data: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
+    ingredients: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
 }

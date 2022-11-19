@@ -1,5 +1,6 @@
 import React from 'react';
 import  propTypes  from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { ingredientTypes } from '../../utils/variables';
 
@@ -13,6 +14,7 @@ import styles from '../burger-ingredients/burger-ingredients.module.css';
 export function BurgerIngredientsElement({item, onOpen}) {
     
     const handleClick=(e) => {
+        e.preventDefault();
         onOpen(item);
     }
 
