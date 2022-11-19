@@ -1,89 +1,106 @@
 import React from "react";
 import  propTypes  from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getOrder } from "../../services/actions/order-details";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from "../modal/modal";
 import { ConstructorIngredientsContainer } from '../constructor-ingredients-container/constructor-ingredients-container';
+import { ADD_BUN, ADD_INGREDIENT } from "../../services/actions/constructor";
 import { OrderDetails } from "../order-details/order-details";
 import { ingredientTypes } from '../../utils/variables';
-
-import { checkReponse } from "../../utils/variables";
+import { CLOSE_ORDER, SHOW_ORDER } from '../../services/actions/order-details';
 
 import styles from './burger-constructor.module.css';
-import { showOrder } from "../../services/burger-constructor-slice";
+import { useDrop } from "react-dnd";
 
 export const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
 
-    const { ingredients } = useSelector((state) => state.ingredients);
-    const { visibleOrder } = useSelector((state => state.BurgerConstructor));
+    const { bun } = useSelector((state) => state.constructorIngredients);
 
-    const bun = ingredients.find((item) => item.type === 'bun');
-
-    const getSum = () => ingredients.reduce((acc, curr) => curr.type === 'bun' ? acc  + curr.price * 2 : acc + curr.price, 0);
-
-    const getOrder = () => {
-
-        const ingredientsId = ingredients.map((item) => item._id);
-
-    //     fetch('https://norma.nomoreparties.space/api/orders', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': "application/json;charset=utf-8"
-    //         },
-    //         body: JSON.stringify({
-    //             ingredients: ingredientsId
-    //         })
-    //     })
-    //     .then(checkReponse)
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err));
-    // }
-    // const [isVisibleOrder, setIsVisibleOrder] = React.useState(false); 
+    const  ingredientsConstructor  = useSelector((state) => state.constructorIngredients.ingredients);
+    const { isVisible } = useSelector((state) => state.orderDetails);
 
 
-    function handleOpenOrder(e) {
-        dispatch(showOrder);
-        getOrder();
+
+    const [{}, dragRef] = useDrop({
+        accept: 'ingredient',
+        drop(item) {
+            if(item.type === 'bun') {
+                dispatch({
+                    type: ADD_BUN,
+                    payload: {
+                        ...item, 
+                        id: uuidv4()
+                    }
+                })
+            } else {
+                dispatch({
+                    type: ADD_INGREDIENT,
+                    payload: {
+                        ...item,
+                        id: uuidv4()
+                    }
+                })
+            }
+        }
+    })
+
+    function handleOpenOrder() {
+        dispatch(getOrder(bun, ingredientsConstructor));
+        dispatch({
+            type: SHOW_ORDER
+        })
     };
 
+    function handleCloseOrder() {
+        dispatch({
+            type: CLOSE_ORDER
+        })
+    };
+
+    const getSum = () => {
+        const sum = [...ingredientsConstructor, ...bun];
+        return sum.reduce((acc, curr) => curr.type === 'bun' ? acc  + curr.price * 2 : acc + curr.price, 0);
+    };
+    
+
     return (
-      <div className={styles.burger_constructor}>
-          <ConstructorElement
+      <div className={styles.burger_constructor} ref={dragRef} >
+          { bun.length > 0 && <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={bun.name + ' (верх)'}
-                price={bun.price}
-                thumbnail={bun.image}
-            />
+                text={bun[0].name + ' (верх)'}
+                price={bun[0].price}
+                thumbnail={bun[0].image}
+
+            />}
             <ConstructorIngredientsContainer />
-            <ConstructorElement
-                text={bun.name + ' (низ)'}
-                thumbnail={bun.image}
-                isLocked={true}
-                price={bun.price}
-                type="bottom"
-            />
+            { bun.length > 0 && 
+                <ConstructorElement
+                    text={bun[0].name + ' (низ)'}
+                    thumbnail={bun[0].image}
+                    isLocked={true}
+                    price={bun[0].price}
+                    type="bottom"
+                />}
         <div className={styles.order_info}>
             <div className={styles.price_container}>
                 <p className={`${styles.price} text text_type_digits-medium`}>{getSum()}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button type="primary" size="medium" onClick={handleOpenOrder}>Оформить заказ</Button>
+            <Button htmlType="button" type="primary" size="medium" onClick={handleOpenOrder}>Оформить заказ</Button>
         </div>
-        {visibleOrder && (
-            <Modal onClose={() => dispatch(closeOrder)} >
+        {isVisible && (
+            <Modal onClose={handleCloseOrder} >
                 <OrderDetails />
             </Modal>
         )}
       </div>
     )
-  }
-
-  BurgerConstructor.ReactPropTypes = {
-    ingredients: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
   }

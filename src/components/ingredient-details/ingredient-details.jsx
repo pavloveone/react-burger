@@ -2,13 +2,12 @@ import React from 'react';
 import  propTypes  from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import { ingredientTypes } from '../../utils/variables';
-
 import styles from './ingredient-details.module.css';
 
 export function IngredientDetails() {
     
-    const  { currentItem }  = useSelector((state) => state.ingredientsDetails);
+    const { currentItem } = useSelector((state) => state.ingredientsDetails);
+
     return (
         <div className={styles.body}>
             <img className={styles.image} alt={`изображение ${currentItem.name}`} src={currentItem.image}/>
@@ -33,7 +32,3 @@ export function IngredientDetails() {
             </div>
         </div>)
 }
-
-IngredientDetails.ReactPropTypes = {
-    ingredient: ingredientTypes.isRequired
-};

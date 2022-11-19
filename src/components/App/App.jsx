@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import {HTML5Backend} from 'react-dnd-html5-backend';
 
 import './App.css';
 
 import { AppHeader } from '../app-header/app-header';
+import { fetchIngredients } from '../../services/actions/ingredients';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
-import { fetchBurgerIngredients } from '../../services/burger-ingredients-slice';
 import { Loading } from '../loading/loading';
 import { ErrorLoading } from '../error-loading/error-loading';
 
@@ -17,8 +19,8 @@ function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchBurgerIngredients());
-  }, []);
+    dispatch(fetchIngredients());
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -31,10 +33,10 @@ function App() {
             <ErrorLoading />
           )}
           {!isLoading && !hasError && ingredients.length > 0 && (
-            <>
-              <BurgerIngredients/>
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
               <BurgerConstructor />
-            </>
+            </DndProvider>
           )}
         </div>
     </div>

@@ -1,12 +1,12 @@
-import ingredientsReducers from './burger-ingredients-slice';
-import detailsReducers from './ingredients-details-slice';
-import constructorReducers from './burger-constructor-slice';
-import { configureStore } from '@reduxjs/toolkit';
+import { ingredientsReducer } from './reducers/ingredients';
+import { constructorReducer } from './reducers/constructor';
+import { ingredientsDetailsReducer } from './reducers/ingredients-details';
+import { orderDetailsReducer } from './reducers/order-details';
+import { combineReducers } from 'redux';
 
-export const store = configureStore({
-    reducer: {
-        ingredients: ingredientsReducers,
-        ingredientsDetails: detailsReducers,
-        burgerConstructor: constructorReducers
-    },
+export const rootReducer = combineReducers({
+    ingredients: ingredientsReducer,
+    constructorIngredients: constructorReducer,
+    ingredientsDetails: ingredientsDetailsReducer,
+    orderDetails: orderDetailsReducer
 });
