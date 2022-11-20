@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import  propTypes  from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -7,75 +9,102 @@ import styles from './burger-ingredients.module.css';
 
 import { Modal } from '../modal/modal';
 import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
-import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { ingredientTypes } from '../../utils/variables';
+import { CLOSE_DETAILS, SHOW_DETAILS } from '../../services/actions/ingredients-details';
 
-export function BurgerIngredients({data}) {
+export function BurgerIngredients() {
+
+    const { ingredients } = useSelector((state) => state.ingredients);
+    const { isVisible } = useSelector((state) => state.ingredientsDetails);
+
+
+    const dispatch = useDispatch();
 
     const bunArr = React.useMemo(() => 
-        data.filter((item) => 
+    ingredients.filter((item) => 
             item.type === 'bun')
         );
     const sauceArr = React.useMemo(() => 
-        data.filter((item) => 
+    ingredients.filter((item) => 
             item.type === 'sauce')
         );
     const mainArr = React.useMemo(() => 
-        data.filter((item) => 
+    ingredients.filter((item) => 
             item.type === 'main')
         );
 
-    const [isVisibleIngredient, setIsVisibleIngredient] = React.useState(false)
-    const [currentItem, setCurrentItem] = React.useState(null)
-
-    const showDetails = (item) => {
-        setCurrentItem(item);
-        setIsVisibleIngredient(true);
+    const handleShowDetails = (item) => {
+        dispatch({
+            type: SHOW_DETAILS,
+            payload: item
+        });
     };
 
-    function handleCloseIngredient() {
-        setCurrentItem(null)
-        setIsVisibleIngredient(false);
-    };
+    const handleCloseDetails = () => {
+        dispatch({
+            type: CLOSE_DETAILS
+        })
+    }
 
+    const [current, setCurrent] = React.useState('one');
 
-    const [current, setCurrent] = React.useState('one')
+    const [bunRef, inViewBun] = useInView({
+        threshold: 0.5,
+      });
+      const [sauceRef, inViewSauce] = useInView({
+        threshold: 0.5,
+      });
+      const [mainRef, inViewMain] = useInView({
+        threshold: 0.2,
+      });
+    
+      React.useEffect(() => {
+        if (inViewBun) {
+          setCurrent('bun');
+        } else if (inViewSauce) {
+          setCurrent('sauce');
+        } else if (inViewMain) {
+          setCurrent('main');
+        }
+      }, [inViewBun, inViewSauce, inViewMain]);
+
     return (
     <section className={styles.section}>
         <h1 className={`${styles.title} p-5 text text_type_main-large`}>Соберите бургер</h1>
         <div className={styles.tabs}>
-            <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+            <Tab value='bun' active={current === 'bun'} onClick={setCurrent}>
             Булки
             </Tab>
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+            <Tab value='sauce' active={current === 'sauce'} onClick={setCurrent}>
              Соусы
             </Tab>
-            <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+            <Tab value='main' active={current === 'main'} onClick={setCurrent}>
             Начинки
             </Tab>
         </div>
         <div className={styles.content}>
-        <h2 className={`${styles.element_title} text text_type_main-medium`}>Булки</h2>
+        <h2 className={`${styles.element_title} text text_type_main-medium`} ref={bunRef}>Булки</h2>
         <div className={styles.element}> {
             bunArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
             ))}
         </div>
-        <h2 className={`${styles.element_title} text text_type_main-medium`}>Соусы</h2>
+        <h2 className={`${styles.element_title} text text_type_main-medium`} ref={sauceRef}>Соусы</h2>
         <div className={styles.element}> {
             sauceArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
             ))}
         </div>
-        <h2 className={`${styles.element_title} text text_type_main-medium`}>Начинки</h2>
+        <h2 className={`${styles.element_title} text text_type_main-medium`} ref={mainRef}>Начинки</h2>
         <div className={styles.element}> {
             mainArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={showDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
             ))}
         </div>
-        {isVisibleIngredient &&(
-            <Modal onClose={handleCloseIngredient} header={'Детали ингредиента'}>
-                <IngredientDetails ingredient={currentItem} />
+        {isVisible &&(
+            <Modal onClose={handleCloseDetails} header={'Детали ингредиента'}>
+                <IngredientDetails />
             </Modal>
         )}
         </div>         
@@ -84,5 +113,5 @@ export function BurgerIngredients({data}) {
   }
 
 BurgerIngredients.ReactPropTypes = {
-    data: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
+    ingredients: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
 }
