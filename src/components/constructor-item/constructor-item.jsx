@@ -79,11 +79,8 @@ export const ConstructorItem = ({item, index}) => {
 
     return(
         <div className={styles.content_element} style={{opacity}} ref={ref}>
-            <>
             <DragIcon type="primary" />
-            </>
             <ConstructorElement
-                key={item.id}
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}

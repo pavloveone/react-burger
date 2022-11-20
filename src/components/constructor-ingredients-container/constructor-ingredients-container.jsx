@@ -13,7 +13,7 @@ export const ConstructorIngredientsContainer = () => {
     return (
         <div className={styles.content}>
              {ingredients.map((item, index) => (
-                 <ConstructorItem item={item} index={index}  />
+                 <ConstructorItem key={item.id} item={item} index={index}  />
                 ))}
         </div>
     );

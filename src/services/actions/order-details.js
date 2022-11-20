@@ -8,8 +8,11 @@ export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
 
 export const getOrder = (bun, ingredients) =>(dispatch) => {
 
-    bun = bun.filter( Boolean )
-    const array = [...bun, ...ingredients];
+    bun = bun.filter( Boolean );
+
+    const array = [...ingredients];
+    array.unshift(...bun);
+    array.push(...bun);
 
         const ingredientsId = array.map((item) => item._id);
         dispatch({type: GET_ORDER_REQUEST});

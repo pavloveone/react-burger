@@ -1,17 +1,17 @@
 import React from "react";
-import  propTypes  from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { addBun } from "../../services/actions/constructor";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getOrder } from "../../services/actions/order-details";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from "../modal/modal";
 import { ConstructorIngredientsContainer } from '../constructor-ingredients-container/constructor-ingredients-container';
-import { ADD_BUN, ADD_INGREDIENT } from "../../services/actions/constructor";
+
 import { OrderDetails } from "../order-details/order-details";
-import { ingredientTypes } from '../../utils/variables';
+
 import { CLOSE_ORDER, SHOW_ORDER } from '../../services/actions/order-details';
 
 import styles from './burger-constructor.module.css';
@@ -26,26 +26,24 @@ export const BurgerConstructor = () => {
     const  ingredientsConstructor  = useSelector((state) => state.constructorIngredients.ingredients);
     const { isVisible } = useSelector((state) => state.orderDetails);
 
-
+    const [disabled, setDisabled] = useState(true);
 
     const [{}, dragRef] = useDrop({
         accept: 'ingredient',
         drop(item) {
-                dispatch({
-                    type: item.type === 'bun' ? ADD_BUN : ADD_INGREDIENT,
-                    payload: {
-                        ...item, 
-                        id: uuidv4()
-                    }
-                })
+            addBun(item, dispatch)
             }
         })
 
     function handleOpenOrder() {
-        dispatch(getOrder(bun, ingredientsConstructor));
-        dispatch({
-            type: SHOW_ORDER
-        })
+        
+        if (bun.length > 0 && ingredientsConstructor.length > 0) {
+            dispatch(getOrder(bun, ingredientsConstructor));
+
+            dispatch({
+                type: SHOW_ORDER
+            })
+        } 
     };
 
     function handleCloseOrder() {
@@ -84,7 +82,7 @@ export const BurgerConstructor = () => {
                 <p className={`${styles.price} text text_type_digits-medium`}>{getSum()}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button htmlType="button" type="primary" size="medium" onClick={handleOpenOrder}>Оформить заказ</Button>
+            <Button htmlType="button" type="primary" size="medium" onClick={handleOpenOrder} disabled={(bun.length > 0 && ingredientsConstructor.length > 0) ? false : true}>Оформить заказ</Button>
         </div>
         {isVisible && (
             <Modal onClose={handleCloseOrder} >

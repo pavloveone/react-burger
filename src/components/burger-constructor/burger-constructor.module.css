@@ -1,5 +1,5 @@
 .burger_constructor {
-    width: 100%;
+    width: 600px;
     padding-top: 100px;
     padding-left: 56px;
 
@@ -7,7 +7,7 @@
 
 .content {
     display: flex;
-    width: 100%;
+    width: 600px;
     flex-direction: column;
     gap: 10px;
     height: 620px;
