@@ -3,10 +3,7 @@ import { rootReducer } from './index';
 import thunk from 'redux-thunk';
 
 
-const composeEnhancers =
-  typeof window === "object" && window.REDUX_DEVTOOLS_EXTENSION_COMPOSE
-    ? window.REDUX_DEVTOOLS_EXTENSION_COMPOSE({})
-    : compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 

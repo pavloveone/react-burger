@@ -11,7 +11,8 @@ export const constructorReducer = (state = initialState, action) => {
         case ADD_INGREDIENT: {
             return {
                 ...state,
-                ingredients: [...state.ingredients, action.payload]
+                ingredients: [...state.ingredients, action.payload],
+               
             }
         }
         case DELETE_INGREDIENT: {
@@ -23,7 +24,7 @@ export const constructorReducer = (state = initialState, action) => {
         case ADD_BUN: {
             return {
                 ...state,
-                bun: [action.payload]
+                bun: [action.payload],
             }
         }
         case REORDER_INGREDIENT: {

@@ -31,25 +31,15 @@ export const BurgerConstructor = () => {
     const [{}, dragRef] = useDrop({
         accept: 'ingredient',
         drop(item) {
-            if(item.type === 'bun') {
                 dispatch({
-                    type: ADD_BUN,
+                    type: item.type === 'bun' ? ADD_BUN : ADD_INGREDIENT,
                     payload: {
                         ...item, 
                         id: uuidv4()
                     }
                 })
-            } else {
-                dispatch({
-                    type: ADD_INGREDIENT,
-                    payload: {
-                        ...item,
-                        id: uuidv4()
-                    }
-                })
             }
-        }
-    })
+        })
 
     function handleOpenOrder() {
         dispatch(getOrder(bun, ingredientsConstructor));

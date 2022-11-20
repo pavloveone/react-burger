@@ -14,8 +14,13 @@
     overflow: scroll;
     overflow-x: hidden;
     align-items: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 10px 10px 0;
+}
+
+.content_element {
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .order_info {
