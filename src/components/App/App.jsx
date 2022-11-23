@@ -13,6 +13,8 @@ import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 import { Loading } from '../loading/loading';
 import { ErrorLoading } from '../error-loading/error-loading';
 import { Login } from '../login/login';
+import { Register } from '../register/register';
+import { ForgotPassword } from '../forgot-password/forgot-password';
 
 function App() {
 
@@ -29,8 +31,14 @@ function App() {
       <AppHeader />
       <Router>
         <Switch>
-            <Route path="/login">
-            <Login />
+            <Route path="/login" exact={true}>
+              <Login />
+            </Route>
+            <Route path="/register" exact={true}>
+              <Register />
+            </Route>
+            <Route path="/forgot-password" exact={true}>
+              <ForgotPassword />
             </Route>
         <div className="content">
           {isLoading && (
@@ -41,8 +49,10 @@ function App() {
           )}
           {!isLoading && !hasError && ingredients.length > 0 && (
             <DndProvider backend={HTML5Backend}>
+            <Route path="/" exact={true}>
               <BurgerIngredients />
               <BurgerConstructor />
+            </Route>
             </DndProvider>
           )}
         </div>

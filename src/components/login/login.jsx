@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './login.module.css';
+import { Link } from 'react-router-dom';
 
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -12,12 +13,10 @@ export const Login = () => {
             <form className={styles.form}>
                 <h1 className='text text_type_main-medium pb-6'>Вход</h1>
                 <EmailInput
-                    name={'email'}
                     placeholder="E-mail"
                     extraClass="mb-6"
                 />
                 <PasswordInput
-                    name={'password'}
                     extraClass="mb-6"
                 />
                 <Button style={{width: '128px', marginBottom: '80px'}} htmlType="button" type="primary" size="medium">
@@ -25,15 +24,15 @@ export const Login = () => {
                 </Button>
                 <p className='text text_type_main-default text_color_inactive pb-4'>
                     Вы - новый пользователь? 
-                    <span className={styles.link}>
+                    <Link to='/register' className={styles.link}>
                         Зарегистрироваться
-                    </span>
+                    </Link>
                 </p>
                 <p className='text text_type_main-default text_color_inactive'>
                     Забыли пароль? 
-                    <span className={styles.link}>
+                    <Link to='/forgot-password' className={styles.link}>
                         Восстановить пароль
-                    </span>
+                    </Link>
                 </p>
             </form>
         </div>
