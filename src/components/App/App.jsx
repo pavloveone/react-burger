@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
@@ -30,7 +30,6 @@ function App() {
   return (
     <div className="App">
       <AppHeader />
-      <Router>
         <Switch>
             <Route path="/login" exact={true}>
               <Login />
@@ -61,7 +60,6 @@ function App() {
           )}
         </div>
         </Switch>
-      </Router>
     </div>
   );
 }

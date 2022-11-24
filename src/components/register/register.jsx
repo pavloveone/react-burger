@@ -1,64 +1,61 @@
 import React from 'react';
 import styles from './register.module.css';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { registration } from '../../services/actions/register';
 
-import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const Register = () => {
 
+    const [email, setEmail] = React.useState('')
+    const [username, setUsername] = React.useState('')
+    const [password, setPassword] = React.useState('')
 
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [name, setName] = React.useState('');
+    const inputRef = React.useRef(null);
 
-    async function createNewLogin() {
-        console.log(email);
-        console.log(password);
-        console.log(name);
-        return await fetch('https://norma.nomoreparties.space/api/auth/register'), {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': "application/json;charset=utf-8"
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify({
-                'email': email,
-                'password': password,
-                'name': name
-            })
-        }
-    }
+
+    const dispatch = useDispatch();
+
+    const createNewLogin = (evt) => {
+    evt.preventDefault();
+    console.log(typeof email)
+    console.log(username)
+    console.log(password)
+    dispatch(registration())
+  }
 
 
     return (
         <div className={styles.container}>
             <form className={styles.form} onSubmit={createNewLogin}>
                 <h1 className='text text_type_main-medium pb-6'>Регистрация</h1>
-                <EmailInput
+                <Input
+                    type={'text'}
                     placeholder="Имя"
                     extraClass="mb-6"
-                    onChange={(event) => setName(event.target.value)}
+                    ref={inputRef}
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
                 />
                 <EmailInput
-                    name={'email'}
+                    type={'email'}
                     placeholder="E-mail"
                     extraClass="mb-6"
-                    onChange={(event) => setEmail(event.target.value)}
+                    ref={inputRef}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                 />
                 <PasswordInput
-                    name={'password'}
+                    type={'password'}
                     extraClass="mb-6"
-                    onChange={(event) => setPassword(event.target.value)}
+                    ref={inputRef}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                 />
                 <Button style={{width: '253px', marginBottom: '80px'}} 
-                htmlType="button" type="primary" size="medium" onClick={createNewLogin}>
+                htmlType="submit" type="primary" size="medium">
                     Зарегистрироваться
                 </Button>
                 <p className='text text_type_main-default text_color_inactive pb-4'>

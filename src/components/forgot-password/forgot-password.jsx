@@ -1,45 +1,39 @@
 import React from 'react';
 import styles from './forgot-password.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { forgotPassword } from '../../services/actions/forgot-password';
+
+import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export const ForgotPassword = () => {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const resetPassword = (evt) => {
+        evt.preventDefault();
+        dispatch(forgotPassword())
+        
+        history.replace({ pathname: '/reset-password' });
+  }
+
 const [email, setEmail] = React.useState('');
-
-
-    async function resetPassword() {
-        console.log(email);
-        return await fetch('https://norma.nomoreparties.space/api/password-reset'), {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': "application/json;charset=utf-8"
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify({
-                'email': email
-            })
-        }
-    }
 
     return (
         <div className={styles.container}>
             <form className={styles.form} onSubmit={resetPassword}>
                 <h1 className='text text_type_main-medium pb-6'>Восстановление пароля</h1>
                 <EmailInput
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     name={'email'}
                     placeholder="Укажите e-mail"
                     extraClass="mb-6"
                 />
                 <Button style={{width: '196px', marginBottom: '80px'}} 
-                    htmlType="button" type="primary" size="medium" onClick={resetPassword}>
+                    htmlType="submit" type="primary" size="medium">
                     Восстановить
                 </Button>
                 <p className='text text_type_main-default text_color_inactive pb-4'>
