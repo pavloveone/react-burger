@@ -15,6 +15,7 @@ import { ErrorLoading } from '../error-loading/error-loading';
 import { Login } from '../login/login';
 import { Register } from '../register/register';
 import { ForgotPassword } from '../forgot-password/forgot-password';
+import { ResetPassword } from '../reset-password/reset-password';
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/forgot-password" exact={true}>
               <ForgotPassword />
+            </Route>
+            <Route path="/reset-password" exact={true}>
+              <ResetPassword />
             </Route>
         <div className="content">
           {isLoading && (

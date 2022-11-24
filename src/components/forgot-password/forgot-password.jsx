@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-
 export const ForgotPassword = () => {
 
+const [email, setEmail] = React.useState('');
+
+
     async function resetPassword() {
+        console.log(email);
         return await fetch('https://norma.nomoreparties.space/api/password-reset'), {
             method: 'POST',
             mode: 'cors',
@@ -20,7 +23,7 @@ export const ForgotPassword = () => {
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
             body: JSON.stringify({
-                'email': ''
+                'email': email
             })
         }
     }
@@ -30,6 +33,7 @@ export const ForgotPassword = () => {
             <form className={styles.form} onSubmit={resetPassword}>
                 <h1 className='text text_type_main-medium pb-6'>Восстановление пароля</h1>
                 <EmailInput
+                    onChange={(event) => setEmail(event.target.value)}
                     name={'email'}
                     placeholder="Укажите e-mail"
                     extraClass="mb-6"
@@ -39,7 +43,7 @@ export const ForgotPassword = () => {
                     Восстановить
                 </Button>
                 <p className='text text_type_main-default text_color_inactive pb-4'>
-                    Вспомнили пароль
+                    Вспомнили пароль?
                     <Link to='/login' className={styles.link}>
                         Войти
                     </Link>
