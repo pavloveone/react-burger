@@ -16,6 +16,8 @@ import { Login } from '../login/login';
 import { Register } from '../register/register';
 import { ForgotPassword } from '../forgot-password/forgot-password';
 import { ResetPassword } from '../reset-password/reset-password';
+import { Profile } from '../profile/profile';
+import { OrdersPage } from '../orders-page/orders-page';
 
 function App() {
 
@@ -42,6 +44,12 @@ function App() {
             </Route>
             <Route path="/reset-password" exact={true}>
               <ResetPassword />
+            </Route>
+            <Route path="/profile" exact={true}>
+              <Profile />
+            </Route>
+            <Route path="/orders" exact={true}>
+              <OrdersPage />
             </Route>
         <div className="content">
           {isLoading && (

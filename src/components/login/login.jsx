@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './login.module.css';
 import { Link } from 'react-router-dom';
 
-import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const Login = () => {

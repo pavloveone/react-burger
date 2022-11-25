@@ -1,0 +1,10 @@
+.container {
+    padding-top: 70px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.link {
+    text-decoration: none;
+    color: #F2F2F3;
+}
