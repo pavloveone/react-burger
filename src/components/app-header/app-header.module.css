@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     text-decoration: none;
+    color: #8585AD;
 }
 
 .logo {
@@ -22,7 +23,7 @@
     padding-right: 289px;
 }
 
-.text {
+.active {
     text-decoration: none;
     color: #F2F2F3;
 }

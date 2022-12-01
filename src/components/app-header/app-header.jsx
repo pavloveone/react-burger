@@ -14,18 +14,18 @@ export function AppHeader() {
     return (
         <header className={styles.header}>
             <nav className={`${styles.navigation} p-4`}>
-                <NavLink to='/' className={`${styles.link} p-5`}>
-                    <BurgerIcon type="primary" />
-                    <p className={`${styles.text} text text_type_main-default text_color p-2`}>Конструктор</p>
+                <NavLink to='/main' className={`${styles.link} text text_type_main-default pr-5`} activeClassName={styles.active}>
+                    <BurgerIcon type="primary" style={{marginRight: '8px'}}/>
+                    Конструктор
                 </NavLink>
-                <NavLink to='/orders' className={styles.link}>
+                <NavLink to='/orders-feed' className={`${styles.link} text text_type_main-default`} activeClassName={styles.active}>
                     <ListIcon type="secondary" />
-                    <p className={`${styles.text} text text_type_main-default text_color_inactive p-2`}>Лента заказов</p>
+                    Лента заказов
                 </NavLink>
                 <img alt='logo' src={headerLogo} className={styles.logo} />
-                <NavLink to='/profile' className={styles.link}>
+                <NavLink to='/profile' className={`${styles.link} text text_type_main-default`}  activeClassName={styles.active}>
                     <ProfileIcon type="secondary" />
-                    <p className={`${styles.text} text text_type_main-default text_color_inactive p-2`}>Личный кабинет</p>
+                    Личный кабинет
                 </NavLink>
             </nav>
         </header>
