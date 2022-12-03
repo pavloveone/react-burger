@@ -14,7 +14,7 @@ export function AppHeader() {
     return (
         <header className={styles.header}>
             <nav className={`${styles.navigation} p-4`}>
-                <NavLink to='/main' className={`${styles.link} text text_type_main-default pr-5`} activeClassName={styles.active}>
+                <NavLink to='/' className={`${styles.link} text text_type_main-default pr-5`} activeClassName={styles.active}>
                     <BurgerIcon type="primary" style={{marginRight: '8px'}}/>
                     Конструктор
                 </NavLink>

@@ -5,6 +5,8 @@ import { orderDetailsReducer } from './reducers/order-details';
 import { registrationReducer } from './reducers/register';
 import { forgotPasswordReducer } from './reducers/forgot-password';
 import { resetPasswordReducer } from './reducers/reset-password';
+import { loginReducer } from './reducers/login';
+import { profileReducer } from './reducers/profile';
 import { combineReducers } from 'redux';
 
 export const rootReducer = combineReducers({
@@ -14,5 +16,7 @@ export const rootReducer = combineReducers({
     orderDetails: orderDetailsReducer,
     registration: registrationReducer,
     forgotPassword: forgotPasswordReducer,
-    resetPassword: resetPasswordReducer
+    resetPassword: resetPasswordReducer,
+    login: loginReducer,
+    profile: profileReducer
 });

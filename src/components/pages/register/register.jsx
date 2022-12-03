@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './register.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { registration } from '../../services/actions/register';
+import { registration } from '../../../services/actions/register';
 
 import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
