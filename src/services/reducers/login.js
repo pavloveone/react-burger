@@ -1,9 +1,9 @@
-import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_ERROR, GET_LOGOUT } from "../actions/login";
+import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_ERROR, LOGOUT, AUTH_CHECKED } from "../actions/login";
 
 const initialState = {
     isLoading: false,
     hasError: false,
-    isLogout: false,
+    isAuth: false,
     userData: {}
 }
 
@@ -21,8 +21,8 @@ export const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                hasError: false,
-                userData: action.payload
+                userData: action.payload,
+                isAuth: true
             }
         }
         case GET_LOGIN_ERROR: {
@@ -33,13 +33,16 @@ export const loginReducer = (state = initialState, action) => {
                 userData: action.payload
             }
         }
-        case GET_LOGOUT: {
+        case LOGOUT: {
             return {
                 ...state,
-                hasError: false,
-                isLoading: false,
-                userData: {},
-                isLogout: true
+                isAuth: false
+            }
+        }
+        case AUTH_CHECKED: {
+            return {
+                ...state,
+                isAuth: true
             }
         }
         default: {

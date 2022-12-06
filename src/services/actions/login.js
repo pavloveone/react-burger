@@ -1,11 +1,13 @@
 import { checkReponse } from '../../utils/variables';
+import { getUser } from './profile';
 import { login, logout } from '../../utils/api';
-import { setCookie, deleteCookie } from '../../utils/cookies';
+import { setCookie, deleteCookie, getCookie } from '../../utils/cookies';
 
 export const GET_LOGIN_REQUEST = 'GET_LOGIN_REQUEST';
 export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS';
 export const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR';
-export const GET_LOGOUT = 'GET_LOGOUT';
+export const LOGOUT = 'LOGOUT';
+export const AUTH_CHECKED = 'AUTH_CHECKED';
 
 export const authorization = (email, password) => (dispatch) => {
     dispatch({ type: GET_LOGIN_REQUEST });
@@ -51,9 +53,15 @@ export const logOut = (dispatch) => {
         if(res.success) {
             deleteCookie('token')   
             dispatch({
-                type: GET_LOGOUT,
+                type: LOGOUT,
             })
         }
     })
     .catch(err => console.log(err));
+}
+
+export const checkUserAuth = () => (dispatch) => {
+    if (getCookie('token')) {
+        dispatch(getUser())
+    }
 }

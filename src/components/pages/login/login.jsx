@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './login.module.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 
 import { authorization } from '../../../services/actions/login';
 
@@ -12,11 +12,9 @@ export const Login = () => {
 
     const [ email, setEmail ] = React.useState('');
     const [ password, setPassword ] = React.useState('');
+    const location = useLocation();
 
-    const { userData } = useSelector((state) => state.login);
-
-    const inputRef = React.useRef(null);
-
+    const { isAuth } = useSelector((state) => state.login)
 
     const dispatch = useDispatch();
 
@@ -25,14 +23,11 @@ export const Login = () => {
         dispatch(authorization(email, password));
     }
 
-    if(userData.success) {
-        return (
-            <Redirect to='/profile' />
-        )
-    }
-
     return (
             <div className={styles.container}>
+                {isAuth && (
+                    <Redirect to={location.state?.from || '/'} />
+                )}
             <form className={styles.form} onSubmit={logIn}>
                 <h1 className='text text_type_main-medium pb-6'>Вход</h1>
                 <EmailInput

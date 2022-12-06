@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getUser, updateUser } from '../../../services/actions/profile';
@@ -13,13 +13,12 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const { userData, isLogout } = useSelector((state) => state.login);
-    const { userProfile, success } = useSelector((state) => state.profile);
+    const { isAuth } = useSelector((state) => state.login);
+    const { userProfile, isLoading } = useSelector((state) => state.profile);
 
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    
     
     React.useEffect(() => {
         dispatch(getUser())
@@ -30,12 +29,12 @@ export const Profile = () => {
             setEmail(userProfile.user.email);
             setUsername(userProfile.user.name);
         }
-    }, [success])
+    }, [isLoading])
 
-    if(isLogout) {
-        return (
-            <Redirect to='/login' />
-        )
+
+    const exit = (e) => {
+        e.preventDefault();
+        logOut(dispatch);
     }
 
     const updateForm = (e) => {
@@ -66,7 +65,7 @@ export const Profile = () => {
                 </NavLink>
                 <a 
                     className={`${styles.link} text text_type_main-medium`}
-                    onClick={() => logOut(dispatch)}
+                    onClick={exit}
                     >
                     Выход
                 </a>
@@ -88,6 +87,9 @@ export const Profile = () => {
                         Отменить
                 </Button>
             </form>
+            {!isAuth && (
+                <Redirect to='/login' />
+            )}
         </div>
     );
 }

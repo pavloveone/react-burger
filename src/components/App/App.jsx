@@ -6,6 +6,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
+import { checkUserAuth } from '../../services/actions/login';
+
 import { AppHeader } from '../app-header/app-header';
 import { fetchIngredients } from '../../services/actions/ingredients';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
@@ -19,10 +21,12 @@ import { ResetPassword } from '../pages/reset-password/reset-password';
 import { Profile } from '../pages/profile/profile';
 import { OrdersPage } from '../pages/orders-page/orders-page';
 import { NotFound404 } from '../pages/not-found-404/not-found-404';
+import { ProtectedRoute } from '../protected-route/protected-route';
 
 function App() {
 
   const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
+  const { isAuth } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
 
@@ -30,6 +34,10 @@ function App() {
     dispatch(fetchIngredients());
   }, [dispatch]);
 
+  React.useEffect(() => {
+    dispatch(checkUserAuth())
+  },[isAuth])
+  
   return (
     <div className="App">
       <AppHeader />
@@ -60,9 +68,9 @@ function App() {
                 <Route path="/reset-password" exact>
                   <ResetPassword />
                 </Route>
-                <Route path="/profile" exact>
+                <ProtectedRoute path="/profile" exact>
                   <Profile />
-                </Route>
+                </ProtectedRoute>
                 <Route path="/orders" exact>
                   <OrdersPage />
                 </Route>

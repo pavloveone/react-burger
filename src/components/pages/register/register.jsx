@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './register.module.css';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useLocation, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { registration } from '../../../services/actions/register';
 
 import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,26 +9,28 @@ import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-de
 
 export const Register = () => {
 
-    const [email, setEmail] = React.useState('')
-    const [username, setUsername] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [email, setEmail] = React.useState('');
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    const { isAuth } = useSelector((state) => state.login)
 
     const inputRef = React.useRef(null);
 
-
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const createNewLogin = (evt) => {
     evt.preventDefault();
-    console.log(typeof email)
-    console.log(username)
-    console.log(password)
     dispatch(registration())
   }
 
 
     return (
         <div className={styles.container}>
+            {isAuth && (
+                    <Redirect to={location.state?.from || '/'} />
+                )}
             <form className={styles.form} onSubmit={createNewLogin}>
                 <h1 className='text text_type_main-medium pb-6'>Регистрация</h1>
                 <Input

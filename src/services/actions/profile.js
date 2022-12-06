@@ -1,6 +1,7 @@
 import { checkReponse } from '../../utils/variables';
 import { user } from '../../utils/api';
 import { getCookie } from '../../utils/cookies';
+import { AUTH_CHECKED } from './login';
 
 export const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST';
 export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
@@ -20,7 +21,6 @@ export const getUser = () => (dispatch) => {
     })
     .then(checkReponse)
     .then(res =>  {
-        console.log(res);
         dispatch({
             type: GET_PROFILE_SUCCESS,
             payload: res
@@ -28,7 +28,12 @@ export const getUser = () => (dispatch) => {
     .catch(err => dispatch({
         type: GET_PROFILE_ERROR,
         payload: err
-    }));
+    }))
+    .finally(() => {
+        dispatch({
+            type: AUTH_CHECKED,
+        })
+    });
 }
 
 export const updateUser = (email, username) => (dispatch) => {
@@ -45,10 +50,12 @@ export const updateUser = (email, username) => (dispatch) => {
         })
     })
     .then(checkReponse)
-    .then(res =>  dispatch({
+    .then(res =>  {
+        console.log(res)
+        dispatch({
             type: GET_UPDATE_PROFILE_SUCCESS,
             payload: res
-        }))
+        })})
     .catch(err => dispatch({
         type: GET_UPDATE_PROFILE_ERR0R,
         payload: err

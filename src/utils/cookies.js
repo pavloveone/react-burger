@@ -1,3 +1,5 @@
+
+
 export function getCookie(name) {
     const matches = document.cookie.match(
       new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
@@ -6,7 +8,10 @@ export function getCookie(name) {
   }
   
   export function setCookie(name, value, props) {
-    props = props || {};
+    props = props || {
+      path: '/',  //задаем корневой адрес для cookies
+      ...props
+    };
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
       const d = new Date();
