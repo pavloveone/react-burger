@@ -3,6 +3,7 @@ import { GET_FORGOT_PASSWORD_ERROR, GET_FORGOT_PASSWORD_SUCCESS, GET_FORGOT_PASS
 const initialState = {
     hasError: false,
     isLoading: false,
+	hasUser: false,
     userData: {}
 }
 
@@ -19,7 +20,7 @@ export const forgotPasswordReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				hasError: false,
+				hasUser: true,
 				userData: action.payload
 			}
 		}

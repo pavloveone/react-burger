@@ -3,6 +3,7 @@ import { GET_RESET_PASSWORD_ERROR, GET_RESET_PASSWORD_SUCCESS, GET_RESET_PASSWOR
 const initialState = {
     hasError: false,
     isLoading: false,
+	success: false,
     userData: {}
 }
 
@@ -20,6 +21,7 @@ export const resetPasswordReducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				hasError: false,
+				success: true,
 				userData: action.payload
 			}
 		}
@@ -27,6 +29,7 @@ export const resetPasswordReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
+				success: false,
 				hasError: true
 			}
 		}

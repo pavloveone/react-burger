@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import './App.css';
 
@@ -22,11 +22,23 @@ import { Profile } from '../pages/profile/profile';
 import { OrdersPage } from '../pages/orders-page/orders-page';
 import { NotFound404 } from '../pages/not-found-404/not-found-404';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { Modal } from '../modal/modal';
 
 function App() {
 
   const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
   const { isAuth } = useSelector((state) => state.login);
+
+  let location = useLocation();
+  let history = useHistory();
+  let background = location.state && location.state.background;
+
+  const handleModalClose = () => {
+    // Возвращаемся к предыдущему пути при закрытии модалки
+    history.goBack();
+  };
+  
 
   const dispatch = useDispatch();
 
@@ -36,7 +48,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(checkUserAuth())
-  },[isAuth])
+  },[])
   
   return (
     <div className="App">
@@ -49,7 +61,7 @@ function App() {
               <ErrorLoading />
             )}
             {!isLoading && !hasError && ingredients.length > 0 && (
-              <Switch>
+              <Switch location={background || location}>
                 <Route path="/" exact>
                   <DndProvider backend={HTML5Backend}>
                     <BurgerIngredients />
@@ -74,12 +86,25 @@ function App() {
                 <Route path="/orders" exact>
                   <OrdersPage />
                 </Route>
+                <Route path='/ingredients/:ingredientId' exact>
+                  <IngredientDetails />
+                </Route>
                 <Route>
                 <NotFound404 />
                   </Route>
               </Switch>
           )}
         </div>
+        {background && (
+        <Route
+          path='/ingredients/:ingredientId'
+          children={
+            <Modal onClose={handleModalClose} header={'Детали ингредиента'}>
+              <IngredientDetails />
+            </Modal>
+          }
+        />
+      )}
     </div>
   );
 }

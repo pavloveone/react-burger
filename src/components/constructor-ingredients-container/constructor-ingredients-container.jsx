@@ -8,8 +8,6 @@ export const ConstructorIngredientsContainer = () => {
 
     const { ingredients } = useSelector((state) => state.constructorIngredients);
 
-    const fetchIngredients = useSelector((state) => state.ingredients.ingredients);
-
     return (
         <div className={styles.content}>
              {ingredients.map((item, index) => (

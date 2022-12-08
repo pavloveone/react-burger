@@ -9,12 +9,15 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from '../burger-ingredients/burger-ingredients.module.css';
 import { useSelector } from 'react-redux';
+import { useLocation, Link } from 'react-router-dom';
 
 
 
-export function BurgerIngredientsElement({item, onOpen}) {
+export function BurgerIngredientsElement({item}) {
 
     const { ingredients, bun } = useSelector((state) => state.constructorIngredients);
+    const location = useLocation();
+    const ingredientId = item['_id'];
 
     const counter = React.useMemo(() => {
         let count = 0;
@@ -35,10 +38,10 @@ export function BurgerIngredientsElement({item, onOpen}) {
         return count
     }, [ingredients, bun])
     
-    const handleClick=(e) => {
-        e.preventDefault();
-        onOpen(item);
-    }
+    // const handleClick=(e) => {
+    //     e.preventDefault();
+    //     // onOpen(item);
+    // }
 
     const [{}, dragRef] = useDrag({
         type: 'ingredient',
@@ -49,19 +52,30 @@ export function BurgerIngredientsElement({item, onOpen}) {
     })
 
     return(
-        <div className={styles.card_container} onClick={handleClick} ref={dragRef}>
-                <div className={styles.card} >
-                    {counter !==0 &&(
-                        <Counter count={counter} size="default" />
-                    )}
-                    <img src={item.image} alt={`картинка ${item.name}`} className={`${styles.card_image} p-4`}/>
-                    <div className={`${styles.price_container} p-1`}>
-                        <p className={`${styles.price_text} text text_type_digits-default`}>{item.price}</p>
-                        <CurrencyIcon type="primary" />
+        <Link
+            key={ingredientId}
+            to={{
+            // Тут мы формируем динамический путь для нашего ингредиента
+            // а также сохраняем в свойство background роут, на котором была открыта наша модалка
+            pathname: `/ingredients/${ingredientId}`,
+            state: { background: location },
+            }}
+            className={styles.link}
+        >
+            <div className={styles.card_container} ref={dragRef}>
+                    <div className={styles.card} >
+                        {counter !==0 &&(
+                            <Counter count={counter} size="default" />
+                        )}
+                        <img src={item.image} alt={`картинка ${item.name}`} className={`${styles.card_image} p-4`}/>
+                        <div className={`${styles.price_container} p-1`}>
+                            <p className={`${styles.price_text} text text_type_digits-default`}>{item.price}</p>
+                            <CurrencyIcon type="primary" />
+                        </div>
+                        <p className={`${styles.card_caption} text text_type_main-default`}>{item.name}</p>
                     </div>
-                    <p className={`${styles.card_caption} text text_type_main-default`}>{item.name}</p>
                 </div>
-            </div>
+        </Link>
     );
 }
 

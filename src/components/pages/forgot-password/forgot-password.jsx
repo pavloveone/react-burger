@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './forgot-password.module.css';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { forgotPassword } from '../../../services/actions/forgot-password';
 
@@ -9,20 +9,21 @@ import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-comp
 
 export const ForgotPassword = () => {
 
+    const [email, setEmail] = React.useState('');
+    const { hasUser } = useSelector((state) => state.forgotPassword);
+
     const dispatch = useDispatch();
-    const history = useHistory();
 
-    const resetPassword = (evt) => {
+    const resetPassword = (evt, email) => {
         evt.preventDefault();
-        dispatch(forgotPassword())
-        
-        history.replace({ pathname: '/reset-password' });
+        dispatch(forgotPassword(email));
   }
-
-const [email, setEmail] = React.useState('');
 
     return (
         <div className={styles.container}>
+            {hasUser && (
+                <Redirect to='/reset-password' />
+            )}
             <form className={styles.form} onSubmit={resetPassword}>
                 <h1 className='text text_type_main-medium pb-6'>Восстановление пароля</h1>
                 <EmailInput

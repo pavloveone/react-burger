@@ -7,19 +7,19 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-ingredients.module.css';
 
-import { Modal } from '../modal/modal';
+// import { Modal } from '../modal/modal';
 import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
+// import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { ingredientTypes } from '../../utils/variables';
-import { CLOSE_DETAILS, SHOW_DETAILS } from '../../services/actions/ingredients-details';
+// import { CLOSE_DETAILS, SHOW_DETAILS } from '../../services/actions/ingredients-details';
 
 export function BurgerIngredients() {
 
     const { ingredients } = useSelector((state) => state.ingredients);
-    const { isVisible } = useSelector((state) => state.ingredientsDetails);
+    // const { isVisible } = useSelector((state) => state.ingredientsDetails);
 
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const bunArr = React.useMemo(() => 
     ingredients.filter((item) => 
@@ -34,18 +34,18 @@ export function BurgerIngredients() {
             item.type === 'main')
         );
 
-    const handleShowDetails = (item) => {
-        dispatch({
-            type: SHOW_DETAILS,
-            payload: item
-        });
-    };
+    // const handleShowDetails = (item) => {
+    //     dispatch({
+    //         type: SHOW_DETAILS,
+    //         payload: item
+    //     });
+    // };
 
-    const handleCloseDetails = () => {
-        dispatch({
-            type: CLOSE_DETAILS
-        })
-    }
+    // const handleCloseDetails = () => {
+    //     dispatch({
+    //         type: CLOSE_DETAILS
+    //     })
+    // }
 
     const [current, setCurrent] = React.useState('one');
 
@@ -87,26 +87,26 @@ export function BurgerIngredients() {
         <h2 className={`${styles.element_title} text text_type_main-medium`} ref={bunRef}>Булки</h2>
         <div className={styles.element}> {
             bunArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`} ref={sauceRef}>Соусы</h2>
         <div className={styles.element}> {
             sauceArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`} ref={mainRef}>Начинки</h2>
         <div className={styles.element}> {
             mainArr.map((item) => (
-                <BurgerIngredientsElement key={item._id} item={item} onOpen={handleShowDetails} />
+                <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
-        {isVisible &&(
+        {/* {isVisible &&(
             <Modal onClose={handleCloseDetails} header={'Детали ингредиента'}>
                 <IngredientDetails />
             </Modal>
-        )}
+        )} */}
         </div>         
     </section>
     )

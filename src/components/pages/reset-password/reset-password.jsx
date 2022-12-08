@@ -1,28 +1,37 @@
 import React from 'react';
 import styles from './reset-password.module.css';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Redirect, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../../../services/actions/reset-password';
 
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export const ResetPassword = () => {
+    
+    const [password, setPassword] = React.useState('');
+    const [token, setToken] = React.useState('');
+    const location = useLocation();
+    const { hasUser } = useSelector((state) => state.forgotPassword);
+    const { success } = useSelector((state) => state.resetPassword);
 
     const dispatch = useDispatch();
 
-
-    const [password, setPassword] = React.useState('');
-    const [token, setToken] = React.useState('');
-
     const handleResetPassword = (evt) => {
         evt.preventDefault();
-        dispatch(resetPassword());
+        dispatch(resetPassword(password, token));
     }
-
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={handleResetPassword}>
+            {!hasUser && (
+                <Redirect to={location.state?.from || '/'} />
+            )} {success ? (
+                <p>ok</p>
+            ) : (
+                <p>error</p>
+            )}
+            {!success && hasUser && (
+                <form className={styles.form} onSubmit={handleResetPassword}>
                 <h1 className='text text_type_main-medium pb-6'>Восстановление пароля</h1>
                 <PasswordInput
                     type={'password'}
@@ -50,6 +59,7 @@ export const ResetPassword = () => {
                     </Link>
                 </p>
             </form>
+            )}
         </div>
     )
 }

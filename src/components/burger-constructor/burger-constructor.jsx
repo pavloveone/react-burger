@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addBun } from "../../services/actions/constructor";
@@ -20,13 +21,12 @@ import { useDrop } from "react-dnd";
 export const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const { bun } = useSelector((state) => state.constructorIngredients);
-
     const  ingredientsConstructor  = useSelector((state) => state.constructorIngredients.ingredients);
     const { isVisible } = useSelector((state) => state.orderDetails);
-
-    const [disabled, setDisabled] = useState(true);
+    const { isAuth } = useSelector((state) => state.login);
 
     const [{}, dragRef] = useDrop({
         accept: 'ingredient',
@@ -37,13 +37,15 @@ export const BurgerConstructor = () => {
 
     function handleOpenOrder() {
         
-        if (bun.length > 0 && ingredientsConstructor.length > 0) {
+         if (bun.length > 0 && ingredientsConstructor.length > 0 && isAuth) {
             dispatch(getOrder(bun, ingredientsConstructor));
 
             dispatch({
                 type: SHOW_ORDER
             })
-        } 
+        } else {
+            history.push('/login');
+        }
     };
 
     function handleCloseOrder() {

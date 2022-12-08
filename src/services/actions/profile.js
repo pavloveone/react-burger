@@ -51,7 +51,6 @@ export const updateUser = (email, username) => (dispatch) => {
     })
     .then(checkReponse)
     .then(res =>  {
-        console.log(res)
         dispatch({
             type: GET_UPDATE_PROFILE_SUCCESS,
             payload: res

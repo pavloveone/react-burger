@@ -66,3 +66,8 @@
 .price_text {
     padding-right: 9px;
 }
+
+.link {
+    text-decoration: none;
+    color: white;
+}

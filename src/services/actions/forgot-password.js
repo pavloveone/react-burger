@@ -18,12 +18,17 @@ export const forgotPassword = (email) => (dispatch) => {
     })
     .then(checkReponse)
     .then(res => {
-        console.log(res);
-        return dispatch({
-        type: GET_FORGOT_PASSWORD_SUCCESS,
-        payload: res,
-    })})
-    .catch(err => dispatch({
+        if(res.success) {
+            console.log(res);
+            dispatch({
+                type: GET_FORGOT_PASSWORD_SUCCESS,
+                payload: res,
+            })
+        }
+})
+    .catch(err => {
+        console.log(err);
+        dispatch({
         type: GET_FORGOT_PASSWORD_ERROR
-    }));
+    })});
 }
