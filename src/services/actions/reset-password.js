@@ -1,4 +1,5 @@
 import { checkReponse } from "../../utils/variables";
+import { URL } from "../../utils/api";
 
 export const GET_RESET_PASSWORD_REQUEST = 'GET_RESET_PASSWORD_REQUEST';
 export const GET_RESET_PASSWORD_SUCCESS = 'GET_RESET_PASSWORD_SUCCESS';
@@ -7,7 +8,7 @@ export const GET_RESET_PASSWORD_ERROR = 'GET_RESET_PASSWORD_ERROR';
 export const resetPassword = (password, token) => (dispatch) => {
 
     dispatch({ type: GET_RESET_PASSWORD_REQUEST });
-        fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
+        fetch(`${URL}/password-reset/reset`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json;charset=utf-8"

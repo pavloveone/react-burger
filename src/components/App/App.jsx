@@ -4,7 +4,7 @@ import { DndProvider } from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
-import './App.css';
+import styles from './app.module.css';
 
 import { checkUserAuth } from '../../services/actions/login';
 
@@ -14,13 +14,13 @@ import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 import { Loading } from '../loading/loading';
 import { ErrorLoading } from '../error-loading/error-loading';
-import { Login } from '../pages/login/login';
-import { Register } from '../pages/register/register';
-import { ForgotPassword } from '../pages/forgot-password/forgot-password';
-import { ResetPassword } from '../pages/reset-password/reset-password';
-import { Profile } from '../pages/profile/profile';
-import { OrdersPage } from '../pages/orders-page/orders-page';
-import { NotFound404 } from '../pages/not-found-404/not-found-404';
+import { Login } from '../../pages/login/login'
+import { Register } from '../../pages/register/register';
+import { ForgotPassword } from '../../pages/forgot-password/forgot-password';
+import { ResetPassword } from '../../pages/reset-password/reset-password';
+import { Profile } from '../../pages/profile/profile';
+import { OrdersPage } from '../../pages/orders-page/orders-page';
+import { NotFound404 } from '../../pages/not-found-404/not-found-404';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
@@ -28,11 +28,10 @@ import { Modal } from '../modal/modal';
 function App() {
 
   const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
-  const { isAuth } = useSelector((state) => state.login);
 
-  let location = useLocation();
-  let history = useHistory();
-  let background = location.state && location.state.background;
+  const location = useLocation();
+  const history = useHistory();
+  const background = location.state && location.state.background;
 
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
@@ -51,7 +50,7 @@ function App() {
   },[])
   
   return (
-    <div className="App">
+    <div className={styles.app}>
       <AppHeader />
         <div className="content">
           {isLoading && (
@@ -95,7 +94,7 @@ function App() {
               </Switch>
           )}
         </div>
-        {background && (
+        {background && ingredients.length > 0 && (
         <Route
           path='/ingredients/:ingredientId'
           children={

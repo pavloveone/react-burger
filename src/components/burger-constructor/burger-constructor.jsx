@@ -1,6 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addBun } from "../../services/actions/constructor";

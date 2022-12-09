@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './login.module.css';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 
-import { authorization } from '../../../services/actions/login';
+import { authorization } from '../../services/actions/login';
 
 import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './register.module.css';
 import { Link, useLocation, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { registration } from '../../../services/actions/register';
+import { registration } from '../../services/actions/register';
 
 import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -56,7 +56,7 @@ export const Register = () => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <Button style={{width: '253px', marginBottom: '80px'}} 
+                <Button extraClass={styles.button}
                 htmlType="submit" type="primary" size="medium">
                     Зарегистрироваться
                 </Button>

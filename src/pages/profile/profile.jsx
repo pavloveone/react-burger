@@ -3,9 +3,9 @@ import styles from './profile.module.css';
 import { NavLink, Redirect, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getUser, updateUser } from '../../../services/actions/profile';
+import { getUser, updateUser } from '../../services/actions/profile';
 
-import { logOut } from '../../../services/actions/login';
+import { logOut } from '../../services/actions/login';
 
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 

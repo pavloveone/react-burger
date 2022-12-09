@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './not-found-404.module.css';
 
-import NotFoundImage from '../../../images/not-found.png';
+import NotFoundImage from '../../images/not-found.png';
 
 export const NotFound404 = () => {
     return (

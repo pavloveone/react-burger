@@ -1,4 +1,5 @@
 import { checkReponse } from "../../utils/variables";
+import { URL } from "../../utils/api";
 
 export const SHOW_ORDER = 'SHOW_ORDER';
 export const CLOSE_ORDER = 'CLOSE_ORDER';
@@ -16,7 +17,7 @@ export const getOrder = (bun, ingredients) =>(dispatch) => {
 
         const ingredientsId = array.map((item) => item._id);
         dispatch({type: GET_ORDER_REQUEST});
-        fetch('https://norma.nomoreparties.space/api/orders', {
+        fetch(`${URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json;charset=utf-8"

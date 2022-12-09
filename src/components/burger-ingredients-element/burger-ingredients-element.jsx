@@ -37,11 +37,6 @@ export function BurgerIngredientsElement({item}) {
         }
         return count
     }, [ingredients, bun])
-    
-    // const handleClick=(e) => {
-    //     e.preventDefault();
-    //     // onOpen(item);
-    // }
 
     const [{}, dragRef] = useDrag({
         type: 'ingredient',
@@ -55,8 +50,6 @@ export function BurgerIngredientsElement({item}) {
         <Link
             key={ingredientId}
             to={{
-            // Тут мы формируем динамический путь для нашего ингредиента
-            // а также сохраняем в свойство background роут, на котором была открыта наша модалка
             pathname: `/ingredients/${ingredientId}`,
             state: { background: location },
             }}

@@ -1,25 +1,18 @@
 import React, { useEffect } from 'react';
 import  propTypes  from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-ingredients.module.css';
 
-// import { Modal } from '../modal/modal';
 import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
-// import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { ingredientTypes } from '../../utils/variables';
-// import { CLOSE_DETAILS, SHOW_DETAILS } from '../../services/actions/ingredients-details';
 
 export function BurgerIngredients() {
 
     const { ingredients } = useSelector((state) => state.ingredients);
-    // const { isVisible } = useSelector((state) => state.ingredientsDetails);
-
-
-    // const dispatch = useDispatch();
 
     const bunArr = React.useMemo(() => 
     ingredients.filter((item) => 
@@ -34,19 +27,6 @@ export function BurgerIngredients() {
             item.type === 'main')
         );
 
-    // const handleShowDetails = (item) => {
-    //     dispatch({
-    //         type: SHOW_DETAILS,
-    //         payload: item
-    //     });
-    // };
-
-    // const handleCloseDetails = () => {
-    //     dispatch({
-    //         type: CLOSE_DETAILS
-    //     })
-    // }
-
     const [current, setCurrent] = React.useState('one');
 
     const [bunRef, inViewBun] = useInView({
@@ -59,7 +39,7 @@ export function BurgerIngredients() {
         threshold: 0.2,
       });
     
-      React.useEffect(() => {
+      useEffect(() => {
         if (inViewBun) {
           setCurrent('bun');
         } else if (inViewSauce) {
