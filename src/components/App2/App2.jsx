@@ -4,7 +4,7 @@ import { DndProvider } from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
-import styles from './app.module.css';
+import styles from './App2.module.css';
 
 import { checkUserAuth } from '../../services/actions/login';
 
