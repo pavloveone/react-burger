@@ -10,26 +10,29 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../burger-ingredients/burger-ingredients.module.css';
 import { useSelector } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
+import { TIngredient } from '../../utils/types';
 
+type TBurgerIngredientsElementProps = {
+    item: TIngredient,
+}
 
+export function BurgerIngredientsElement({item}: TBurgerIngredientsElementProps): JSX.Element {
 
-export function BurgerIngredientsElement({item}) {
-
-    const { ingredients, bun } = useSelector((state) => state.constructorIngredients);
+    const { ingredients, bun } = useSelector((state: any) => state.constructorIngredients);
     const location = useLocation();
     const ingredientId = item['_id'];
 
     const counter = React.useMemo(() => {
         let count = 0;
         if (item.type !== 'bun') {
-            ingredients.map((element) => {
+            ingredients.map((element: TIngredient) => {
                 if(element._id === item._id) {
                     ++count;
                 }   
             })
         }
         else {
-            bun.map((element) => {
+            bun.map((element: TIngredient) => {
                 if(element._id === item._id) {
                     return count = 2;
                 }

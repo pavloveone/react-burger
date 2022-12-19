@@ -5,17 +5,22 @@ import { useDrop, useDrag } from 'react-dnd';
 import styles from '../burger-constructor/burger-constructor.module.css';
 
 import { DELETE_INGREDIENT, REORDER_INGREDIENT } from '../../services/actions/constructor';
+import { TIngredient } from '../../utils/types';
+
+type TConstructorItemProps = {
+    item: TIngredient,
+    index: number,
+}
 
 
-
-
-export const ConstructorItem = ({item, index}) => {
+export const ConstructorItem = ({item, index}: TConstructorItemProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const deleteItem = () => {
+        // @ts-ignore
         dispatch({
             type: DELETE_INGREDIENT,
-            id: item.id
+            id: item._id
         })
     }
 

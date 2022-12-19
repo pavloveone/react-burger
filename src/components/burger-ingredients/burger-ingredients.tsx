@@ -7,24 +7,25 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-ingredients.module.css';
 
-import {BurgerIngredientsElement} from '../burger-ingredients-element/burger-ingredients-element';
-import { ingredientTypes } from '../../utils/variables';
+import { BurgerIngredientsElement } from '../burger-ingredients-element/burger-ingredients-element';
+// import { ingredientTypes } from '../../utils/variables';
+import { TIngredient } from '../../utils/types';
 
-export function BurgerIngredients() {
+export function BurgerIngredients(): JSX.Element {
 
-    const { ingredients } = useSelector((state) => state.ingredients);
+    const { ingredients } = useSelector((state:any) => state.ingredients);
 
     const bunArr = React.useMemo(() => 
-    ingredients.filter((item) => 
-            item.type === 'bun')
+    ingredients.filter((item: TIngredient) => 
+            item.type === 'bun'), []
         );
     const sauceArr = React.useMemo(() => 
-    ingredients.filter((item) => 
-            item.type === 'sauce')
+    ingredients.filter((item: TIngredient) => 
+            item.type === 'sauce'), []
         );
     const mainArr = React.useMemo(() => 
-    ingredients.filter((item) => 
-            item.type === 'main')
+    ingredients.filter((item: TIngredient) => 
+            item.type === 'main'), []
         );
 
     const [current, setCurrent] = React.useState('one');
@@ -66,19 +67,19 @@ export function BurgerIngredients() {
         <div className={styles.content}>
         <h2 className={`${styles.element_title} text text_type_main-medium`} ref={bunRef}>Булки</h2>
         <div className={styles.element}> {
-            bunArr.map((item) => (
+            bunArr.map((item: TIngredient) => (
                 <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`} ref={sauceRef}>Соусы</h2>
         <div className={styles.element}> {
-            sauceArr.map((item) => (
+            sauceArr.map((item: TIngredient) => (
                 <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
         <h2 className={`${styles.element_title} text text_type_main-medium`} ref={mainRef}>Начинки</h2>
         <div className={styles.element}> {
-            mainArr.map((item) => (
+            mainArr.map((item: TIngredient) => (
                 <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
@@ -92,6 +93,6 @@ export function BurgerIngredients() {
     )
   }
 
-BurgerIngredients.ReactPropTypes = {
-    ingredients: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
-}
+// BurgerIngredients.ReactPropTypes = {
+//     ingredients: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
+// }

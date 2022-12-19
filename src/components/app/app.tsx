@@ -24,29 +24,34 @@ import { NotFound404 } from '../../pages/not-found-404/not-found-404';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
+import { Location } from 'history';
+type TLocataionState = {
+  background: Location
+}
 
-function App() {
+function App(): JSX.Element {
 
-  const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
+  const { ingredients, isLoading, hasError } = useSelector((state: any) => state.ingredients);
 
-  const location = useLocation();
+  const location = useLocation<TLocataionState>();
   const history = useHistory();
   const background = location.state && location.state.background;
 
   const handleModalClose = () => {
-    // Возвращаемся к предыдущему пути при закрытии модалки
     history.goBack();
-  };
+  };  
   
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchIngredients());
+  // @ts-ignore
+    dispatch(fetchIngredients()); 
   }, [dispatch]);
 
   React.useEffect(() => {
-    dispatch(checkUserAuth())
+  // @ts-ignore
+    dispatch(checkUserAuth()) 
   },[])
   
   return (

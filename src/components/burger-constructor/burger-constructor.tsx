@@ -22,12 +22,12 @@ export const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { bun } = useSelector((state) => state.constructorIngredients);
-    const  ingredientsConstructor  = useSelector((state) => state.constructorIngredients.ingredients);
-    const { isVisible } = useSelector((state) => state.orderDetails);
-    const { isAuth } = useSelector((state) => state.login);
+    const { bun } = useSelector((state: any) => state.constructorIngredients);
+    const  ingredientsConstructor  = useSelector((state: any) => state.constructorIngredients.ingredients);
+    const { isVisible } = useSelector((state: any) => state.orderDetails);
+    const { isAuth } = useSelector((state: any) => state.login);
 
-    const [{}, dragRef] = useDrop({
+    const [{}, dragRef]: any = useDrop({
         accept: 'ingredient',
         drop(item) {
             addBun(item, dispatch)
@@ -37,7 +37,8 @@ export const BurgerConstructor = () => {
     function handleOpenOrder() {
         
          if (bun.length > 0 && ingredientsConstructor.length > 0 && isAuth) {
-            dispatch(getOrder(bun, ingredientsConstructor));
+              // @ts-ignore
+              dispatch(getOrder(bun, ingredientsConstructor));
 
             dispatch({
                 type: SHOW_ORDER
