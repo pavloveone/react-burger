@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {  Redirect, Route } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 
-export const ProtectedRoute = ({ children, ...rest }) => {
+type TProtectedRouteProps = {
+    children: ReactNode,
+    path: string,
+    exact: boolean,
+}
 
-    const { isAuth } = useSelector((state) => state.login);
+
+export const ProtectedRoute = ({ children, ...rest }: TProtectedRouteProps) => {
+
+    const { isAuth } = useSelector((state: any) => state.login);
 
   return (
       <Route

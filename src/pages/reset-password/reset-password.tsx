@@ -6,18 +6,23 @@ import { resetPassword } from '../../services/actions/reset-password';
 
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const ResetPassword = () => {
+type TLocataionState = {
+    from: Location
+}
+
+export const ResetPassword = ():JSX.Element => {
     
     const [password, setPassword] = React.useState('');
     const [token, setToken] = React.useState('');
-    const location = useLocation();
-    const { hasUser } = useSelector((state) => state.forgotPassword);
-    const { success } = useSelector((state) => state.resetPassword);
+    const location = useLocation<TLocataionState>();
+    const { hasUser } = useSelector((state: any) => state.forgotPassword);
+    const { success } = useSelector((state: any) => state.resetPassword);
 
     const dispatch = useDispatch();
 
-    const handleResetPassword = (evt) => {
+    const handleResetPassword = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
+        // @ts-ignore
         dispatch(resetPassword(password, token));
     }
 
@@ -34,7 +39,6 @@ export const ResetPassword = () => {
                 <form className={styles.form} onSubmit={handleResetPassword}>
                 <h1 className='text text_type_main-medium pb-6'>Восстановление пароля</h1>
                 <PasswordInput
-                    type={'password'}
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     extraClass="mb-6"

@@ -6,22 +6,26 @@ import { registration } from '../../services/actions/register';
 
 import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
+type TLocataionState = {
+    from: Location
+}
 
-export const Register = () => {
+export const Register = ():JSX.Element => {
 
     const [email, setEmail] = React.useState('');
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const { isAuth } = useSelector((state) => state.login)
+    const { isAuth } = useSelector((state: any) => state.login)
 
-    const inputRef = React.useRef(null);
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
 
     const dispatch = useDispatch();
-    const location = useLocation();
+    const location = useLocation<TLocataionState>();
 
-    const createNewLogin = (evt) => {
+    const createNewLogin = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    // @ts-ignore
     dispatch(registration())
   }
 
@@ -42,17 +46,13 @@ export const Register = () => {
                     onChange={e => setUsername(e.target.value)}
                 />
                 <EmailInput
-                    type={'email'}
                     placeholder="E-mail"
                     extraClass="mb-6"
-                    ref={inputRef}
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
                 <PasswordInput
-                    type={'password'}
                     extraClass="mb-6"
-                    ref={inputRef}
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import styles from './profile.module.css';
 import { NavLink, Redirect, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,14 +13,15 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const { isAuth } = useSelector((state) => state.login);
-    const { userProfile, isLoading } = useSelector((state) => state.profile);
+    const { isAuth } = useSelector((state: any) => state.login);
+    const { userProfile, isLoading } = useSelector((state: any) => state.profile);
 
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     
     React.useEffect(() => {
+        // @ts-ignore
         dispatch(getUser())
     }, [])
 
@@ -32,17 +33,18 @@ export const Profile = () => {
     }, [isLoading])
 
 
-    const exit = (e) => {
+    const exit = (e: SyntheticEvent) => {
         e.preventDefault();
         logOut(dispatch);
     }
 
-    const updateForm = (e) => {
+    const updateForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        // @ts-ignore
         dispatch(updateUser(email, username));
     }
 
-    const cancelUpdate = (e) => {
+    const cancelUpdate = (e: SyntheticEvent) => {
         e.preventDefault();
         setUsername(userProfile.user.name);
         setEmail(userProfile.user.email);

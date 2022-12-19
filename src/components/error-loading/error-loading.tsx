@@ -1,4 +1,4 @@
-export const ErrorLoading = () => {
+export const ErrorLoading = (): JSX.Element => {
     return (
         <>
             <p className='text text_type_main-large pt-20'>

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrop, useDrag } from 'react-dnd';
 import styles from '../burger-constructor/burger-constructor.module.css';
+import { Identifier } from 'dnd-core';
 
 import { DELETE_INGREDIENT, REORDER_INGREDIENT } from '../../services/actions/constructor';
 import { TIngredient } from '../../utils/types';
@@ -10,6 +11,15 @@ import { TIngredient } from '../../utils/types';
 type TConstructorItemProps = {
     item: TIngredient,
     index: number,
+}
+
+type TDragObject = {
+  id: string,
+  index: number,
+}
+
+type TCollectedProps = {
+  handlerId: Identifier | null
 }
 
 
@@ -24,9 +34,9 @@ export const ConstructorItem = ({item, index}: TConstructorItemProps): JSX.Eleme
         })
     }
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement | null>(null);
 
-    const [{handlerId}, drop] = useDrop({
+    const [{handlerId}, drop] = useDrop<TDragObject, unknown, TCollectedProps>({
         accept: 'constructor',
         collect(monitor) {
             return {
@@ -44,13 +54,13 @@ export const ConstructorItem = ({item, index}: TConstructorItemProps): JSX.Eleme
             if (dragIndex === hoverIndex) {
                 return;
             }
-            const hoverBoundingRect = ref.current?.getBoundingClientRect();
+            const hoverBoundingRect = ref.current!.getBoundingClientRect();
 
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
             const clientOffset = monitor.getClientOffset();
 
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+            const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
 
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return;

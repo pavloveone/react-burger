@@ -4,7 +4,7 @@ import styles from './not-found-404.module.css';
 
 import NotFoundImage from '../../images/not-found.png';
 
-export const NotFound404 = () => {
+export const NotFound404 = (): JSX.Element => {
     return (
         <div>
             <div>

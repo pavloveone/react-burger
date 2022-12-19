@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 export function OrderDetails() {
 
-    const { orderNumber } = useSelector((state) => state.orderDetails);
+    const { orderNumber } = useSelector((state: any) => state.orderDetails);
 
     return (
         <div className={styles.body}>

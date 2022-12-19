@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import styles from './forgot-password.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,15 +7,16 @@ import { forgotPassword } from '../../services/actions/forgot-password';
 
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const ForgotPassword = () => {
+export const ForgotPassword = (): JSX.Element => {
 
     const [email, setEmail] = React.useState('');
-    const { hasUser } = useSelector((state) => state.forgotPassword);
+    const { hasUser } = useSelector((state: any) => state.forgotPassword);
 
     const dispatch = useDispatch();
 
-    const resetPassword = (evt, email) => {
+    const resetPassword = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
+        //@ts-ignore
         dispatch(forgotPassword(email));
   }
 

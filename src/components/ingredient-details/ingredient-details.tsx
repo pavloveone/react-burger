@@ -1,17 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { TIngredient } from '../../utils/types';
 
 import styles from './ingredient-details.module.css';
 
-export function IngredientDetails() {
+export function IngredientDetails():JSX.Element {
     
     // const { currentItem } = useSelector((state) => state.ingredientsDetails);
-    const { ingredients } = useSelector((state) => state.ingredients);
+    const { ingredients } = useSelector((state: any) => state.ingredients);
 
-    const { ingredientId } = useParams();
+    interface IIngredientDetailsParams{
+        ingredientId: string;
+    }
 
-    const currentItem = ingredients.find((element) => element._id === ingredientId ? true : false);
+    const { ingredientId } = useParams<IIngredientDetailsParams>();
+
+    const currentItem = ingredients.find((element: TIngredient) => element._id === ingredientId ? true : false);
 
     return (
         (<div className={styles.body}>

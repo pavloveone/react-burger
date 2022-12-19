@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './orders-page.module.css';
 
-export const OrdersPage = () => {
+export const OrdersPage = (): JSX.Element => {
     return (
         <div className={styles.container}>
             <p className='text text_type_main-medium pb-10 text_color_inactive'>

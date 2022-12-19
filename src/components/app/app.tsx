@@ -25,6 +25,7 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
 import { Location } from 'history';
+
 type TLocataionState = {
   background: Location
 }
