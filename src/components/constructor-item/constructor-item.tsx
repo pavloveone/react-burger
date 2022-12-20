@@ -30,7 +30,7 @@ export const ConstructorItem = ({item, index}: TConstructorItemProps): JSX.Eleme
         // @ts-ignore
         dispatch({
             type: DELETE_INGREDIENT,
-            id: item._id
+            id: item.id
         })
     }
 

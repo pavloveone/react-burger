@@ -12,7 +12,7 @@ export const ConstructorIngredientsContainer = ():JSX.Element => {
     return (
         <div className={styles.content}>
              {ingredients.map((item: TIngredient, index: number) => (
-                 <ConstructorItem key={item._id} item={item} index={index}  />
+                 <ConstructorItem key={item.id} item={item} index={index}  />
                 ))}
         </div>
     );
