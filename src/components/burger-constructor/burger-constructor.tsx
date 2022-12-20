@@ -16,6 +16,7 @@ import { CLOSE_ORDER, SHOW_ORDER } from '../../services/actions/order-details';
 
 import styles from './burger-constructor.module.css';
 import { useDrop } from "react-dnd";
+import { TIngredient } from "../../utils/types";
 
 export const BurgerConstructor = () => {
 
@@ -29,7 +30,7 @@ export const BurgerConstructor = () => {
 
     const [{}, dragRef]: any = useDrop({
         accept: 'ingredient',
-        drop(item) {
+        drop(item:TIngredient) {
             addBun(item, dispatch)
             }
         })

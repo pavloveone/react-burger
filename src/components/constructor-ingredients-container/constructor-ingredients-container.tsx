@@ -5,7 +5,7 @@ import { ConstructorItem } from '../constructor-item/constructor-item'
 import { useSelector } from 'react-redux';
 import { TIngredient } from '../../utils/types';
 
-export const ConstructorIngredientsContainer = () => {
+export const ConstructorIngredientsContainer = ():JSX.Element => {
 
     const { ingredients } = useSelector((state:any) => state.constructorIngredients);
 
