@@ -1,6 +1,21 @@
-import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_ERROR, LOGOUT, AUTH_CHECKED } from "../actions/login";
+import { TUser } from "../../utils/types";
+import { 
+    GET_LOGIN_REQUEST,
+    GET_LOGIN_SUCCESS,
+    GET_LOGIN_ERROR,
+    LOGOUT,
+    AUTH_CHECKED,
+    TLoginActions 
+} from "../actions/login";
 
-const initialState = {
+type TLoginListState = {
+    isLoading: boolean;
+    hasError: boolean;
+    isAuth: boolean;
+    userData: TUser;
+}
+
+const initialState: TLoginListState = {
     isLoading: false,
     hasError: false,
     isAuth: false,
@@ -8,7 +23,7 @@ const initialState = {
 }
 
 
-export const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action: TLoginActions) => {
     switch(action.type) {
         case GET_LOGIN_REQUEST: {
             return {
@@ -21,7 +36,7 @@ export const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                userData: action.payload,
+                userData: action.userData,
                 isAuth: true
             }
         }
@@ -30,7 +45,7 @@ export const loginReducer = (state = initialState, action) => {
                 ...state,
                 hasError: true,
                 isLoading: false,
-                userData: action.payload
+                userData: action.userData
             }
         }
         case LOGOUT: {

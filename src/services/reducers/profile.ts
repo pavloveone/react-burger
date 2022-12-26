@@ -1,16 +1,28 @@
+import { TUser } from '../../utils/types';
 import { 
-    GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, GET_PROFILE_ERROR, 
-    GET_UPDATE_PROFILE_REQUEST, GET_UPDATE_PROFILE_SUCCESS, GET_UPDATE_PROFILE_ERR0R
- } from '../actions/profile';
+    GET_PROFILE_REQUEST,
+    GET_PROFILE_SUCCESS,
+    GET_PROFILE_ERROR, 
+    GET_UPDATE_PROFILE_REQUEST,
+    GET_UPDATE_PROFILE_SUCCESS,
+    GET_UPDATE_PROFILE_ERR0R,
+    TProfileActions
+} from '../actions/profile';
 
-const initialState = {
+type TProfileListState = {
+    isLoading: boolean;
+    hasError: boolean;
+    userProfile: TUser;
+}
+
+const initialState: TProfileListState = {
     isLoading: false,
     hasError: false,
     userProfile: {},
     
 }
 
-export const profileReducer = (state = initialState, action) => {
+export const profileReducer = (state = initialState, action: TProfileActions) => {
     switch(action.type) {
         case GET_PROFILE_REQUEST: {
             return {
@@ -22,14 +34,14 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                userProfile: action.payload
+                userProfile: action.userProfile
             }
         }
         case GET_PROFILE_ERROR: {
             return {
                 ...state,
                 hasError: true,
-                userProfile: action.payload
+                userProfile: action.userProfile
             }
         }
         case GET_UPDATE_PROFILE_REQUEST: {
@@ -43,14 +55,14 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                userProfile: action.payload
+                userProfile: action.userProfile
             }
         }
         case GET_UPDATE_PROFILE_ERR0R: {
             return {
                 ...state,
                 hasError: true,
-                userProfile: action.payload
+                userProfile: action.userProfile
             }
         }
         default: {

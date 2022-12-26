@@ -1,17 +1,30 @@
-import { ADD_INGREDIENT, DELETE_INGREDIENT, ADD_BUN, REORDER_INGREDIENT, RESET_CONSTRUCTOR } from "../actions/constructor";
+import { 
+    ADD_INGREDIENT, 
+    DELETE_INGREDIENT, 
+    ADD_BUN, 
+    REORDER_INGREDIENT, 
+    RESET_CONSTRUCTOR, 
+    TConstructorActions
+ } from "../actions/constructor";
+import { TIngredient } from '../../utils/types';
+
+type TConstructorListState = {
+    ingredients: ReadonlyArray<TIngredient>;
+    bun: ReadonlyArray<TIngredient>;
+}
 
 
-const initialState = {
+const initialState: TConstructorListState = {
     ingredients: [],
     bun: []
 };
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (state = initialState, action: TConstructorActions) => {
     switch(action.type) {
         case ADD_INGREDIENT: {
             return {
                 ...state,
-                ingredients: [...state.ingredients, action.payload],
+                ingredients: [...state.ingredients, action.ingredients],
                
             }
         }
@@ -24,7 +37,7 @@ export const constructorReducer = (state = initialState, action) => {
         case ADD_BUN: {
             return {
                 ...state,
-                bun: [action.payload],
+                bun: [action.bun],
             }
         }
         case REORDER_INGREDIENT: {

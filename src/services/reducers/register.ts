@@ -1,12 +1,24 @@
-import { GET_REGISTRATION_SUCCESS, GET_REGISTRATION_REQUEST, GET_REGISTRATION_ERROR } from "../actions/register";
+import { TUser } from "../../utils/types";
+import {
+	GET_REGISTRATION_SUCCESS,
+	GET_REGISTRATION_REQUEST,
+	GET_REGISTRATION_ERROR,
+	TRegisterActions
+} from "../actions/register";
 
-const initialState = {
+type TRegisterListState = {
+	isLoading: boolean;
+	hasError: Boolean;
+	userData: TUser;
+}
+
+const initialState: TRegisterListState = {
     isLoading: false,
 	hasError: false,
     userData: {}
 };
 
-export const registrationReducer = (state = initialState, action) => {
+export const registrationReducer = (state = initialState, action: TRegisterActions) => {
     switch(action.type) {
 		case GET_REGISTRATION_REQUEST: {
 			return {
@@ -20,7 +32,7 @@ export const registrationReducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				hasError: false,
-				userData: action.payload
+				userData: action.userData
 			}
 		}
 		case GET_REGISTRATION_ERROR: {

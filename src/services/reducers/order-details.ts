@@ -1,13 +1,27 @@
-import { SHOW_ORDER, CLOSE_ORDER, GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR } from '../actions/order-details';
+import { 
+    SHOW_ORDER,
+    CLOSE_ORDER,
+    GET_ORDER_REQUEST,
+    GET_ORDER_SUCCESS,
+    GET_ORDER_ERROR,
+    TOrderDetailsActions
+} from '../actions/order-details';
 
-const initialState = {
+type TOrderDetailsListState = {
+    isVisible: boolean;
+    isLoading: boolean;
+    hasError: boolean;
+    orderNumber: number | null;
+}
+
+const initialState: TOrderDetailsListState = {
     isVisible: false,
     isLoading: false,
     hasError: false,
     orderNumber: null
 };
 
-export const orderDetailsReducer = (state = initialState, action) => {
+export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions) => {
     switch(action.type) {
         case GET_ORDER_REQUEST: {
             return {
@@ -21,7 +35,7 @@ export const orderDetailsReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 hasError: false,
-                orderNumber: action.payload
+                orderNumber: action.orderNumber
             }
         }
         case GET_ORDER_ERROR: {
