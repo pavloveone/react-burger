@@ -9,7 +9,6 @@ import { useRouteMatch } from "react-router-dom";
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { JsxEmit } from "typescript";
 
 
 export function AppHeader() {

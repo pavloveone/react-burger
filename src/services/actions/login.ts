@@ -2,7 +2,8 @@ import { checkReponse } from '../../utils/variables';
 import { getUser } from './profile';
 import { login, logout } from '../../utils/api';
 import { setCookie, deleteCookie, getCookie } from '../../utils/cookies';
-import { TUser } from '../../utils/types';
+import { TRegisterResponse, TUser } from '../../utils/types';
+import { AppDispatch } from '..';
 
 export const GET_LOGIN_REQUEST: 'GET_LOGIN_REQUEST' = 'GET_LOGIN_REQUEST';
 export const GET_LOGIN_SUCCESS: 'GET_LOGIN_SUCCESS' = 'GET_LOGIN_SUCCESS';
@@ -15,11 +16,10 @@ export interface IGetLoginRequestAction {
 }
 export interface IGetLoginSuccessAction {
     readonly type: typeof GET_LOGIN_SUCCESS;
-    readonly userData: TUser;
+    readonly userData: TRegisterResponse;
 }
 export interface IGetLoginErrorAction {
     readonly type: typeof GET_LOGIN_ERROR;
-    readonly userData: TUser;
 }
 export interface ILogoutAction {
     readonly type: typeof LOGOUT;
@@ -31,7 +31,7 @@ export interface IAuthCheckedAction {
 export type TLoginActions = | IGetLoginRequestAction | IGetLoginSuccessAction | IGetLoginErrorAction | ILogoutAction
 | IAuthCheckedAction;
 
-export const authorization = (email: string, password: string) => (dispatch: any) => {
+export const authorization = (email: TRegisterResponse, password: TRegisterResponse) => (dispatch: AppDispatch) => {
     dispatch({ type: GET_LOGIN_REQUEST });
     fetch(login, {
         method: 'POST',
@@ -43,8 +43,8 @@ export const authorization = (email: string, password: string) => (dispatch: any
             'password': password
         })
     })
-    .then(checkReponse)
-    .then((res: any) =>  {
+    .then(res => checkReponse<TRegisterResponse>(res))
+    .then((res) =>  {
         if(res.success) {
             setCookie('token', res.accessToken)
             localStorage.setItem('token', res.refreshToken);     
@@ -60,7 +60,7 @@ export const authorization = (email: string, password: string) => (dispatch: any
     }));
 }
 
-export const logOut = (dispatch: any) => {
+export const logOut = (dispatch: AppDispatch) => {
     fetch(logout, {
         method: 'POST',
         headers: {
@@ -70,8 +70,8 @@ export const logOut = (dispatch: any) => {
             'token': localStorage.token
         })
     })
-    .then(checkReponse)
-    .then((res: any) =>  {
+    .then(res => checkReponse<TRegisterResponse>(res))
+    .then((res) =>  {
         if(res.success) {
             deleteCookie('token')   
             dispatch({
@@ -82,7 +82,7 @@ export const logOut = (dispatch: any) => {
     .catch(err => console.log(err));
 }
 
-export const checkUserAuth = () => (dispatch: any) => {
+export const checkUserAuth = () => (dispatch: AppDispatch) => {
     if (getCookie('token')) {
         dispatch(getUser())
     }

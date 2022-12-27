@@ -1,6 +1,8 @@
 import { checkReponse } from "../../utils/variables";
 import { URL } from "../../utils/api";
 import { TIngredient } from "../../utils/types";
+import { AppDispatch } from "..";
+import { TOrderResponse } from "../../utils/types";
 
 export const SHOW_ORDER: 'SHOW_ORDER'= 'SHOW_ORDER';
 export const CLOSE_ORDER: 'CLOSE_ORDER' = 'CLOSE_ORDER';
@@ -28,7 +30,7 @@ export interface IGetOrderErrorAction {
 export type TOrderDetailsActions = | IShowOrderAction | ICloseOrderAction | IGetOrderRequestAction | IGetOrderSuccessAction
 | IGetOrderErrorAction;
 
-export const getOrder = (bun: TIngredient[], ingredients: TIngredient[]) =>(dispatch: any) => {
+export const getOrder = (bun: TIngredient[], ingredients: TIngredient[]) =>(dispatch: AppDispatch) => {
 
     bun = bun.filter( Boolean );
 
@@ -47,12 +49,11 @@ export const getOrder = (bun: TIngredient[], ingredients: TIngredient[]) =>(disp
                 ingredients: ingredientsId
             })
         })
-        .then(checkReponse)
-        .then((res: any) => {
-            console.log(res);
+        .then(res => checkReponse<TOrderResponse>(res))
+        .then((res) => {
              return dispatch({
             type: GET_ORDER_SUCCESS,
-            payload: res.order.number
+            orderNumber: res.order.number
         })})
         .catch(err => dispatch({
             type: GET_ORDER_ERROR

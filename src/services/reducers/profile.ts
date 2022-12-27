@@ -41,7 +41,6 @@ export const profileReducer = (state = initialState, action: TProfileActions) =>
             return {
                 ...state,
                 hasError: true,
-                userProfile: action.userProfile
             }
         }
         case GET_UPDATE_PROFILE_REQUEST: {
@@ -62,7 +61,6 @@ export const profileReducer = (state = initialState, action: TProfileActions) =>
             return {
                 ...state,
                 hasError: true,
-                userProfile: action.userProfile
             }
         }
         default: {

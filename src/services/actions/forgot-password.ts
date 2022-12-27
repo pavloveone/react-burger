@@ -1,6 +1,6 @@
 import { checkReponse } from "../../utils/variables";
 import { URL } from '../../utils/api';
-import { TUser } from "../../utils/types";
+import { TUser, TResponse } from "../../utils/types";
 import { AppDispatch } from "..";
 
 
@@ -34,8 +34,8 @@ export const forgotPassword = (email: TUser) => (dispatch: AppDispatch) => {
             'email': email
         })
     })
-    .then(checkReponse)
-    .then((res: any) => {
+    .then(res => checkReponse<TResponse>(res))
+    .then((res) => {
         if(res.success) {
             dispatch({
                 type: GET_FORGOT_PASSWORD_SUCCESS,

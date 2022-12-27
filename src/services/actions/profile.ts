@@ -2,7 +2,8 @@ import { checkReponse } from '../../utils/variables';
 import { user } from '../../utils/api';
 import { getCookie } from '../../utils/cookies';
 import { AUTH_CHECKED } from './login';
-import { TUser } from '../../utils/types';
+import { TResponse, TUser } from '../../utils/types';
+import { AppDispatch } from '..';
 
 export const GET_PROFILE_REQUEST: 'GET_PROFILE_REQUEST' = 'GET_PROFILE_REQUEST';
 export const GET_PROFILE_SUCCESS: 'GET_PROFILE_SUCCESS' = 'GET_PROFILE_SUCCESS';
@@ -20,7 +21,6 @@ export interface IGetProfileSuccessAction {
 }
 export interface IGetProfileErrorAction {
     readonly type: typeof GET_PROFILE_ERROR;
-    readonly userProfile: TUser;
 }
 export interface IGetUpdateProfileRequestAction {
     readonly type: typeof GET_UPDATE_PROFILE_REQUEST;
@@ -31,13 +31,12 @@ export interface IGetUpdateProfileSuccessAction {
 }
 export interface IGetUpdateProfileErrorAction {
     readonly type: typeof GET_UPDATE_PROFILE_ERR0R;
-    readonly userProfile: TUser;
 }
 
 export type TProfileActions = | IGetProfileRequestAction | IGetProfileSuccessAction | IGetProfileErrorAction
  | IGetUpdateProfileRequestAction | IGetUpdateProfileSuccessAction | IGetUpdateProfileErrorAction;
 
-export const getUser = () => (dispatch: any) => {
+export const getUser = () => (dispatch: AppDispatch) => {
     dispatch({ type: GET_PROFILE_REQUEST });
     fetch(user, {
         method: 'GET',
@@ -47,15 +46,14 @@ export const getUser = () => (dispatch: any) => {
             'authorization': getCookie('token')
         }
     })
-    .then(checkReponse)
+    .then(res => checkReponse<TUser>(res))
     .then(res =>  {
         dispatch({
             type: GET_PROFILE_SUCCESS,
             userProfile: res
         })})
     .catch(err => dispatch({
-        type: GET_PROFILE_ERROR,
-        userProfile: err
+        type: GET_PROFILE_ERROR
     }))
     .finally(() => {
         dispatch({
@@ -64,7 +62,7 @@ export const getUser = () => (dispatch: any) => {
     });
 }
 
-export const updateUser = (email: string, username: string) => (dispatch: any) => {
+export const updateUser = (email: TUser, username: TUser) => (dispatch: AppDispatch) => {
     dispatch({ type: GET_UPDATE_PROFILE_REQUEST });
     fetch(user, {
         method: 'PATCH',
@@ -78,7 +76,7 @@ export const updateUser = (email: string, username: string) => (dispatch: any) =
             'name': username
         })
     })
-    .then(checkReponse)
+    .then(res => checkReponse<TUser>(res))
     .then(res =>  {
         dispatch({
             type: GET_UPDATE_PROFILE_SUCCESS,

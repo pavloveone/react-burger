@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { DndProvider } from 'react-dnd';
-import {HTML5Backend} from 'react-dnd-html5-backend';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import styles from './app.module.css';
@@ -32,7 +32,7 @@ type TLocataionState = {
 
 function App(): JSX.Element {
 
-  const { ingredients, isLoading, hasError } = useSelector((state: any) => state.ingredients);
+  const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
 
   const location = useLocation<TLocataionState>();
   const history = useHistory();
@@ -46,12 +46,10 @@ function App(): JSX.Element {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-  // @ts-ignore
     dispatch(fetchIngredients()); 
   }, [dispatch]);
 
   React.useEffect(() => {
-  // @ts-ignore
     dispatch(checkUserAuth()) 
   },[])
   

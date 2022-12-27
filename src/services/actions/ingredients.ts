@@ -2,6 +2,7 @@ import { checkReponse } from "../../utils/variables";
 import { URL } from '../../utils/api';
 import { TIngredient } from "../../utils/types";
 import { AppDispatch } from "..";
+import { TIngredientResponse } from "../../utils/types";
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';
@@ -24,8 +25,8 @@ export type TIngredientsActions = | IGetIngredientsRequestAction | IGetIngredien
 export const fetchIngredients = () => (dispatch: AppDispatch) => {
     dispatch({type: GET_INGREDIENTS_REQUEST});
     fetch(`${URL}/ingredients`)
-    .then(checkReponse)
-    .then((res: any) => dispatch({
+    .then(res => checkReponse<TIngredientResponse>(res))
+    .then((res) => dispatch({
         type: GET_INGREDIENTS_SUCCESS,
         ingredients: res.data,
     }))

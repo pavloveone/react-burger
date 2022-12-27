@@ -45,7 +45,6 @@ export const loginReducer = (state = initialState, action: TLoginActions) => {
                 ...state,
                 hasError: true,
                 isLoading: false,
-                userData: action.userData
             }
         }
         case LOGOUT: {

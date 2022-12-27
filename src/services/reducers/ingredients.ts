@@ -42,7 +42,6 @@ export const ingredientsReducer = (state = initialState, action: TIngredientsAct
                 ...state,
                 isLoading: false,
                 hasError: true,
-                ingredients: []
             }
         } default: {
             return state
