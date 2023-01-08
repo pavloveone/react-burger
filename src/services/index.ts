@@ -16,7 +16,6 @@ import { TProfileActions } from './actions/profile';
 import { TRegisterActions } from './actions/register';
 import { TResetPasswordActions } from './actions/reset-password';
 import { ThunkAction } from 'redux-thunk';
-import { store } from './store';
 
 export type RootState = ReturnType<typeof rootReducer>
 
@@ -35,6 +34,8 @@ type TApplicationActions =
 | TConstructorActions | TForgotPasswordActions | TIngredientsActions 
 | TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions;
 
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
+export type AppThunk<TReturnType = void> = ThunkAction<TReturnType, RootState, unknown, TApplicationActions>;
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch<TReturnType = void> = (
+    action: TApplicationActions | AppThunk<TReturnType>
+) => TReturnType; 
