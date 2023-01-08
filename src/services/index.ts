@@ -7,7 +7,6 @@ import { resetPasswordReducer } from './reducers/reset-password';
 import { loginReducer } from './reducers/login';
 import { profileReducer } from './reducers/profile';
 import { combineReducers } from 'redux';
-import { store } from './store';
 import { TConstructorActions } from './actions/constructor';
 import { TForgotPasswordActions } from './actions/forgot-password';
 import { TIngredientsActions } from './actions/ingredients';
@@ -17,17 +16,9 @@ import { TProfileActions } from './actions/profile';
 import { TRegisterActions } from './actions/register';
 import { TResetPasswordActions } from './actions/reset-password';
 import { ThunkAction } from 'redux-thunk';
-import { Action, ActionCreator, Dispatch } from 'redux';
+import { store } from './store';
 
-export type RootState = ReturnType<typeof store.getState>
-
-type TApplicationActions = 
-| TConstructorActions | TForgotPasswordActions | TIngredientsActions 
-| TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions;
-
-export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TApplicationActions>>; 
-
-export type AppDispatch = Dispatch<TApplicationActions>; 
+export type RootState = ReturnType<typeof rootReducer>
 
 export const rootReducer = combineReducers({
     ingredients: ingredientsReducer,
@@ -39,3 +30,11 @@ export const rootReducer = combineReducers({
     login: loginReducer,
     profile: profileReducer
 });
+
+type TApplicationActions = 
+| TConstructorActions | TForgotPasswordActions | TIngredientsActions 
+| TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions;
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
+
+export type AppDispatch = typeof store.dispatch;

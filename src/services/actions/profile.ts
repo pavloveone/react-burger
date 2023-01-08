@@ -2,7 +2,7 @@ import { checkReponse } from '../../utils/variables';
 import { user } from '../../utils/api';
 import { getCookie } from '../../utils/cookies';
 import { AUTH_CHECKED } from './login';
-import { TResponse, TUser } from '../../utils/types';
+import { TUser } from '../../utils/types';
 import { AppDispatch } from '..';
 
 export const GET_PROFILE_REQUEST: 'GET_PROFILE_REQUEST' = 'GET_PROFILE_REQUEST';

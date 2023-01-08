@@ -46,7 +46,7 @@ function App(): JSX.Element {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchIngredients()); 
+    dispatch(fetchIngredients())
   }, [dispatch]);
 
   React.useEffect(() => {

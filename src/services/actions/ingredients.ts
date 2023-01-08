@@ -1,7 +1,7 @@
 import { checkReponse } from "../../utils/variables";
 import { URL } from '../../utils/api';
 import { TIngredient } from "../../utils/types";
-import { AppDispatch } from "..";
+import { AppDispatch, AppThunk } from "..";
 import { TIngredientResponse } from "../../utils/types";
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
