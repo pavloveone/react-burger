@@ -3,7 +3,7 @@ import { user } from '../../utils/api';
 import { getCookie } from '../../utils/cookies';
 import { AUTH_CHECKED } from './login';
 import { TUser } from '../../utils/types';
-import { AppDispatch } from '..';
+import { AppDispatch, AppThunk } from '..';
 
 export const GET_PROFILE_REQUEST: 'GET_PROFILE_REQUEST' = 'GET_PROFILE_REQUEST';
 export const GET_PROFILE_SUCCESS: 'GET_PROFILE_SUCCESS' = 'GET_PROFILE_SUCCESS';
@@ -36,7 +36,7 @@ export interface IGetUpdateProfileErrorAction {
 export type TProfileActions = | IGetProfileRequestAction | IGetProfileSuccessAction | IGetProfileErrorAction
  | IGetUpdateProfileRequestAction | IGetUpdateProfileSuccessAction | IGetUpdateProfileErrorAction;
 
-export const getUser = () => (dispatch: AppDispatch) => {
+export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: GET_PROFILE_REQUEST });
     fetch(user, {
         method: 'GET',
@@ -84,6 +84,5 @@ export const updateUser = (email: TUser, username: TUser) => (dispatch: AppDispa
         })})
     .catch(err => dispatch({
         type: GET_UPDATE_PROFILE_ERR0R,
-        userProfile: err
     }));
 }

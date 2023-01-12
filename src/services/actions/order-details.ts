@@ -1,7 +1,7 @@
 import { checkReponse } from "../../utils/variables";
 import { URL } from "../../utils/api";
 import { TIngredient } from "../../utils/types";
-import { AppDispatch } from "..";
+import { AppDispatch, AppThunk } from "..";
 import { TOrderResponse } from "../../utils/types";
 
 export const SHOW_ORDER: 'SHOW_ORDER'= 'SHOW_ORDER';
@@ -30,7 +30,7 @@ export interface IGetOrderErrorAction {
 export type TOrderDetailsActions = | IShowOrderAction | ICloseOrderAction | IGetOrderRequestAction | IGetOrderSuccessAction
 | IGetOrderErrorAction;
 
-export const getOrder = (bun: TIngredient[], ingredients: TIngredient[]) =>(dispatch: AppDispatch) => {
+export const getOrder = (bun: ReadonlyArray<TIngredient>, ingredients: ReadonlyArray<TIngredient>): AppThunk =>(dispatch: AppDispatch) => {
 
     bun = bun.filter( Boolean );
 

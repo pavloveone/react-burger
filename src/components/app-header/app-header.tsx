@@ -24,7 +24,7 @@ export function AppHeader() {
                     <BurgerIcon type={isConstructor ? 'primary' : 'secondary'}/>
                     Конструктор
                 </NavLink>
-                <NavLink to='/orders-feed' className={`${styles.link} text text_type_main-default`} activeClassName={styles.active}>
+                <NavLink to='/feed' className={`${styles.link} text text_type_main-default`} activeClassName={styles.active}>
                     <ListIcon type={isFeed ? 'primary' : 'secondary'} />
                     Лента заказов
                 </NavLink>

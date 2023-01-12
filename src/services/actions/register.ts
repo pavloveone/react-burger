@@ -1,7 +1,7 @@
 import { checkReponse } from "../../utils/variables";
 import { register } from "../../utils/api";
 import { TUser, TRegisterResponse } from "../../utils/types";
-import { AppDispatch } from "..";
+import { AppDispatch, AppThunk } from "..";
 
 export const GET_REGISTRATION_REQUEST: 'GET_REGISTRATION_REQUEST' = 'GET_REGISTRATION_REQUEST';
 export const GET_REGISTRATION_SUCCESS: 'GET_REGISTRATION_SUCCESS'  = 'GET_REGISTRATION_SUCCESS';
@@ -20,7 +20,7 @@ export interface IGetRegistrationErrorAction {
 
 export type TRegisterActions = | IGetRegistrationRequestAction | IGetRegistrationSuccessAction | IGetRegistrationErrorAction;
 
-export const registration = (email: TUser, password: TUser, username: TUser) => (dispatch: AppDispatch) => {
+export const registration = (email: TUser, password: TUser, username: TUser): AppThunk => (dispatch: AppDispatch) => {
 
     dispatch({ type: GET_REGISTRATION_REQUEST });
         fetch(register, {

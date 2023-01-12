@@ -22,7 +22,7 @@ export interface IGetIngredientsErrorAction {
 export type TIngredientsActions = | IGetIngredientsRequestAction | IGetIngredientsSuccessAction 
 | IGetIngredientsErrorAction;
 
-export const fetchIngredients = () => (dispatch: AppDispatch) => {
+export const fetchIngredients = (): AppThunk => (dispatch: AppDispatch) => {
     dispatch({type: GET_INGREDIENTS_REQUEST});
     fetch(`${URL}/ingredients`)
     .then(res => checkReponse<TIngredientResponse>(res))

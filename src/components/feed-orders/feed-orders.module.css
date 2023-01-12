@@ -1,0 +1,9 @@
+.stats_title {
+    list-style-type: none;
+}
+.stats_order {
+    color: #F2F2F3;
+}
+.stats_order_ready {
+    color: #00CCCC;
+}

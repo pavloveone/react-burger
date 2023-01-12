@@ -1,14 +1,11 @@
 import React from 'react';
-import  propTypes  from 'prop-types';
 import { useDrag } from 'react-dnd';
-
-import { ingredientTypes } from '../../utils/variables';
 
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from '../burger-ingredients/burger-ingredients.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks'
 import { useLocation, Link } from 'react-router-dom';
 import { TIngredient } from '../../utils/types';
 
@@ -18,7 +15,7 @@ type TBurgerIngredientsElementProps = {
 
 export function BurgerIngredientsElement({item}: TBurgerIngredientsElementProps): JSX.Element {
 
-    const { ingredients, bun } = useSelector((state: any) => state.constructorIngredients);
+    const { ingredients, bun } = useSelector((state) => state.constructorIngredients);
     const location = useLocation();
     const ingredientId = item['_id'];
 
@@ -73,9 +70,4 @@ export function BurgerIngredientsElement({item}: TBurgerIngredientsElementProps)
                 </div>
         </Link>
     );
-}
-
-BurgerIngredientsElement.ReactPropTypes = {
-    item: ingredientTypes.isRequired,
-    onOpen: propTypes.func.isRequired
 }

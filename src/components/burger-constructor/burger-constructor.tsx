@@ -28,7 +28,7 @@ export const BurgerConstructor = () => {
     const { isVisible } = useSelector((state) => state.orderDetails);
     const { isAuth } = useSelector((state) => state.login);
 
-    const [{}, dragRef]: any = useDrop({
+    const [, dragRef] = useDrop({
         accept: 'ingredient',
         drop(item: TIngredient) {
             addBun(item, dispatch)

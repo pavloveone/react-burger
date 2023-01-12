@@ -25,6 +25,8 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
 import { Location } from 'history';
+import { Feed, feedArray } from '../../pages/feed/feed';
+import { OrderInfo } from '../order-info/order-info';
 
 type TLocataionState = {
   background: Location
@@ -89,8 +91,14 @@ function App(): JSX.Element {
                 <Route path="/orders" exact>
                   <OrdersPage />
                 </Route>
+                <Route path="/feed" exact>
+                  <Feed />
+                </Route>
                 <Route path='/ingredients/:ingredientId' exact>
                   <IngredientDetails />
+                </Route>
+                <Route path='/feed/:feedId' exact>
+                  <OrderInfo />
                 </Route>
                 <Route>
                 <NotFound404 />
@@ -107,6 +115,16 @@ function App(): JSX.Element {
             </Modal>
           }
         />
+      )}
+      {background && feedArray.length > 0 && (
+      <Route
+        path='/feed/:feedId'
+        children={
+          <Modal onClose={handleModalClose}>
+            <OrderInfo />
+          </Modal>
+        }
+      />
       )}
     </div>
   );

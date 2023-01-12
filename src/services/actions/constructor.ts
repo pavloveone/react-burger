@@ -15,7 +15,7 @@ export interface IAddIngredientAction {
 }
 export interface IDeleteIngredientAction {
     readonly type: typeof DELETE_INGREDIENT;
-    readonly id: number | undefined;
+    readonly id: string | undefined;
 }
 export interface IAddBunAction {
     readonly type: typeof ADD_BUN;

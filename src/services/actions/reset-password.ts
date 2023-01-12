@@ -1,7 +1,7 @@
 import { checkReponse } from "../../utils/variables";
 import { URL } from "../../utils/api";
 import { TResponse, TUser } from "../../utils/types";
-import { AppDispatch } from "..";
+import { AppDispatch, AppThunk } from "..";
 
 export const GET_RESET_PASSWORD_REQUEST: 'GET_RESET_PASSWORD_REQUEST' = 'GET_RESET_PASSWORD_REQUEST';
 export const GET_RESET_PASSWORD_SUCCESS: 'GET_RESET_PASSWORD_SUCCESS' = 'GET_RESET_PASSWORD_SUCCESS';
@@ -21,7 +21,7 @@ export interface IGetResetPasswordErrorAction {
 export type TResetPasswordActions = 
 | IGetResetPasswordRequestAction | IGetResetPasswordSuccessAction | IGetResetPasswordErrorAction;
 
-export const resetPassword = (password: TUser, token: TUser) => (dispatch: AppDispatch) => {
+export const resetPassword = (password: TUser, token: TUser): AppThunk => (dispatch: AppDispatch) => {
 
     dispatch({ type: GET_RESET_PASSWORD_REQUEST });
         fetch(`${URL}/password-reset/reset`, {

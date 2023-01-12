@@ -34,7 +34,7 @@ type TApplicationActions =
 | TConstructorActions | TForgotPasswordActions | TIngredientsActions 
 | TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions;
 
-export type AppThunk<TReturnType = void> = ThunkAction<TReturnType, RootState, unknown, TApplicationActions>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 
 export type AppDispatch<TReturnType = void> = (
     action: TApplicationActions | AppThunk<TReturnType>

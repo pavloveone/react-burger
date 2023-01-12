@@ -2,12 +2,12 @@ import styles from '../burger-constructor/burger-constructor.module.css';
 import { ConstructorItem } from '../constructor-item/constructor-item'
 
 
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks'
 import { TIngredient } from '../../utils/types';
 
 export const ConstructorIngredientsContainer = ():JSX.Element => {
 
-    const { ingredients } = useSelector((state:any) => state.constructorIngredients);
+    const { ingredients } = useSelector((state) => state.constructorIngredients);
 
     return (
         <div className={styles.content}>

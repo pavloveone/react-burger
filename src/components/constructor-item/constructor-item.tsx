@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks/hooks'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrop, useDrag } from 'react-dnd';
 import styles from '../burger-constructor/burger-constructor.module.css';
@@ -27,7 +27,6 @@ export const ConstructorItem = ({item, index}: TConstructorItemProps): JSX.Eleme
     const dispatch = useDispatch();
 
     const deleteItem = () => {
-        // @ts-ignore
         dispatch({
             type: DELETE_INGREDIENT,
             id: item.id

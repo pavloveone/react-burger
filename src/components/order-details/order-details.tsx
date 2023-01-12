@@ -3,12 +3,12 @@ import React from 'react';
 import styles from './order-details.module.css';
 
 import imageOrder from '../../images/graphics.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks'
 
 
 export function OrderDetails() {
 
-    const { orderNumber } = useSelector((state: any) => state.orderDetails);
+    const { orderNumber } = useSelector((state) => state.orderDetails);
 
     return (
         <div className={styles.body}>

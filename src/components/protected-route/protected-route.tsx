@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import {  Redirect, Route } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks'
 
 
 type TProtectedRouteProps = {
@@ -12,7 +12,7 @@ type TProtectedRouteProps = {
 
 export const ProtectedRoute = ({ children, ...rest }: TProtectedRouteProps) => {
 
-    const { isAuth } = useSelector((state: any) => state.login);
+    const { isAuth } = useSelector((state) => state.login);
 
   return (
       <Route

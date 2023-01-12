@@ -3,7 +3,7 @@ import { getUser } from './profile';
 import { login, logout } from '../../utils/api';
 import { setCookie, deleteCookie, getCookie } from '../../utils/cookies';
 import { TRegisterResponse, TUser } from '../../utils/types';
-import { AppDispatch } from '..';
+import { AppDispatch, AppThunk } from '..';
 
 export const GET_LOGIN_REQUEST: 'GET_LOGIN_REQUEST' = 'GET_LOGIN_REQUEST';
 export const GET_LOGIN_SUCCESS: 'GET_LOGIN_SUCCESS' = 'GET_LOGIN_SUCCESS';
@@ -31,7 +31,7 @@ export interface IAuthCheckedAction {
 export type TLoginActions = | IGetLoginRequestAction | IGetLoginSuccessAction | IGetLoginErrorAction | ILogoutAction
 | IAuthCheckedAction;
 
-export const authorization = (email: TRegisterResponse, password: TRegisterResponse) => (dispatch: AppDispatch) => {
+export const authorization = (email: TRegisterResponse, password: TRegisterResponse): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: GET_LOGIN_REQUEST });
     fetch(login, {
         method: 'POST',
@@ -56,7 +56,6 @@ export const authorization = (email: TRegisterResponse, password: TRegisterRespo
     })
     .catch(err => dispatch({
         type: GET_LOGIN_ERROR,
-        userData: err
     }));
 }
 
@@ -82,7 +81,7 @@ export const logOut = (dispatch: AppDispatch) => {
     .catch(err => console.log(err));
 }
 
-export const checkUserAuth = () => (dispatch: AppDispatch) => {
+export const checkUserAuth = (): AppThunk => (dispatch: AppDispatch) => {
     if (getCookie('token')) {
         dispatch(getUser())
     }

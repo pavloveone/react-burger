@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import  propTypes  from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks'
 import { useInView } from 'react-intersection-observer';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,12 +7,11 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 
 import { BurgerIngredientsElement } from '../burger-ingredients-element/burger-ingredients-element';
-// import { ingredientTypes } from '../../utils/variables';
 import { TIngredient } from '../../utils/types';
 
 export function BurgerIngredients(): JSX.Element {
 
-    const { ingredients } = useSelector((state:any) => state.ingredients);
+    const { ingredients } = useSelector((state) => state.ingredients);
 
     const bunArr = React.useMemo(() => 
     ingredients.filter((item: TIngredient) => 
@@ -83,16 +81,7 @@ export function BurgerIngredients(): JSX.Element {
                 <BurgerIngredientsElement key={item._id} item={item} />
             ))}
         </div>
-        {/* {isVisible &&(
-            <Modal onClose={handleCloseDetails} header={'Детали ингредиента'}>
-                <IngredientDetails />
-            </Modal>
-        )} */}
         </div>         
     </section>
     )
   }
-
-// BurgerIngredients.ReactPropTypes = {
-//     ingredients: propTypes.arrayOf(ingredientTypes.isRequired).isRequired
-// }
