@@ -116,9 +116,9 @@ function App(): JSX.Element {
           }
         />
       )}
-      {background && feedArray.length > 0 && (
+      {background &&  (
       <Route
-        path='/feed/:feedId'
+        path='/feed/:feedNumber'
         children={
           <Modal onClose={handleModalClose}>
             <OrderInfo />

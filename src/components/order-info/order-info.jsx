@@ -8,16 +8,15 @@ import { useSelector } from '../../services/hooks/hooks';
 export const OrderInfo = () => {
 
     const { ingredients } = useSelector(state => state.ingredients);
-    const { feedId } = useParams();
+    const { feedNumber } = useParams();
     const feedIngredients = feedArray.map(item => ingredients.find(element => element._id === item))
     // const ingredientId = item.ingredients.map(item => ingredients.find(element => element._id === item));
-
     
     // const currentItem = feedIngredients.find(element => element.id === feedId ? true : false);
 
     return (
         <div className={styles.container}>
-            {console.log(feedId)}
+            {console.log(feedNumber)}
             <span className={styles.order_number}></span>
             <h3 className={styles.order_name}></h3>
             <h4 className={styles.order_status}></h4>

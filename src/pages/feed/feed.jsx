@@ -6,7 +6,7 @@ import { FeedOrders } from '../../components/feed-orders/feed-orders';
 export const feedArray = [
     {
         id: 1,
-        orderNumber: 1,
+        number: 1,
         orderName: 'qwer',
         price: 123,
         orderTime: 16,
@@ -16,7 +16,7 @@ export const feedArray = [
     },
     {
         id: 2,
-        orderNumber: 2,
+        number: 2,
         orderName: 'qwerty',
         price: 1231,
         orderTime: 161,
@@ -27,7 +27,7 @@ export const feedArray = [
     },
     {
         id: 3,
-        orderNumber: 12452,
+        number: 12452,
         orderName: 'qweasfasr',
         price: 1212323,
         orderTime: 126,
@@ -39,7 +39,7 @@ export const feedArray = [
     },
     {
         id: 4,
-        orderNumber: 123123,
+        number: 123123,
         orderName: 'qwasddasder',
         price: 12331323,
         orderTime: 1613123,
@@ -52,7 +52,7 @@ export const feedArray = [
     },
     {
         id: 5,
-        orderNumber: 123125,
+        number: 123125,
         orderName: 'qwesadfasr',
         price: 121553,
         orderTime: 161251,

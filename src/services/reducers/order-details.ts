@@ -4,6 +4,9 @@ import {
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
     GET_ORDER_ERROR,
+    FETCH_ORDER_NUMBER_ERROR,
+    FETCH_ORDER_NUMBER_REQUEST,
+    FETCH_ORDER_NUMBER_SUCCESS,
     TOrderDetailsActions
 } from '../actions/order-details';
 
@@ -55,6 +58,28 @@ export const orderDetailsReducer = (state = initialState, action: TOrderDetailsA
             return {
                 ...state,
                 isVisible: false
+            }
+        }
+        case FETCH_ORDER_NUMBER_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                hasError: false
+            }
+        }
+        case FETCH_ORDER_NUMBER_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                hasError: false,
+                orderNumber: action.orderNumber
+            }
+        }
+        case FETCH_ORDER_NUMBER_ERROR: {
+            return {
+                ...state,
+                isLoading: false,
+                hasError: true
             }
         }
         default: {

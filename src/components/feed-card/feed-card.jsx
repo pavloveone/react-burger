@@ -9,7 +9,7 @@ export const FeedCard = ({item}) => {
 
     const location = useLocation();
 
-    const feedId = item['id'];
+    const feedNumber = item['number'];
 
     const { ingredients } = useSelector(state => state.ingredients)
 
@@ -19,19 +19,19 @@ export const FeedCard = ({item}) => {
 
     return(
         <Link
-            key={feedId}
+            key={feedNumber}
             to={{
-            pathname: `/feed/${feedId}`,
+            pathname: `/feed/${feedNumber}`,
             state: { background: location },
             }}
             className={styles.link}
         >
             <div className={styles.card}>
                 <div className={styles.card_id}>
-                    <p className='text text_type_digits-default'>{item.orderNumber}</p>
+                    <p className='text text_type_digits-default'>{item.number}</p>
                     <span className='text text_type_main-default text_color_inactive'>{item.orderTime}</span>
                 </div>
-                <h3 className={`${styles.card_info} text text_type_main-medium`}>{item.orderName}</h3>
+                <h3 className={`${styles.card_info} text text_type_main-medium`}>{item.number}</h3>
                 <div className={styles.ingredients}>
                     <div className={styles.ingredients_images}>
                         {ingredientId.map(item => (
