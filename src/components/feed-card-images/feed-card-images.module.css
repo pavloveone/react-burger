@@ -1,10 +1,4 @@
-.element {
-    display: flex;
-    align-items: center;
-}
-
-
-.element_image {
+.ingredient_preview {
     width: 64px;
     height: 64px;
     box-sizing: border-box;

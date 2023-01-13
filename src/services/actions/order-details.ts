@@ -30,7 +30,8 @@ export interface IGetOrderErrorAction {
 export type TOrderDetailsActions = | IShowOrderAction | ICloseOrderAction | IGetOrderRequestAction | IGetOrderSuccessAction
 | IGetOrderErrorAction;
 
-export const getOrder = (bun: ReadonlyArray<TIngredient>, ingredients: ReadonlyArray<TIngredient>): AppThunk =>(dispatch: AppDispatch) => {
+export const getOrder = (bun: ReadonlyArray<TIngredient>, 
+    ingredients: ReadonlyArray<TIngredient>): AppThunk =>(dispatch: AppDispatch) => {
 
     bun = bun.filter( Boolean );
 

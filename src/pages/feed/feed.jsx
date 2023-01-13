@@ -10,6 +10,9 @@ export const feedArray = [
         orderName: 'qwer',
         price: 123,
         orderTime: 16,
+        ingredients: [
+                "60d3b41abdacab0026a733c6",
+            ]
     },
     {
         id: 2,
@@ -17,6 +20,10 @@ export const feedArray = [
         orderName: 'qwerty',
         price: 1231,
         orderTime: 161,
+        ingredients: [
+                "60d3b41abdacab0026a733c6",
+                "60d3b41abdacab0026a733c7",
+            ]
     },
     {
         id: 3,
@@ -24,6 +31,11 @@ export const feedArray = [
         orderName: 'qweasfasr',
         price: 1212323,
         orderTime: 126,
+        ingredients:[
+                "60d3b41abdacab0026a733c6",
+                "60d3b41abdacab0026a733c7",
+                "60d3b41abdacab0026a733c8",
+            ]
     },
     {
         id: 4,
@@ -31,6 +43,12 @@ export const feedArray = [
         orderName: 'qwasddasder',
         price: 12331323,
         orderTime: 1613123,
+        ingredients: [
+                "60d3b41abdacab0026a733c6",
+                "60d3b41abdacab0026a733c7",
+                "60d3b41abdacab0026a733c8",
+                "60d3b41abdacab0026a733c9",
+            ]
     },
     {
         id: 5,
@@ -38,6 +56,13 @@ export const feedArray = [
         orderName: 'qwesadfasr',
         price: 121553,
         orderTime: 161251,
+        ingredients: [
+                "60d3b41abdacab0026a733c6",
+                "60d3b41abdacab0026a733c7",
+                "60d3b41abdacab0026a733c8",
+                "60d3b41abdacab0026a733c9",
+                "60d3b41abdacab0026a733c9",
+            ]
     }
 ]
 

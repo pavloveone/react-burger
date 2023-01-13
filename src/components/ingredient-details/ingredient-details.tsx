@@ -18,7 +18,7 @@ export function IngredientDetails():JSX.Element {
     const currentItem  = ingredients.find((element: TIngredient) => element._id === ingredientId ? true : false);
 
     return (
-        (<div className={styles.body}>
+        <div className={styles.body}>
             <img className={styles.image} alt={`изображение ${currentItem?.name}`} src={currentItem?.image}/>
             <span className={`${styles.title} text text_type_main-medium`}>{currentItem?.name}</span>
             <div className={`${styles.container} pb-15`}>
@@ -39,6 +39,6 @@ export function IngredientDetails():JSX.Element {
                     <p>{currentItem?.carbohydrates}</p>
                 </div>
             </div>
-        </div>)
+        </div>
         )
 }
