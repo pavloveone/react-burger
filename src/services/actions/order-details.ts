@@ -3,7 +3,7 @@ import { URL } from "../../utils/api";
 import { TIngredient } from "../../utils/types";
 import { AppDispatch, AppThunk } from "..";
 import { TOrderResponse } from "../../utils/types";
-import { useParams } from 'react-router-dom';
+
 
 export const SHOW_ORDER: 'SHOW_ORDER'= 'SHOW_ORDER';
 export const CLOSE_ORDER: 'CLOSE_ORDER' = 'CLOSE_ORDER';
@@ -39,10 +39,6 @@ export interface IFetchOrderNumberSuccessAction {
 }
 export interface IFetchOrderNumberErrorAction {
     readonly type: typeof FETCH_ORDER_NUMBER_ERROR;
-}
-
-interface IFeedNumber{
-    feedNumber: string;
 }
 
 export type TOrderDetailsActions = | IShowOrderAction | ICloseOrderAction | IGetOrderRequestAction | IGetOrderSuccessAction
@@ -81,14 +77,13 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
     }));
 }
 
-export const fetchOrderNumber = ():AppThunk => (dispatch: AppDispatch) => {
-    const { feedNumber } = useParams<IFeedNumber>();
+export const fetchOrderNumber = (orderNumber: number):AppThunk => (dispatch: AppDispatch) => {
     dispatch({type: FETCH_ORDER_NUMBER_REQUEST});
-    fetch(`${URL}/orders/${feedNumber}`)
+    fetch(`${URL}/orders/${orderNumber}`)
     .then(res => checkReponse<TOrderResponse>(res))
     .then((res) => dispatch({
         type: FETCH_ORDER_NUMBER_SUCCESS,
-        orderNumber: res.order.number
+        orderNumber: res.orders.number
     }))
     .catch(error => dispatch({
         type: FETCH_ORDER_NUMBER_ERROR

@@ -21,7 +21,7 @@ const initialState: TOrderDetailsListState = {
     isVisible: false,
     isLoading: false,
     hasError: false,
-    orderNumber: null
+    orderNumber: null,
 };
 
 export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions) => {

@@ -2,6 +2,9 @@ import React from 'react';
 import styles from '../feed/feed.module.css';
 import { FeedCard } from '../../components/feed-card/feed-card';
 import { FeedOrders } from '../../components/feed-orders/feed-orders';
+import { useDispatch } from '../../services/hooks/hooks';
+import { connect } from '../../services/actions/feed';
+import { wsUrl } from '../../utils/api';
 
 export const feedArray = [
     {
@@ -67,6 +70,10 @@ export const feedArray = [
 ]
 
 export const Feed = () => {
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(connect(wsUrl))
+    }, [])
     return (
         <>
         <section className={styles.feed_section}>
@@ -83,11 +90,11 @@ export const Feed = () => {
             </div>
             <div className={styles.complited_all}>
                 <h3 className={`${styles.stats_title} text text_type_main-default`}>Выполнено за все время:</h3>
-                <span className='text text_type_digits-large'>28 752</span>
+                <span className='text text_type_digits-large'>total</span>
             </div>
             <div className={styles.complited_today}>
                 <h3 className={`${styles.stats_title} text text_type_main-default`}>Выполнено за сегодня:</h3>
-                <span className='text text_type_digits-large'>286</span>
+                <span className='text text_type_digits-large'>totalToday</span>
             </div>
         </div>
         </>

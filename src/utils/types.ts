@@ -34,7 +34,9 @@ export type TCreatedOrder = {
    number: number
 }
 
+
 export type TOrderResponse = TResponse & {
     name: string, 
-    order: TCreatedOrder
+    order: TCreatedOrder,
+    orders: TCreatedOrder,
 }
