@@ -2,8 +2,8 @@ import React from 'react';
 import styles from '../feed/feed.module.css';
 import { FeedCard } from '../../components/feed-card/feed-card';
 import { FeedOrders } from '../../components/feed-orders/feed-orders';
-import { useDispatch } from '../../services/hooks/hooks';
-import { connect } from '../../services/actions/feed';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
+import { connect, disconnect } from '../../services/actions/feed';
 import { wsUrl } from '../../utils/api';
 
 export const feedArray = [
@@ -70,10 +70,15 @@ export const feedArray = [
 ]
 
 export const Feed = () => {
+
+    const { orders } = useSelector(state => state.feed);
+
     const dispatch = useDispatch();
+
     React.useEffect(() => {
-        dispatch(connect(wsUrl))
-    }, [])
+        dispatch(connect(wsUrl));
+        console.log(orders)
+    }, [dispatch]);
     return (
         <>
         <section className={styles.feed_section}>

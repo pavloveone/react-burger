@@ -4,7 +4,7 @@ import { wsConnecting, wsOpen, wsClose, wsMessage, wsError } from '../actions/fe
 const initialState = {
     status: '',
     connectionError: '',
-    orders: []
+    orders: [],
 }
 
 export const feedReducer = (state = initialState, action) => {

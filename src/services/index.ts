@@ -19,6 +19,8 @@ import { ThunkAction } from 'redux-thunk';
 import { feedReducer } from './reducers/feed';
 import { socketMiddleware } from './middleware/socket-middleware';
 import { 
+    connect as feedWsConnect,
+    disconnect as feedWsDisconnect,
     wsConnecting as feedWsConnecting,
     wsOpen as feedWsOpen, 
     wsClose as feedWsClose, 
@@ -29,12 +31,14 @@ import {
 export type RootState = ReturnType<typeof rootReducer>;
 
 export const feedMiddleware = socketMiddleware({
+    wsConnect: feedWsConnect,
+    wsDisconnect: feedWsDisconnect,
     wsConnecting: feedWsConnecting,
-    wsOpen: feedWsOpen,
-    wsClose: feedWsClose,
-    wsMessage: feedWsMessage,
-    wsError: feedWsError
-})
+    onOpen: feedWsOpen,
+    onClose: feedWsClose,
+    onError: feedWsError,
+    onMessage: feedWsMessage,
+});
 
 export const rootReducer = combineReducers({
     ingredients: ingredientsReducer,

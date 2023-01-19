@@ -7,6 +7,7 @@ export const socketMiddleware = (wsActions) => {
       return next => action => {
         const { dispatch } = store;
         const { wsConnect, wsSendMessage, onOpen, onClose, onError, onMessage, wsConnecting, wsDisconnect } = wsActions;
+
         if (wsConnect.match(action)) {
           socket = new WebSocket(action.payload);
           dispatch(wsConnecting())
@@ -30,7 +31,7 @@ export const socketMiddleware = (wsActions) => {
             dispatch(onClose());
           };
   
-          if (wsSendMessage.match(action)) {
+          if (wsSendMessage?.match(action)) {
             socket.send(JSON.stringify(action.payload));
           }
           if (wsDisconnect.match(action)) {
