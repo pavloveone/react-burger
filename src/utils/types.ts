@@ -34,9 +34,23 @@ export type TCreatedOrder = {
    number: number
 }
 
-
 export type TOrderResponse = TResponse & {
-    name: string, 
-    order: TCreatedOrder,
-    orders: TCreatedOrder,
+  name: string, 
+  order: TCreatedOrder,
+  orders: TCreatedOrder,
+}
+export type TOrderInfo = {
+  _id: string;
+  ingredients: Array<String>;
+  status: string;
+  name: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type TOrders = {
+  orders: Array<TOrderInfo>;
+  total: number;
+  totalToday: number;
 }

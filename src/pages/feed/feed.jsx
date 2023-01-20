@@ -71,14 +71,18 @@ export const feedArray = [
 
 export const Feed = () => {
 
-    const { orders } = useSelector(state => state.feed);
+    const { orders } = useSelector((state) => state.feed);
 
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         dispatch(connect(wsUrl));
         console.log(orders)
-    }, [dispatch]);
+
+        return () => {
+            dispatch(disconnect());
+        }
+    }, []);
     return (
         <>
         <section className={styles.feed_section}>
