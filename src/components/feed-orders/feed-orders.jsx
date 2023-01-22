@@ -1,19 +1,24 @@
 import React from 'react';
-import { feedArray } from '../../pages/feed/feed';
+import { useSelector } from '../../services/hooks/hooks';
 import styles from './feed-orders.module.css';
 
 export const FeedOrders = () => {
+
+    const { orders } = useSelector(state => state.feed);
+
     return (
         <>
             <ul className={`${styles.stats_title} text text_type_main-default`}>Готовы
-            {feedArray.map(item => (
-                <li className={`${styles.stats_order_ready} text text_type_digits-default`} key={item.id}>{item.orderNumber}</li>
-            ))}
+            { orders.orders.map(item => (
+                item.status === 'done' && (
+                    <li className={`${styles.stats_order_ready} text text_type_digits-default`}>{item.number}</li>
+                )))}
             </ul>
             <ul className={`${styles.stats_title} text text_type_main-default`}>В работе
-            {feedArray.map(item => (
-                <li className={`${styles.stats_order} text text_type_digits-default`} key={item.id}>{item.orderNumber}</li>
-            ))}
+            { orders.orders.map(item => (
+                item.status !== 'done' && (
+                    <li className={`${styles.stats_order} text text_type_digits-default`}>{item.number}</li>
+                )))}
             </ul>
         </>
     );

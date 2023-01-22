@@ -5,6 +5,7 @@ import { FeedOrders } from '../../components/feed-orders/feed-orders';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { connect, disconnect } from '../../services/actions/feed';
 import { wsUrl } from '../../utils/api';
+import { Loading } from '../../components/loading/loading';
 
 export const feedArray = [
     {
@@ -77,19 +78,22 @@ export const Feed = () => {
 
     React.useEffect(() => {
         dispatch(connect(wsUrl));
-        console.log(orders)
-
+        
         return () => {
             dispatch(disconnect());
         }
     }, []);
     return (
         <>
-        <section className={styles.feed_section}>
+        {orders === null ? (
+            <Loading />
+        ): (
+            <>
+            <section className={styles.feed_section}>
             <h2 className={`${styles.title} text text_type_main-large`}>Лента заказов</h2>
                 <div className={styles.list}>
-                    {feedArray.map(item => (
-                        <FeedCard item={item} key={item.id} />
+                    {orders.orders.map(item => (
+                        <FeedCard item={item} key={item._id} />
                     ))}
                 </div>
         </section>
@@ -99,14 +103,15 @@ export const Feed = () => {
             </div>
             <div className={styles.complited_all}>
                 <h3 className={`${styles.stats_title} text text_type_main-default`}>Выполнено за все время:</h3>
-                <span className='text text_type_digits-large'>total</span>
+                <span className='text text_type_digits-large'>{orders.total}</span>
             </div>
             <div className={styles.complited_today}>
                 <h3 className={`${styles.stats_title} text text_type_main-default`}>Выполнено за сегодня:</h3>
-                <span className='text text_type_digits-large'>totalToday</span>
+                <span className='text text_type_digits-large'>{orders.totalToday}</span>
             </div>
         </div>
+            </>
+        )}
         </>
-
     );
 }

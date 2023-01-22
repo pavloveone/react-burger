@@ -1,5 +1,9 @@
 .stats_title {
     list-style-type: none;
+    height: 206px;
+    padding-right: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .stats_order {
     color: #F2F2F3;
