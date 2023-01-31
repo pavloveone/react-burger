@@ -8,18 +8,24 @@ export const FeedOrders = () => {
 
     return (
         <>
-            <ul className={`${styles.stats_title} text text_type_main-default`}>Готовы
-            { orders.orders.map(item => (
+            <div className={styles.stats}>
+            <h3 className='text text_type_main-medium mb-6'>Готовы:</h3>
+            <ul className={styles.stats_list}>
+            { orders.orders.map((item, index) => (
                 item.status === 'done' && (
-                    <li className={`${styles.stats_order_ready} text text_type_digits-default`}>{item.number}</li>
+                    <li key={index} className={`${styles.stats_order_ready} text text_type_digits-default`}>{item.number}</li>
                 )))}
             </ul>
-            <ul className={`${styles.stats_title} text text_type_main-default`}>В работе
-            { orders.orders.map(item => (
+            </div>
+            <div>
+            <h3 className='text text_type_main-medium mb-6'>В работе:</h3>
+            <ul className={styles.stats_list}>
+            { orders.orders.map((item, index) => (
                 item.status !== 'done' && (
-                    <li className={`${styles.stats_order} text text_type_digits-default`}>{item.number}</li>
+                    <li key={index} className={`${styles.stats_order} text text_type_digits-default`}>{item.number}</li>
                 )))}
             </ul>
+            </div>
         </>
     );
 }

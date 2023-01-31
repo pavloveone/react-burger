@@ -62,7 +62,8 @@ export const BurgerConstructor = () => {
 
     return (
       <div className={styles.burger_constructor} ref={dragRef} >
-          { bun.length > 0 && <ConstructorElement
+          { bun.length > 0 && 
+          <ConstructorElement
                 type="top"
                 isLocked={true}
                 text={bun[0].name + ' (верх)'}

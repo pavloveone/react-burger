@@ -17,6 +17,7 @@ import { TRegisterActions } from './actions/register';
 import { TResetPasswordActions } from './actions/reset-password';
 import { ThunkAction } from 'redux-thunk';
 import { feedReducer } from './reducers/feed';
+import { ordersReducer } from './reducers/orders';
 import { socketMiddleware } from './middleware/socket-middleware';
 import { 
     connect as feedWsConnect,
@@ -27,6 +28,16 @@ import {
     wsMessage as feedWsMessage, 
     wsError as feedWsError,
 } from './actions/feed';
+
+import { 
+    connect as ordersWsConnect,
+    disconnect as ordersWsDisconnect,
+    wsConnecting as ordersWsConnecting,
+    wsOpen as ordersWsOpen, 
+    wsClose as ordersWsClose, 
+    wsMessage as ordersWsMessage, 
+    wsError as ordersWsError,
+} from './actions/orders';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -40,6 +51,16 @@ export const feedMiddleware = socketMiddleware({
     onMessage: feedWsMessage,
 });
 
+export const ordersMiddleware = socketMiddleware({
+    wsConnect: ordersWsConnect,
+    wsDisconnect: ordersWsDisconnect,
+    wsConnecting: ordersWsConnecting,
+    onOpen: ordersWsOpen,
+    onClose: ordersWsClose,
+    onError: ordersWsError,
+    onMessage: ordersWsMessage,
+});
+
 export const rootReducer = combineReducers({
     ingredients: ingredientsReducer,
     constructorIngredients: constructorReducer,
@@ -49,7 +70,8 @@ export const rootReducer = combineReducers({
     resetPassword: resetPasswordReducer,
     login: loginReducer,
     profile: profileReducer,
-    feed: feedReducer
+    feed: feedReducer,
+    orders: ordersReducer,
 });
 
 type TApplicationActions = 

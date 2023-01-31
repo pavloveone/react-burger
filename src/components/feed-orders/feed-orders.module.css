@@ -1,13 +1,18 @@
-.stats_title {
-    list-style-type: none;
-    height: 206px;
+.stats {
+    padding-right: 130px;
+}
+.stats_list {
+    height: 150px;
     padding-right: 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden auto;
+    list-style-type: none;
+    padding-left: 0;
 }
 .stats_order {
     color: #F2F2F3;
+    padding-bottom: 8px;
 }
 .stats_order_ready {
     color: #00CCCC;
+    padding-bottom: 8px;
 }

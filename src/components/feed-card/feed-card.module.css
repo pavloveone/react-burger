@@ -28,8 +28,16 @@
 .ingredients_images {
     display: flex;
     margin: 0;
+    position: relative;
 }
 .link {
     text-decoration: none;
     color: white;
+}
+.status_ready {
+    color: #00CCCC;
+    text-align: left;
+}
+.status{
+    text-align: left;
 }

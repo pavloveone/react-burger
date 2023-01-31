@@ -31,13 +31,12 @@ export type TIngredientResponse = TIngredient & {data: TIngredient[]}
 export type TRegisterResponse = TResponse & TCredentials & { user: Omit<TUser, "password"> };
 
 export type TCreatedOrder = {
-   number: number
+   number: number;
 }
 
 export type TOrderResponse = TResponse & {
   name: string, 
   order: TCreatedOrder,
-  orders: TCreatedOrder,
 }
 export type TOrderInfo = {
   _id: string;
@@ -51,6 +50,6 @@ export type TOrderInfo = {
 
 export type TOrders = {
   orders: Array<TOrderInfo>;
-  total: number;
-  totalToday: number;
+  total?: number;
+  totalToday?: number;
 }

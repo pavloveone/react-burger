@@ -1,4 +1,4 @@
-import React, { ReactNode, SyntheticEvent } from 'react';
+import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import  propTypes  from 'prop-types';
 
@@ -33,10 +33,16 @@ export function Modal ({header, onClose, children}:TModalProps): JSX.Element {
     return ReactDOM.createPortal(
         <>
             <div className={styles.container}>
+                {header ? (
                 <div className={`${styles.header} p-10`}>
                     <h2 className={`${styles.title} text text_type_main-large`}>{header}</h2>
                     <CloseIcon type="primary" onClick={onClose}/>
                 </div>
+                ) : (
+                <div className={styles.button}>
+                    <CloseIcon type="primary" onClick={onClose}/>
+                </div>
+                )}
                 {children}
             </div> 
             <ModalOverlay onClose={onClose} />

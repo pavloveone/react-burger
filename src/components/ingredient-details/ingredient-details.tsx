@@ -24,19 +24,19 @@ export function IngredientDetails():JSX.Element {
             <div className={`${styles.container} pb-15`}>
                 <div className={`${styles.info} pl-5`}>
                     <h4 className={`${styles.title} text text_type_main-default text_color_inactive`}>Калории,ккал</h4>
-                    <p>{currentItem?.calories}</p>
+                    <p className='text text_type_main-default text_color_inactive'>{currentItem?.calories}</p>
                 </div>
                 <div className={`${styles.info} pl-5`}>
                     <h4 className={`${styles.title} text text_type_main-default text_color_inactive`}>Белки,г</h4>
-                    <p>{currentItem?.proteins}</p>
+                    <p className='text text_type_main-default text_color_inactive'>{currentItem?.proteins}</p>
                 </div>
                 <div className={`${styles.info} pl-5`}>
                     <h4 className={`${styles.title} text text_type_main-default text_color_inactive`}>Жиры,г</h4>
-                    <p>{currentItem?.fat}</p>
+                    <p className='text text_type_main-default text_color_inactive'>{currentItem?.fat}</p>
                 </div>
                 <div className={`${styles.info} pl-5`}>
                     <h4 className={`${styles.title} text text_type_main-default text_color_inactive`}>Углеводы,г</h4>
-                    <p>{currentItem?.carbohydrates}</p>
+                    <p className='text text_type_main-default text_color_inactive'>{currentItem?.carbohydrates}</p>
                 </div>
             </div>
         </div>

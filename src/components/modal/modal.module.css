@@ -27,6 +27,7 @@
 }
 
 .button {
-    border: none;
-    background: none;
+    position: absolute;
+    right: 50px;
+    top: 50px;
 }

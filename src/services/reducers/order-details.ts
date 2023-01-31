@@ -1,3 +1,4 @@
+import { TOrderInfo } from '../../utils/types';
 import { 
     SHOW_ORDER,
     CLOSE_ORDER,
@@ -15,6 +16,7 @@ type TOrderDetailsListState = {
     isLoading: boolean;
     hasError: boolean;
     orderNumber: number | null;
+    currentOrders: Array<TOrderInfo>;
 }
 
 const initialState: TOrderDetailsListState = {
@@ -22,6 +24,7 @@ const initialState: TOrderDetailsListState = {
     isLoading: false,
     hasError: false,
     orderNumber: null,
+    currentOrders: [],
 };
 
 export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions) => {
@@ -72,7 +75,7 @@ export const orderDetailsReducer = (state = initialState, action: TOrderDetailsA
                 ...state,
                 isLoading: false,
                 hasError: false,
-                orderNumber: action.orderNumber
+                currentOrders: action.currentOrders
             }
         }
         case FETCH_ORDER_NUMBER_ERROR: {

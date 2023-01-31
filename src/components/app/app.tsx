@@ -25,8 +25,9 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
 import { Location } from 'history';
-import { Feed, feedArray } from '../../pages/feed/feed';
+import { Feed } from '../../pages/feed/feed';
 import { OrderInfo } from '../order-info/order-info';
+import { fetchOrderNumber } from '../../services/actions/order-details';
 
 type TLocataionState = {
   background: Location
@@ -35,6 +36,7 @@ type TLocataionState = {
 function App(): JSX.Element {
 
   const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
+  const { orders } = useSelector((state) => state.feed);
 
   const location = useLocation<TLocataionState>();
   const history = useHistory();
@@ -44,7 +46,6 @@ function App(): JSX.Element {
     history.goBack();
   };  
   
-
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -53,7 +54,7 @@ function App(): JSX.Element {
 
   React.useEffect(() => {
     dispatch(checkUserAuth()) 
-  },[])
+  },[]);
   
   return (
     <div className={styles.app}>
@@ -97,7 +98,7 @@ function App(): JSX.Element {
                 <Route path='/ingredients/:ingredientId' exact>
                   <IngredientDetails />
                 </Route>
-                <Route path='/feed/:feedId' exact>
+                <Route path='/feed/:feedNumber' exact>
                   <OrderInfo />
                 </Route>
                 <Route>
@@ -116,7 +117,7 @@ function App(): JSX.Element {
           }
         />
       )}
-      {background &&  (
+      {background && orders && (
       <Route
         path='/feed/:feedNumber'
         children={

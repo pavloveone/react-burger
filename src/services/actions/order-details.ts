@@ -2,7 +2,7 @@ import { checkReponse } from "../../utils/variables";
 import { URL } from "../../utils/api";
 import { TIngredient } from "../../utils/types";
 import { AppDispatch, AppThunk } from "..";
-import { TOrderResponse } from "../../utils/types";
+import { TOrderResponse, TOrderInfo } from "../../utils/types";
 
 
 export const SHOW_ORDER: 'SHOW_ORDER'= 'SHOW_ORDER';
@@ -35,7 +35,7 @@ export interface IFetchOrderNumberRequestAction {
 }
 export interface IFetchOrderNumberSuccessAction {
     readonly type: typeof FETCH_ORDER_NUMBER_SUCCESS;
-    readonly orderNumber: number;
+    readonly currentOrders: TOrderInfo;
 }
 export interface IFetchOrderNumberErrorAction {
     readonly type: typeof FETCH_ORDER_NUMBER_ERROR;
@@ -80,10 +80,10 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
 export const fetchOrderNumber = (orderNumber: number):AppThunk => (dispatch: AppDispatch) => {
     dispatch({type: FETCH_ORDER_NUMBER_REQUEST});
     fetch(`${URL}/orders/${orderNumber}`)
-    .then(res => checkReponse<TOrderResponse>(res))
+    .then(res => checkReponse<TOrderInfo>(res))
     .then((res) => dispatch({
         type: FETCH_ORDER_NUMBER_SUCCESS,
-        orderNumber: res.orders.number
+        currentOrders: res
     }))
     .catch(error => dispatch({
         type: FETCH_ORDER_NUMBER_ERROR

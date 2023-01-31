@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './feed-card.module.css';
 import { useLocation, Link } from 'react-router-dom';
 import { FeedCardImages } from '../feed-card-images/feed-card-images';
@@ -15,6 +15,10 @@ export const FeedCard = ({item}) => {
 
     const ingredientId = item.ingredients.map(item => ingredients.find(element => element._id === item));
 
+    const currentPrice = () => {
+        const sum = [...ingredientId];
+        return sum.reduce((acc, curr) => curr.type === 'bun' ? acc  + curr.price * 2 : acc + curr.price, 0);
+    };
 
     return(
         <Link
@@ -27,9 +31,15 @@ export const FeedCard = ({item}) => {
         >
             <div className={styles.card}>
                 <div className={styles.card_id}>
-                    <p className='text text_type_digits-default'>{item.number}</p>
-                    <span className='text text_type_main-default text_color_inactive'>{item.orderTime}</span>
+                    <p className='text text_type_digits-default'>{`#${item.number}`}</p>
+                    <FormattedDate className='text text_type_main-default text_color_inactive' date={new Date(item.createdAt)} />
                 </div>
+                {item.status === 'done' ? (
+                <h4 className={`${styles.status_ready} text text_type_main-small`}>Выполнен</h4>
+            ): (
+                <h4 className={`${styles.status} text text_type_main-small`}>Готовится</h4>
+
+            )}
                 <h3 className={`${styles.card_info} text text_type_main-medium`}>{item.name}</h3>
                 <div className={styles.ingredients}>
                     <div className={styles.ingredients_images}>
@@ -38,7 +48,7 @@ export const FeedCard = ({item}) => {
                         ))}
                     </div>
                     <div className={styles.price}>
-                        <span className={`${styles.price_info} text text_type_digits-default pr-2`}>{item.price}</span>
+                        <span className={`${styles.price_info} text text_type_digits-default pr-2`}>{currentPrice()}</span>
                         <CurrencyIcon type="primary" />
                     </div>
                 </div>
