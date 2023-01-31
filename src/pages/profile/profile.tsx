@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getUser, updateUser } from '../../services/actions/profile';
 
-import { logOut } from '../../services/actions/login';
 
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { NavigationProfile } from '../../components/navigation-profile/navigation-profile';
 
 export const Profile = () => {
 
@@ -32,12 +32,6 @@ export const Profile = () => {
         }
     }, [isLoading])
 
-
-    const exit = (e: SyntheticEvent) => {
-        e.preventDefault();
-        logOut(dispatch);
-    }
-
     const updateForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // @ts-ignore
@@ -52,27 +46,7 @@ export const Profile = () => {
 
     return(
         <div className={styles.container}>
-            <nav className={styles.links}>
-                <NavLink to='/profile' 
-                    className={`${styles.link} text text_type_main-medium`}
-                    activeClassName={styles.link_active}
-                    >
-                    Профиль
-                </NavLink>
-                <NavLink to='/orders' 
-                    className={`${styles.link} text text_type_main-medium`}
-                    activeClassName={styles.link_active}
-                    >
-                    История заказов
-                </NavLink>
-                <a 
-                    className={`${styles.link} text text_type_main-medium`}
-                    onClick={exit}
-                    >
-                    Выход
-                </a>
-                <p className={`${styles.description} text text_type_main-default text_color_inactive pt-20`}>В этом разделе вы можете<br /> изменить свои персональные данные</p>
-            </nav>
+            <NavigationProfile description={' изменить свои персональные данные'} />
             <form className={styles.form} onSubmit={updateForm}>
                 <Input placeholder={'Имя'} icon={'EditIcon'} value={username} onChange={(e) => setUsername(e.target.value)} />
                 <Input placeholder={'Логин'} icon={'EditIcon'} value={email} onChange={(e) => setEmail(e.target.value)} />

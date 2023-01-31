@@ -3,6 +3,7 @@ import { URL } from "../../utils/api";
 import { TIngredient } from "../../utils/types";
 import { AppDispatch, AppThunk } from "..";
 import { TOrderResponse, TOrderInfo } from "../../utils/types";
+import { getCookie } from "../../utils/cookies";
 
 
 export const SHOW_ORDER: 'SHOW_ORDER'= 'SHOW_ORDER';
@@ -63,7 +64,9 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
             'Content-Type': "application/json;charset=utf-8"
         },
         body: JSON.stringify({
-            ingredients: ingredientsId
+            ingredients: ingredientsId,
+            //@ts-ignore
+            'authorization': getCookie('token'),
         })
     })
     .then(res => checkReponse<TOrderResponse>(res))

@@ -1,8 +1,8 @@
-.container {
-    padding-top: 120px;
-    width: 85%;
+
+.links {
     display: flex;
-    margin: 0 auto;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .link {
@@ -11,6 +11,11 @@
     color: #8585AD;
     cursor: pointer;
 }
-.link:hover {
+
+.link_active {
     color: #F2F2F3;
+}
+
+.description {
+    text-align: left;
 }

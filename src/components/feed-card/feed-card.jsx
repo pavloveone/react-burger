@@ -21,7 +21,9 @@ export const FeedCard = ({item}) => {
     };
 
     return(
-        <Link
+        <>
+        {item && (
+            <Link
             key={feedNumber}
             to={{
             pathname: `/feed/${feedNumber}`,
@@ -54,5 +56,7 @@ export const FeedCard = ({item}) => {
                 </div>
             </div>
         </Link>
+        )}
+        </>
     );
 }
