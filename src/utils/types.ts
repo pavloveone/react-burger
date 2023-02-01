@@ -43,7 +43,7 @@ export type TOrderInfo = {
   ingredients: Array<String>;
   status: string;
   name: string;
-  number: number;
+  number: string;
   createdAt: string;
   updatedAt: string;
 }

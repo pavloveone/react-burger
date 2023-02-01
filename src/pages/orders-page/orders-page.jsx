@@ -33,7 +33,7 @@ export const OrdersPage = () => {
                 <Loading />
             ) : (
                 <div>
-                    {console.log(orders)}
+                    {console.log(orders.orders)}
                     {orders.orders.length > 0 ? (
                         <FeedCard />
                     ) : (

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import styles from './navigation-profile.module.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../services/actions/login';
 
+export type TNavigationProfileProps = {
+    description: string;
+}
 
-export const NavigationProfile = ({description}) => {
+
+export const NavigationProfile = ({description}: TNavigationProfileProps): JSX.Element => {
     const dispatch = useDispatch();
 
-    const exit = (e) => {
+    const exit = (e: SyntheticEvent) => {
         e.preventDefault();
         logOut(dispatch);
     }

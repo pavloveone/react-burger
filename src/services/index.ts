@@ -27,6 +27,7 @@ import {
     wsClose as feedWsClose, 
     wsMessage as feedWsMessage, 
     wsError as feedWsError,
+    TFeedActions,
 } from './actions/feed';
 
 import { 
@@ -76,7 +77,7 @@ export const rootReducer = combineReducers({
 
 type TApplicationActions = 
 | TConstructorActions | TForgotPasswordActions | TIngredientsActions 
-| TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions;
+| TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions | TFeedActions;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 

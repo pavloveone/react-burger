@@ -8,7 +8,6 @@ export type TOrdersListState = {
     orders: TOrders | null;
 }
 
-
 const initialState: TOrdersListState = {
     status: '',
     connectionError: '',

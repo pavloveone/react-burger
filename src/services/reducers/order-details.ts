@@ -15,7 +15,7 @@ type TOrderDetailsListState = {
     isVisible: boolean;
     isLoading: boolean;
     hasError: boolean;
-    orderNumber: number | null;
+    orderNumber: string | null;
     currentOrders: Array<TOrderInfo>;
 }
 

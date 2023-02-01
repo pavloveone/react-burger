@@ -66,7 +66,7 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
         body: JSON.stringify({
             ingredients: ingredientsId,
             //@ts-ignore
-            'authorization': getCookie('token'),
+            accessToken: getCookie('token').split(' ')[1],
         })
     })
     .then(res => checkReponse<TOrderResponse>(res))
@@ -80,7 +80,7 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
     }));
 }
 
-export const fetchOrderNumber = (orderNumber: number):AppThunk => (dispatch: AppDispatch) => {
+export const fetchOrderNumber = (orderNumber: string):AppThunk => (dispatch: AppDispatch) => {
     dispatch({type: FETCH_ORDER_NUMBER_REQUEST});
     fetch(`${URL}/orders/${orderNumber}`)
     .then(res => checkReponse<TOrderInfo>(res))

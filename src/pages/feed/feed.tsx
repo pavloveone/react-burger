@@ -7,7 +7,7 @@ import { connect, disconnect } from '../../services/actions/feed';
 import { wsUrl } from '../../utils/api';
 import { Loading } from '../../components/loading/loading';
 
-export const Feed = () => {
+export const Feed = (): JSX.Element => {
 
     const { orders } = useSelector((state) => state.feed);
 
