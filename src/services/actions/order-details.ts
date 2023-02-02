@@ -66,7 +66,7 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
         body: JSON.stringify({
             ingredients: ingredientsId,
             //@ts-ignore
-            accessToken: getCookie('token').split(' ')[1],
+            'authorization': getCookie('token'),
         })
     })
     .then(res => checkReponse<TOrderResponse>(res))

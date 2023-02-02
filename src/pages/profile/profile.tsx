@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import styles from './profile.module.css';
-import { NavLink, Redirect, useLocation } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getUser, updateUser } from '../../services/actions/profile';
@@ -46,7 +46,7 @@ export const Profile = () => {
 
     return(
         <div className={styles.container}>
-            <NavigationProfile description={' изменить свои персональные данные'} />
+                <NavigationProfile description={' изменить свои персональные данные'} />
             <form className={styles.form} onSubmit={updateForm}>
                 <Input placeholder={'Имя'} icon={'EditIcon'} value={username} onChange={(e) => setUsername(e.target.value)} />
                 <Input placeholder={'Логин'} icon={'EditIcon'} value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -65,6 +65,7 @@ export const Profile = () => {
             </form>
             {!isAuth && (
                 <Redirect to='/login' />
+
             )}
         </div>
     );

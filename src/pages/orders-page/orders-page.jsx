@@ -20,6 +20,7 @@ export const OrdersPage = () => {
 
     React.useEffect(() => {
         dispatch(connect(`${ordersWsUrl}?token=${token}`));
+        console.log(token)
         
         return () => {
             dispatch(disconnect());
@@ -33,8 +34,8 @@ export const OrdersPage = () => {
                 <Loading />
             ) : (
                 <div>
-                    {console.log(orders.orders)}
-                    {orders.orders.length > 0 ? (
+                    {console.log(orders)}
+                    {/* {orders.orders.length > 0 ? (
                         <FeedCard />
                     ) : (
                         <>
@@ -47,7 +48,7 @@ export const OrdersPage = () => {
                         </NavLink>
                         </>
 
-                    )}
+                    )} */}
                 </div>
             )}
 
