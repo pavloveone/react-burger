@@ -17,11 +17,10 @@ export const OrdersPage = () => {
     const dispatch = useDispatch();
 
     const { orders } = useSelector((state) => state.orders);
+    const { error } = useSelector((state) => state.profile)
 
     React.useEffect(() => {
         dispatch(connect(`${ordersWsUrl}?token=${token}`));
-        console.log(token)
-        
         return () => {
             dispatch(disconnect());
         }
@@ -30,28 +29,18 @@ export const OrdersPage = () => {
     return (
         <div className={styles.container}>
             <NavigationProfile description={' посмотреть свою историю заказов'} />
-            {orders === null ? (
+            {orders === null &&(
                 <Loading />
-            ) : (
-                <div>
-                    {console.log(orders)}
-                    {/* {orders.orders.length > 0 ? (
-                        <FeedCard />
-                    ) : (
-                        <>
-                        <p className='text text_color_inactive text_type_main-medium mb-10'>История заказов пока что отсутствует...<br/>Исправим?</p>
-                        <NavLink to='/' 
-                        className={`${styles.link} text text_type_main-medium`}
-                        exact
-                        >
-                        Сделать заказ
-                        </NavLink>
-                        </>
-
-                    )} */}
-                </div>
             )}
-
+            <>
+                <p className='text text_color_inactive text_type_main-medium mb-10'>История заказов пока что отсутствует...<br/>Исправим?</p>
+                <NavLink to='/' 
+                className={`${styles.link} text text_type_main-medium`}
+                exact
+                >
+                Сделать заказ
+                </NavLink>
+            </>
         </div>
     );
 }

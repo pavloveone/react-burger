@@ -19,7 +19,6 @@ const initialState: TProfileListState = {
     isLoading: false,
     hasError: false,
     userProfile: {},
-    
 }
 
 export const profileReducer = (state = initialState, action: TProfileActions) => {

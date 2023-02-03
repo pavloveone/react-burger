@@ -1,8 +1,8 @@
 import { checkReponse } from '../../utils/variables';
-import { user } from '../../utils/api';
-import { getCookie } from '../../utils/cookies';
+import { refreshToken, user } from '../../utils/api';
+import { getCookie, setCookie } from '../../utils/cookies';
 import { AUTH_CHECKED } from './login';
-import { TUser } from '../../utils/types';
+import { TRegisterResponse, TUser } from '../../utils/types';
 import { AppDispatch, AppThunk } from '..';
 
 export const GET_PROFILE_REQUEST: 'GET_PROFILE_REQUEST' = 'GET_PROFILE_REQUEST';
@@ -46,19 +46,39 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
             'authorization': getCookie('token')
         }
     })
-    .then(res => checkReponse<TUser>(res))
+    .then((res) => checkReponse<TUser>(res))
     .then(res =>  {
         dispatch({
             type: GET_PROFILE_SUCCESS,
             userProfile: res
         })})
-    .catch(err => dispatch({
-        type: GET_PROFILE_ERROR
-    }))
-    .finally(() => {
+    .then(res => {
         dispatch({
-            type: AUTH_CHECKED,
+            type: AUTH_CHECKED
         })
+    })
+    .catch((err) => {
+        if(err.message === 'jwt expired') {
+            fetch(refreshToken, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    'token': localStorage.token
+                })
+            })
+            .then((res) => checkReponse<TRegisterResponse>(res))
+            .then((res) => {
+                if(res.success) {
+                    setCookie('token', res.accessToken)
+                    localStorage.setItem('token', res.refreshToken); 
+                }
+            })
+        } else
+            dispatch({
+                type: GET_PROFILE_ERROR,
+            })
     });
 }
 

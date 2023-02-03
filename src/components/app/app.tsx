@@ -6,7 +6,7 @@ import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import styles from './app.module.css';
 
-import { checkUserAuth } from '../../services/actions/login';
+import { getUser } from '../../services/actions/profile';
 
 import { AppHeader } from '../app-header/app-header';
 import { fetchIngredients } from '../../services/actions/ingredients';
@@ -53,7 +53,7 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   React.useEffect(() => {
-    dispatch(checkUserAuth()) 
+    dispatch(getUser()) 
   },[]);
   
   return (

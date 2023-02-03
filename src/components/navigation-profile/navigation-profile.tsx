@@ -10,6 +10,7 @@ export type TNavigationProfileProps = {
 
 
 export const NavigationProfile = ({description}: TNavigationProfileProps): JSX.Element => {
+    
     const dispatch = useDispatch();
 
     const exit = (e: SyntheticEvent) => {

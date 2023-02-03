@@ -13,11 +13,6 @@ export type TIngredient = {
   image_mobile: string,
 };
 
-export type TUserData = {
-  email?: string,
-  name?: string;
-}
-
 export type TUser = {
   username?: string,
   email?: string,

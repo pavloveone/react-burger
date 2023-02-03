@@ -1,6 +1,6 @@
 import { checkReponse } from '../../utils/variables';
 import { getUser } from './profile';
-import { login, logout } from '../../utils/api';
+import { login, logout, refreshToken } from '../../utils/api';
 import { setCookie, deleteCookie, getCookie } from '../../utils/cookies';
 import { TRegisterResponse, TUser } from '../../utils/types';
 import { AppDispatch, AppThunk } from '..';
@@ -84,5 +84,5 @@ export const logOut = (dispatch: AppDispatch) => {
 export const checkUserAuth = (): AppThunk => (dispatch: AppDispatch) => {
     if (getCookie('token')) {
         dispatch(getUser())
-    }
+    } 
 }

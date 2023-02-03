@@ -60,13 +60,13 @@ export const getOrder = (bun: ReadonlyArray<TIngredient>,
 
     fetch(`${URL}/orders`, {
         method: 'POST',
+        //@ts-ignore
         headers: {
-            'Content-Type': "application/json;charset=utf-8"
+            'Content-Type': "application/json;charset=utf-8",
+            'authorization': getCookie('token')
         },
         body: JSON.stringify({
             ingredients: ingredientsId,
-            //@ts-ignore
-            'authorization': getCookie('token'),
         })
     })
     .then(res => checkReponse<TOrderResponse>(res))
