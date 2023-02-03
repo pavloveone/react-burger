@@ -50,7 +50,7 @@ export const OrderCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element =>
             )}
             <div className={styles.ingredients}>
                 <div className={styles.ingredients_images}>
-                    {ingredientInOrder.map((item, index) => (
+                    {ingredientInOrder.slice(0, 6).map((item, index) => (
                         <FeedCardImages item={item} key={index} />
                     ))}
                 </div>
