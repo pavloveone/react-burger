@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './register.module.css';
 import { Link, useLocation, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { registration } from '../../services/actions/register';
 
 import { EmailInput, Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -16,7 +16,7 @@ export const Register = ():JSX.Element => {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const { isAuth } = useSelector((state: any) => state.login)
+    const { isAuth } = useSelector((state) => state.login)
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -25,8 +25,7 @@ export const Register = ():JSX.Element => {
 
     const createNewLogin = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // @ts-ignore
-    dispatch(registration())
+    dispatch(registration(email, username, password))
   }
 
 

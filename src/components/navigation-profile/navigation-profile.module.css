@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 400px;
+    padding-top: 120px;
 }
 
 .link {
@@ -14,6 +16,7 @@
 
 .link_active {
     color: #F2F2F3;
+    text-align: left;
 }
 
 .description {

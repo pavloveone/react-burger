@@ -17,6 +17,8 @@ export type TUser = {
   username?: string,
   email?: string,
   password?: string,
+  success?: string,
+  user?: any
 };
 
 export type TResponse = TUser & { success: string };

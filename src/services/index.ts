@@ -38,6 +38,7 @@ import {
     wsClose as ordersWsClose, 
     wsMessage as ordersWsMessage, 
     wsError as ordersWsError,
+    TOrdersActions
 } from './actions/orders';
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -77,7 +78,7 @@ export const rootReducer = combineReducers({
 
 type TApplicationActions = 
 | TConstructorActions | TForgotPasswordActions | TIngredientsActions 
-| TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions | TFeedActions;
+| TLoginActions | TOrderDetailsActions | TProfileActions | TRegisterActions | TResetPasswordActions | TFeedActions | TOrdersActions;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 

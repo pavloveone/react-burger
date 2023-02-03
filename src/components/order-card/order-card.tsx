@@ -1,17 +1,17 @@
 import React from 'react';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './feed-card.module.css';
+import styles from './order-card.module.css';
 import { useLocation, Link } from 'react-router-dom';
 import { FeedCardImages } from '../feed-card-images/feed-card-images';
 import { useSelector } from '../../services/hooks/hooks';
 import { TIngredient, TOrderInfo } from '../../utils/types';
 
 
-export const FeedCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element => {
+export const OrderCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element => {
 
     const location = useLocation();
 
-    const feedNumber = orderInfo.number;
+    const orderNumber = orderInfo.number;
 
     const { ingredients } = useSelector(state => state.ingredients)
 
@@ -26,9 +26,9 @@ export const FeedCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element => 
 
     return(
         <Link
-        key={feedNumber}
+        key={orderNumber}
         to={{
-        pathname: `/feed/${feedNumber}`,
+        pathname: `/orders/${orderNumber}`,
         state: { background: location },
         }}
         className={styles.link}
@@ -38,13 +38,16 @@ export const FeedCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element => 
                 <p className='text text_type_digits-default'>{`#${orderInfo.number}`}</p>
                 <FormattedDate className='text text_type_main-default text_color_inactive' date={new Date(orderInfo.createdAt)} />
             </div>
-            {orderInfo.status === 'done' ? (
-            <h4 className={`${styles.status_ready} text text_type_main-small`}>Выполнен</h4>
-        ): (
-            <h4 className={`${styles.status} text text_type_main-small`}>Готовится</h4>
-
-        )}
             <h3 className={`${styles.card_info} text text_type_main-medium`}>{orderInfo.name}</h3>
+            {orderInfo.status === 'done' &&(
+            <h4 className={`${styles.status_ready} text text_type_main-small`}>Выполнен</h4>
+            )}
+            {orderInfo.status === 'pending' && (
+            <h4 className={`${styles.status_pending} text text_type_main-small`}>Готовится</h4>
+            )}
+            {orderInfo.status === 'created' && (
+            <h4 className={`${styles.status_created} text text_type_main-small`}>Создан</h4>
+            )}
             <div className={styles.ingredients}>
                 <div className={styles.ingredients_images}>
                     {ingredientInOrder.map((item, index) => (

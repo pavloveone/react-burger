@@ -20,7 +20,7 @@ export interface IGetRegistrationErrorAction {
 
 export type TRegisterActions = | IGetRegistrationRequestAction | IGetRegistrationSuccessAction | IGetRegistrationErrorAction;
 
-export const registration = (email: TUser, password: TUser, username: TUser): AppThunk => (dispatch: AppDispatch) => {
+export const registration = (email: string, password: string, username: string): AppThunk => (dispatch: AppDispatch) => {
 
     dispatch({ type: GET_REGISTRATION_REQUEST });
         fetch(register, {

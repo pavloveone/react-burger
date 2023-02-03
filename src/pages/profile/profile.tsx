@@ -1,10 +1,9 @@
 import React, { SyntheticEvent } from 'react';
 import styles from './profile.module.css';
-import { NavLink, Redirect, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from '../../services/hooks/hooks';
 
 import { getUser, updateUser } from '../../services/actions/profile';
-
 
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavigationProfile } from '../../components/navigation-profile/navigation-profile';
@@ -13,15 +12,14 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const { isAuth } = useSelector((state: any) => state.login);
-    const { userProfile, isLoading } = useSelector((state: any) => state.profile);
+    const { isAuth } = useSelector((state) => state.login);
+    const { userProfile, isLoading } = useSelector((state) => state.profile);
 
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     
     React.useEffect(() => {
-        // @ts-ignore
         dispatch(getUser())
     }, [])
 
@@ -34,7 +32,6 @@ export const Profile = () => {
 
     const updateForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(updateUser(email, username));
     }
 

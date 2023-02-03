@@ -22,7 +22,7 @@ export interface IGetForgotPasswordErrorAction {
 export type TForgotPasswordActions = 
 | IGetForgotPasswordRequestAction | IGetForgotPasswordSuccessAction | IGetForgotPasswordErrorAction;
 
-export const forgotPassword = (email: TUser) => (dispatch: AppDispatch) => {
+export const forgotPassword = (email: string) => (dispatch: AppDispatch) => {
 
     dispatch({ type: GET_FORGOT_PASSWORD_REQUEST });
         fetch(`${URL}/password-reset`, {

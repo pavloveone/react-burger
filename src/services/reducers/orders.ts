@@ -5,14 +5,14 @@ import { wsConnecting, wsOpen, wsClose, wsMessage, wsError } from '../actions/or
 export type TOrdersListState = {
     status: string;
     connectionError: string;
-    orders: TOrders | null;
+    userOrders: TOrders | null;
 }
 
 
 const initialState: TOrdersListState = {
     status: '',
     connectionError: '',
-    orders: null,
+    userOrders: null,
 }
 
 export const ordersReducer = createReducer(initialState, builder => {
@@ -31,6 +31,6 @@ export const ordersReducer = createReducer(initialState, builder => {
             state.connectionError = action.payload;
         })
         .addCase(wsMessage, (state, action) => {
-            state.orders = action.payload;
+            state.userOrders = action.payload;
         })
 })

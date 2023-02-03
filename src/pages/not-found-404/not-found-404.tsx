@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './not-found-404.module.css';
 
 import NotFoundImage from '../../images/not-found.png';
 

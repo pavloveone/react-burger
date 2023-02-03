@@ -17,6 +17,8 @@ import { CLOSE_ORDER, SHOW_ORDER } from '../../services/actions/order-details';
 import styles from './burger-constructor.module.css';
 import { useDrop } from "react-dnd";
 import { TIngredient } from "../../utils/types";
+import { Loading } from "../loading/loading";
+import { Spinner } from "../spinner/spinner";
 
 export const BurgerConstructor = () => {
 
@@ -25,7 +27,7 @@ export const BurgerConstructor = () => {
 
     const { bun } = useSelector((state) => state.constructorIngredients);
     const  ingredientsConstructor  = useSelector((state) => state.constructorIngredients.ingredients);
-    const { isVisible } = useSelector((state) => state.orderDetails);
+    const { isVisible, orderNumber, isLoading } = useSelector((state) => state.orderDetails);
     const { isAuth } = useSelector((state) => state.login);
 
     const [, dragRef] = useDrop({
@@ -37,12 +39,9 @@ export const BurgerConstructor = () => {
 
     function handleOpenOrder() {
         
-         if (bun.length > 0 && ingredientsConstructor.length > 0 && isAuth) {
+        if (bun.length > 0 && ingredientsConstructor.length > 0 && isAuth) {
               dispatch(getOrder(bun, ingredientsConstructor));
-
-            dispatch({
-                type: SHOW_ORDER
-            })
+              dispatch({ type: SHOW_ORDER })
         } else {
             history.push('/login');
         }
@@ -87,10 +86,13 @@ export const BurgerConstructor = () => {
             </div>
             <Button htmlType="button" type="primary" size="medium" onClick={handleOpenOrder} disabled={(bun.length > 0 && ingredientsConstructor.length > 0) ? false : true}>Оформить заказ</Button>
         </div>
-        {isVisible && (
+        {isVisible && orderNumber &&(
             <Modal onClose={handleCloseOrder} >
                 <OrderDetails />
             </Modal>
+        )}
+        {isLoading && (
+            <Spinner description={'Передаем заказ на кухню. Пожалуйста, подождите'} />
         )}
       </div>
     )

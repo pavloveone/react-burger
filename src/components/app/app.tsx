@@ -27,7 +27,7 @@ import { Modal } from '../modal/modal';
 import { Location } from 'history';
 import { Feed } from '../../pages/feed/feed';
 import { OrderInfo } from '../order-info/order-info';
-import { fetchOrderNumber } from '../../services/actions/order-details';
+import { UserOrderInfo } from '../user-order-info/user-order-info';
 
 type TLocataionState = {
   background: Location
@@ -37,6 +37,7 @@ function App(): JSX.Element {
 
   const { ingredients, isLoading, hasError } = useSelector((state) => state.ingredients);
   const { orders } = useSelector((state) => state.feed);
+  const { userOrders } = useSelector((state) => state.orders);
 
   const location = useLocation<TLocataionState>();
   const history = useHistory();
@@ -101,6 +102,9 @@ function App(): JSX.Element {
                 <Route path='/feed/:feedNumber' exact>
                   <OrderInfo />
                 </Route>
+                <Route path='/orders/:orderNumber' exact>
+                  <UserOrderInfo />
+                </Route>
                 <Route>
                 <NotFound404 />
                   </Route>
@@ -123,6 +127,16 @@ function App(): JSX.Element {
         children={
           <Modal onClose={handleModalClose}>
             <OrderInfo />
+          </Modal>
+        }
+      />
+      )}
+      {background && userOrders && (
+      <Route
+        path='/orders/:orderNumber'
+        children={
+          <Modal onClose={handleModalClose}>
+            <UserOrderInfo />
           </Modal>
         }
       />

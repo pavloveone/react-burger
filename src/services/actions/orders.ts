@@ -9,7 +9,7 @@ export const wsClose = createAction('ORDERS_WS_CLOSE');
 export const wsMessage = createAction<TOrders, 'ORDERS_WS_MESSAGE'>('ORDERS_WS_MESSAGE');
 export const wsError = createAction<string, 'ORDERS_WS_ERROR'>('ORDERS_WS_ERROR');
 
-export type TFeedActions = 
+export type TOrdersActions = 
     | ReturnType<typeof connect>
     | ReturnType<typeof disconnect>
     | ReturnType<typeof wsConnecting>

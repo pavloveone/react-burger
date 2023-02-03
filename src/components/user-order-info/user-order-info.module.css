@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.order_consistent {
+    display: flex;
+    flex-direction: column;
+    max-height: 312px;
+    overflow: hidden auto;
+    padding-right: 25px;
+    gap: 16px;
+}
+.order_status_ready {
+    color: #00CCCC;
+}
+.order_name {
+    font-weight: 700;
+}
+.order_info {
+    padding-top: 52px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.price {
+    display: flex;
+    align-items: center;
+}

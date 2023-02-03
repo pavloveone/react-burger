@@ -31,7 +31,7 @@ export interface IAuthCheckedAction {
 export type TLoginActions = | IGetLoginRequestAction | IGetLoginSuccessAction | IGetLoginErrorAction | ILogoutAction
 | IAuthCheckedAction;
 
-export const authorization = (email: TRegisterResponse, password: TRegisterResponse): AppThunk => (dispatch: AppDispatch) => {
+export const authorization = (email: string, password: string): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: GET_LOGIN_REQUEST });
     fetch(login, {
         method: 'POST',

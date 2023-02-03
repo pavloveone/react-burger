@@ -5,7 +5,7 @@ import { Link, Redirect, useLocation } from 'react-router-dom';
 import { authorization } from '../../services/actions/login';
 
 import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
 
 type TLocataionState = {
     from: Location
@@ -17,13 +17,12 @@ export const Login = (): JSX.Element => {
     const [ password, setPassword ] = React.useState('');
     const location = useLocation<TLocataionState>();
 
-    const { isAuth } = useSelector((state: any) => state.login)
+    const { isAuth } = useSelector((state) => state.login)
 
     const dispatch = useDispatch();
 
     const logIn = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(authorization(email, password));
     }
 

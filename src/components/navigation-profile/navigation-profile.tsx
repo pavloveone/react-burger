@@ -13,6 +13,7 @@ export const NavigationProfile = ({description}: TNavigationProfileProps): JSX.E
     
     const dispatch = useDispatch();
 
+
     const exit = (e: SyntheticEvent) => {
         e.preventDefault();
         logOut(dispatch);

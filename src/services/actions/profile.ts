@@ -79,10 +79,10 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
             dispatch({
                 type: GET_PROFILE_ERROR,
             })
-    });
+    })
 }
 
-export const updateUser = (email: TUser, username: TUser) => (dispatch: AppDispatch) => {
+export const updateUser = (email: string, username: string) => (dispatch: AppDispatch) => {
     dispatch({ type: GET_UPDATE_PROFILE_REQUEST });
     fetch(user, {
         method: 'PATCH',
