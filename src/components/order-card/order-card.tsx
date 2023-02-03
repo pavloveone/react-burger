@@ -53,6 +53,9 @@ export const OrderCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element =>
                     {ingredientInOrder.slice(0, 6).map((item, index) => (
                         <FeedCardImages item={item} key={index} />
                     ))}
+                    {ingredientInOrder.length > 5 &&(
+                    <p className={`${styles.counter} text text_type_digits-default`}>{`+${ingredientInOrder.length - 5}`}</p>
+                    )}
                 </div>
                 <div className={styles.price}>
                     <span className={`${styles.price_info} text text_type_digits-default pr-2`}>{currentPrice()}</span>
