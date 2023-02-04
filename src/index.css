@@ -16,6 +16,7 @@ code {
 
 .content {
   display: flex;
+  justify-content: center;
   width: 83%;
   margin: 0 auto;
 }

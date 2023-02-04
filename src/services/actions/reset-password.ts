@@ -21,7 +21,7 @@ export interface IGetResetPasswordErrorAction {
 export type TResetPasswordActions = 
 | IGetResetPasswordRequestAction | IGetResetPasswordSuccessAction | IGetResetPasswordErrorAction;
 
-export const resetPassword = (password: TUser, token: TUser): AppThunk => (dispatch: AppDispatch) => {
+export const resetPassword = (password: string, token: string): AppThunk => (dispatch: AppDispatch) => {
 
     dispatch({ type: GET_RESET_PASSWORD_REQUEST });
         fetch(`${URL}/password-reset/reset`, {

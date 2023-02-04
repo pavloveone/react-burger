@@ -10,9 +10,9 @@
     margin: 0 auto;
     align-items: center;
     position: fixed;
-    left: 0%;
-    right: 0%;
-    top: 2%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .header {

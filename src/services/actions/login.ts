@@ -46,7 +46,7 @@ export const authorization = (email: string, password: string): AppThunk => (dis
     .then(res => checkReponse<TRegisterResponse>(res))
     .then((res) =>  {
         if(res.success) {
-            setCookie('token', res.accessToken)
+            setCookie('token', res.accessToken, undefined)
             localStorage.setItem('token', res.refreshToken);     
         }
         dispatch({

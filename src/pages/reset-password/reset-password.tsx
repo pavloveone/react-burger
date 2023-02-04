@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './reset-password.module.css';
 import { Link, Redirect, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { resetPassword } from '../../services/actions/reset-password';
 
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -15,14 +15,13 @@ export const ResetPassword = ():JSX.Element => {
     const [password, setPassword] = React.useState('');
     const [token, setToken] = React.useState('');
     const location = useLocation<TLocataionState>();
-    const { hasUser } = useSelector((state: any) => state.forgotPassword);
-    const { success } = useSelector((state: any) => state.resetPassword);
+    const { hasUser } = useSelector(state => state.forgotPassword);
+    const { success } = useSelector((state) => state.resetPassword);
 
     const dispatch = useDispatch();
 
     const handleResetPassword = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        // @ts-ignore
         dispatch(resetPassword(password, token));
     }
 

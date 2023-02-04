@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './orders-page.module.css';
-import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { connect, disconnect } from '../../services/actions/orders';
 import { ordersWsUrl } from '../../utils/api';

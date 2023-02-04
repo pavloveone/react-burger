@@ -21,7 +21,7 @@ export const OrderCard = ({item: orderInfo}: {item: TOrderInfo}): JSX.Element =>
 
     const currentPrice = () => {
         const sum = [...ingredientInOrder];
-        return sum.reduce((acc, curr) => curr?.type === 'bun' ? acc  + curr.price * 2 : acc + curr.price, 0);
+        return sum.reduce((acc, curr) => acc + curr.price, 0);
     };
 
     return(

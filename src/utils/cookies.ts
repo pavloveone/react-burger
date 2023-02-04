@@ -1,13 +1,12 @@
 
-
-export function getCookie(name) {
+export function getCookie(name: String) {
     const matches = document.cookie.match(
       new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
   }
   
-  export function setCookie(name, value, props) {
+  export function setCookie(name: String, value: any, props: any | undefined) {
     props = props || {
       path: '/',  //задаем корневой адрес для cookies
       ...props
@@ -33,6 +32,6 @@ export function getCookie(name) {
     document.cookie = updatedCookie;
   }
 
-  export function deleteCookie(name) {
+  export function deleteCookie(name: String) {
     setCookie(name, null, { expires: -1 });
 }

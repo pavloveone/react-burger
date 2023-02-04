@@ -29,8 +29,8 @@ export const Feed = (): JSX.Element => {
             <section className={styles.feed_section}>
             <h2 className={`${styles.title} text text_type_main-large pt-10 pb-5`}>Лента заказов</h2>
                 <div className={styles.list}>
-                    {orders.orders.map((item, index) => (
-                        <FeedCard item={item} key={index} />
+                    {orders.orders.map((item) => (
+                        <FeedCard item={item} key={item._id} />
                     ))}
                 </div>
             </section>

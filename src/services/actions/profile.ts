@@ -71,7 +71,7 @@ export const getUser = (): AppThunk => (dispatch: AppDispatch) => {
             .then((res) => checkReponse<TRegisterResponse>(res))
             .then((res) => {
                 if(res.success) {
-                    setCookie('token', res.accessToken)
+                    setCookie('token', res.accessToken, undefined)
                     localStorage.setItem('token', res.refreshToken); 
                 }
             })

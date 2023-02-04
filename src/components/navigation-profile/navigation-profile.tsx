@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import styles from './navigation-profile.module.css';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks/hooks';
 import { logOut } from '../../services/actions/login';
 
 export type TNavigationProfileProps = {
