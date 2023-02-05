@@ -3,17 +3,16 @@
     flex-direction: column;
     background: #1C1C21;
     width: 720px;
-    z-index: 1;
-    /* overflow: hidden; */
+    z-index: 10;
     border: 1px solid rgba(76, 76, 255, 0.2);
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
     border-radius: 40px;
     margin: 0 auto;
     align-items: center;
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 17%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .header {
@@ -28,6 +27,7 @@
 }
 
 .button {
-    border: none;
-    background: none;
+    position: absolute;
+    right: 50px;
+    top: 50px;
 }

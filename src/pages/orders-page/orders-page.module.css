@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 44px;
+    height: 916px;
+    overflow: hidden auto;
+}
+
+.link {
+    text-decoration: none;
+    height: 64px;
+    color: #8585AD;
+    cursor: pointer;
+}
+.link:hover {
+    color: #F2F2F3;
+}

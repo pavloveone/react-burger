@@ -1,0 +1,24 @@
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+    padding-top: 120px;
+}
+
+.link {
+    text-decoration: none;
+    height: 64px;
+    color: #8585AD;
+    cursor: pointer;
+}
+
+.link_active {
+    color: #F2F2F3;
+    text-align: left;
+}
+
+.description {
+    text-align: left;
+}

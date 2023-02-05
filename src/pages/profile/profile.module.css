@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 120px;
+}
+
+.link {
+    text-decoration: none;
+    height: 64px;
+    color: #8585AD;
+    cursor: pointer;
+}
+
+.link_active {
+    color: #F2F2F3;
+}
+
+.description {
+    text-align: left;
+}
