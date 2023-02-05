@@ -11,7 +11,7 @@ import { connect, disconnect } from '../../services/actions/orders';
 import { ordersWsUrl } from '../../utils/api';
 import { getCookie } from '../../utils/cookies';
 import { Spinner } from '../spinner/spinner';
-import { unique } from '../../utils/variables';
+import { getCount, unique } from '../../utils/variables';
 
 export const UserOrderInfo = (): JSX.Element => {
 
@@ -53,7 +53,8 @@ export const UserOrderInfo = (): JSX.Element => {
         const sum = currentItem;
         return sum?.reduce((acc, curr) =>  acc + curr.price, 0);
     };
-
+    const duplicatedItem = currentItem && getCount(currentItem)
+    .filter((item):item is TIngredient => !!item);
     return (
         <div className={styles.container}>
             {!currentOrder &&(
@@ -70,8 +71,8 @@ export const UserOrderInfo = (): JSX.Element => {
                     )}
                     <h4 className={`${styles.title} text text_type_main-default pb-6`}>Состав: </h4>
                     <div className={styles.order_consistent}>
-                        {unique(currentOrder?.ingredients).map((item, index) => (
-                            <OrderInfoElement item={item} key={index} />
+                        {currentItem && unique(currentOrder?.ingredients).map((item, index) => (
+                            <OrderInfoElement item={item} key={index} count={duplicatedItem} />
                         ))}
                     </div>
                     <div className={styles.order_info}>

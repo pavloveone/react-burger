@@ -10,7 +10,7 @@ import { TIngredient } from '../../utils/types';
 import { connect, disconnect } from '../../services/actions/feed';
 import { wsUrl } from '../../utils/api';
 import { Spinner } from '../spinner/spinner';
-import { unique } from '../../utils/variables';
+import { getCount, unique } from '../../utils/variables';
 
 export const OrderInfo = (): JSX.Element => {
 
@@ -47,29 +47,9 @@ export const OrderInfo = (): JSX.Element => {
         const sum = currentItem;
         return sum?.reduce((acc, curr) => acc + curr.price, 0);
     };
-    //@ts-ignore
-    const res = currentOrder?.ingredients.reduce((acc, i) => {
-        //@ts-ignore
-        if (acc.hasOwnProperty(i)) {
-        //@ts-ignore
 
-          acc[i] += 1;
-        } else {
-        //@ts-ignore
-
-          acc[i] = 1;
-        }
-        return acc;
-      }, {});
-
-      const counter = () => {
-          let result = [];
-          for (let key in res) {
-              //@ts-ignore
-              result.push(res[key])
-              return result.map(item => item)
-          }
-      }
+    const duplicatedItem = currentItem && getCount(currentItem)
+    .filter((item):item is TIngredient => !!item);
 
     return (
         <div className={styles.container}>
@@ -88,8 +68,8 @@ export const OrderInfo = (): JSX.Element => {
                     )}
                     <h4 className={`${styles.title} text text_type_main-default pb-6`}>Состав: </h4>
                     <div className={styles.order_consistent}>
-                        {unique(currentOrder?.ingredients).map((ignredient, index) => (
-                            <OrderInfoElement item={ignredient} key={index} count={counter} />
+                        {unique(currentOrder?.ingredients).map((ingredient, index) => (
+                            <OrderInfoElement item={ingredient} key={index} count={duplicatedItem} />
                         ))}
                     </div>
                     <div className={styles.order_info}>

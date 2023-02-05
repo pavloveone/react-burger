@@ -11,11 +11,16 @@
     padding-right: 25px;
     gap: 16px;
 }
+.order_status {
+    text-align: left;
+}
 .order_status_ready {
     color: #00CCCC;
+    text-align: left;
 }
 .order_name {
     font-weight: 700;
+    text-align: left;
 }
 .order_info {
     padding-top: 52px;
@@ -26,4 +31,7 @@
 .price {
     display: flex;
     align-items: center;
+}
+.title {
+    text-align: left;
 }
