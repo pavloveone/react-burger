@@ -55,7 +55,7 @@ export function BurgerIngredientsElement({item}: TBurgerIngredientsElementProps)
             }}
             className={styles.link}
         >
-            <div className={styles.card_container} ref={dragRef}>
+            <div className={styles.card_container} ref={dragRef} data-testid='ingredient'>
                     <div className={styles.card} >
                         {counter !==0 &&(
                             <Counter count={counter} size="default" />

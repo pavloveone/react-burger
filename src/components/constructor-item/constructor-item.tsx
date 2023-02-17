@@ -92,7 +92,7 @@ export const ConstructorItem = ({item, index}: TConstructorItemProps): JSX.Eleme
     const opacity = isDragging ? 0 : 1;
 
     return(
-        <div className={styles.content_element} style={{opacity}} ref={ref}>
+        <div className={styles.content_element} style={{opacity}} ref={ref} data-cy={index}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={item.name}

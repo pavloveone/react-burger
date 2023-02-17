@@ -1,6 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { TOrders } from '../../utils/types';
-import { wsConnecting, wsOpen, wsClose, wsMessage, wsError } from '../actions/orders';
+import { 
+    wsConnecting, 
+    wsOpen, 
+    wsClose, 
+    wsMessage, 
+    wsError 
+} from '../actions/orders';
 
 export type TOrdersListState = {
     status: string;
