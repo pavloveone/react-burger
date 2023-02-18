@@ -1,16 +1,12 @@
-import { loginReducer } from "./login";
+import { loginReducer, initialState } from "./login";
 import * as types from '../actions/login';
+import { newUser } from "../../utils/constants-test";
 
 describe('login reducer', () => {
     it('should return the initial state', () => {
         expect(
             loginReducer(undefined, {})
-        ).toEqual({
-            isLoading: false,
-            hasError: false,
-            isAuth: false,
-            userData: {}
-        });
+        ).toEqual(initialState);
     });
     it('should handle GET_LOGIN_REQUEST', () => {
         expect(
@@ -18,28 +14,20 @@ describe('login reducer', () => {
                 type: types.GET_LOGIN_REQUEST
             })
         ).toEqual({
+            ...initialState,
             isLoading: true,
-            hasError: false,
-            isAuth: false,
-            userData: {}
         });
     });
     it('should handle GET_LOGIN_SUCCESS', () => {
-        const user = {
-            username: 'user',
-            email: 'email@email.ru',
-            password: 'password',
-        };
         expect(
             loginReducer(undefined, {
                 type: types.GET_LOGIN_SUCCESS,
-                userData: user
+                userData: newUser
             })
         ).toEqual({
-            isLoading: false,
-            hasError: false,
+            ...initialState,
             isAuth: true,
-            userData: user
+            userData: newUser
         });
     });
     it('should handle GET_LOGIN_ERROR', () => {
@@ -48,10 +36,8 @@ describe('login reducer', () => {
                 type: types.GET_LOGIN_ERROR
             })
         ).toEqual({
-            isLoading: false,
+            ...initialState,
             hasError: true,
-            isAuth: false,
-            userData: {}
         });
     });
     it('should handle LOGOUT', () => {
@@ -60,10 +46,7 @@ describe('login reducer', () => {
                 type: types.LOGOUT
             })
         ).toEqual({
-            isLoading: false,
-            hasError: false,
-            isAuth: false,
-            userData: {}
+            ...initialState
         });
     });
     it('should handle AUTH_CHECKED', () => {
@@ -72,10 +55,8 @@ describe('login reducer', () => {
                 type: types.AUTH_CHECKED
             })
         ).toEqual({
-            isLoading: false,
-            hasError: false,
+            ...initialState,
             isAuth: true,
-            userData: {}
         });
     });
 })

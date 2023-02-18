@@ -1,15 +1,12 @@
-import { profileReducer } from './profile';
+import { profileReducer, initialState } from './profile';
 import * as types from '../actions/profile';
+import { newUser } from '../../utils/constants-test';
 
 describe('profile reducer', () => {
     it('should return the initial state', () => {
         expect(
             profileReducer(undefined, {})
-        ).toEqual({
-                isLoading: false,
-                hasError: false,
-                userProfile: {}
-            });
+        ).toEqual(initialState);
     });
     it('should handle GET_PROFILE_REQUEST', () => {
         expect(
@@ -17,26 +14,19 @@ describe('profile reducer', () => {
                 type: types.GET_PROFILE_REQUEST
             })
         ).toEqual({
+            ...initialState,
             isLoading: true,
-            hasError: false,
-            userProfile: {}
         });
     });
     it('should handle GET_PROFILE_SUCCESS', () => {
-        const user = {
-            username: 'user',
-            email: 'email@email.ru',
-            password: 'password',
-        }
         expect(
             profileReducer(undefined, {
                 type: types.GET_PROFILE_SUCCESS,
-                userProfile: user
+                userProfile: newUser
             })
         ).toEqual({
-            isLoading: false,
-            hasError: false,
-            userProfile: user
+            ...initialState,
+            userProfile: newUser
         });
     });
     it('should handle GET_PROFILE_ERROR', () => {
@@ -45,9 +35,8 @@ describe('profile reducer', () => {
                 type: types.GET_PROFILE_ERROR
             })
         ).toEqual({
-            isLoading: false,
-            hasError: true,
-            userProfile: {}
+            ...initialState,
+            hasError: true
         });
     });
     it('should handle GET_UPDATE_PROFILE_REQUEST', () => {
@@ -56,26 +45,19 @@ describe('profile reducer', () => {
                 type: types.GET_UPDATE_PROFILE_REQUEST
             })
         ).toEqual({
+            ...initialState,
             isLoading: true,
-            hasError: false,
-            userProfile: {}
         });
     });
     it('should handle GET_UPDATE_PROFILE_SUCCESS', () => {
-        const user = {
-            username: 'user',
-            email: 'email@email.ru',
-            password: 'password',
-        }
         expect(
             profileReducer(undefined, {
                 type: types.GET_UPDATE_PROFILE_SUCCESS,
-                userProfile: user
+                userProfile: newUser
             })
         ).toEqual({
-            isLoading: false,
-            hasError: false,
-            userProfile: user,
+            ...initialState,
+            userProfile: newUser,
         });
     });
     it('should handle GET_UPDATE_PROFILE_ERROR', () => {
@@ -84,9 +66,8 @@ describe('profile reducer', () => {
                 type: types.GET_UPDATE_PROFILE_ERR0R
             })
         ).toEqual({
-            isLoading: false,
+            ...initialState,
             hasError: true,
-            userProfile: {}
         });
     });
 })

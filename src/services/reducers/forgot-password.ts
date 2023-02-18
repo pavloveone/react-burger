@@ -13,7 +13,7 @@ type TForgotPasswordListState = {
 	userData: TUser;
 }
 
-const initialState: TForgotPasswordListState = {
+export const initialState: TForgotPasswordListState = {
     hasError: false,
     isLoading: false,
 	hasUser: false,

@@ -13,7 +13,7 @@ type TResetPasswordListState = {
 	userData: TUser;
 }
 
-const initialState: TResetPasswordListState = {
+export const initialState: TResetPasswordListState = {
     hasError: false,
     isLoading: false,
 	success: false,

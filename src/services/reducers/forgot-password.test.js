@@ -1,15 +1,12 @@
-import { forgotPasswordReducer } from "./forgot-password";
+import { forgotPasswordReducer, initialState } from "./forgot-password";
 import * as types from '../actions/forgot-password';
+import { newUser } from "../../utils/constants-test";
 
 describe('forgot password reducer', () => {
 
     it('should return the initial state', () => {
-        expect(forgotPasswordReducer(undefined, {})).toEqual({
-            hasError: false,
-            isLoading: false,
-            hasUser: false,
-            userData: {}
-        });
+        expect(forgotPasswordReducer(undefined, {}))
+        .toEqual(initialState);
     });
 
     it('should handle GET_FORGOT_PASSWORD_REQUEST', () => {
@@ -18,29 +15,21 @@ describe('forgot password reducer', () => {
                 type: types.GET_FORGOT_PASSWORD_REQUEST
             })
         ).toEqual({
-            hasError: false,
+            ...initialState,
             isLoading: true,
-            hasUser: false,
-            userData: {}
         })
     })
 
     it('should handle GET_FORGOT_PASSWORD_SUCCESS', () => {
-        const user = {
-            username: 'user',
-            email: 'email@email.ru',
-            password: 'password',
-        }
         expect(
             forgotPasswordReducer(undefined, {
                 type: types.GET_FORGOT_PASSWORD_SUCCESS,
-                userData: user,
+                userData: newUser,
             })
         ).toEqual({
-            hasError: false,
-            isLoading: false,
+            ...initialState,
             hasUser: true,
-            userData: user
+            userData: newUser
         })
     })
 
@@ -50,10 +39,8 @@ describe('forgot password reducer', () => {
                 type: types.GET_FORGOT_PASSWORD_ERROR
             })
         ).toEqual({
+            ...initialState,
             hasError: true,
-            isLoading: false,
-            hasUser: false,
-            userData: {}
         })
     })
 })

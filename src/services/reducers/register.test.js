@@ -1,15 +1,12 @@
-import { registrationReducer } from './register';
+import { registrationReducer, initialState } from './register';
+import { newUser } from '../../utils/constants-test';
 import * as types from '../actions/register';
 
 describe('register reducer', () => {
     it('should return the initial state', () => {
         expect(
             registrationReducer(undefined, {})
-        ).toEqual({
-                isLoading: false,
-                hasError: false,
-                userData: {}
-            });
+        ).toEqual(initialState);
     });
 
     it('should handle GET_REGISTRATION_REQUEST', () => {
@@ -18,27 +15,20 @@ describe('register reducer', () => {
                 type: types.GET_REGISTRATION_REQUEST
             })
         ).toEqual({
-            isLoading: true,
-            hasError: false,
-            userData: {}
+            ...initialState,
+            isLoading: true
         });
     });
 
     it('should handle GET_REGISTRATION_SUCCESS', () => {
-        const user = {
-            username: 'user',
-            email: 'email@email.ru',
-            password: 'password',
-        };
         expect(
             registrationReducer(undefined, {
                 type: types.GET_REGISTRATION_SUCCESS,
-                userData: user
+                userData: newUser
             })
         ).toEqual({
-            isLoading: false,
-            hasError: false,
-            userData: user
+            ...initialState,
+            userData: newUser
         });
     });
 
@@ -48,9 +38,8 @@ describe('register reducer', () => {
                 type: types.GET_REGISTRATION_ERROR
             })
         ).toEqual({
-            isLoading: false,
+            ...initialState,
             hasError: true,
-            userData: {}
         })
     })
 })

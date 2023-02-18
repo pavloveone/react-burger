@@ -1,17 +1,12 @@
-import { orderDetailsReducer } from "./order-details";
+import { orderDetailsReducer, initialState } from "./order-details";
 import * as types from '../actions/order-details';
+import { order, orderNumber } from "../../utils/constants-test";
 
 describe('order details reducer', () => {
     it('should return the initial state', () => {
         expect(
             orderDetailsReducer(undefined, {})
-        ).toEqual({
-            isVisible: false,
-            isLoading: false,
-            hasError: false,
-            orderNumber: null,
-            currentOrders: []
-        });
+        ).toEqual(initialState);
     });
     it('should handle GET_ORDER_REQUEST', () => {
         expect(
@@ -19,26 +14,19 @@ describe('order details reducer', () => {
                 type: types.GET_ORDER_REQUEST
             })
         ).toEqual({
-            isVisible: false,
+            ...initialState,
             isLoading: true,
-            hasError: false,
-            orderNumber: null,
-            currentOrders: []
         });
     });
     it('should handle GET_ORDER_SUCCESS', () => {
-        const orderNumber = 1;
         expect(
             orderDetailsReducer(undefined, {
                 type: types.GET_ORDER_SUCCESS,
                 orderNumber: orderNumber
             })
         ).toEqual({
-            isVisible: false,
-            isLoading: false,
-            hasError: false,
+            ...initialState,
             orderNumber: orderNumber,
-            currentOrders: []
         });
     });
     it('should handle GET_ORDER_ERROR', () => {
@@ -47,11 +35,8 @@ describe('order details reducer', () => {
                 type: types.GET_ORDER_ERROR
             })
         ).toEqual({
-            isVisible: false,
-            isLoading: false,
+            ...initialState,
             hasError: true,
-            orderNumber: null,
-            currentOrders: []
         });
     });
     it('should handle SHOW_ORDER', () => {
@@ -60,11 +45,8 @@ describe('order details reducer', () => {
                 type: types.SHOW_ORDER
             })
         ).toEqual({
+            ...initialState,
             isVisible: true,
-            isLoading: false,
-            hasError: false,
-            orderNumber: null,
-            currentOrders: [] 
         });
     });
     it('should handle CLOSE_ORDER', () => {
@@ -73,11 +55,7 @@ describe('order details reducer', () => {
                 type: types.CLOSE_ORDER
             })
         ).toEqual({
-            isVisible: false,
-            isLoading: false,
-            hasError: false,
-            orderNumber: null,
-            currentOrders: []
+            ...initialState
         });
     });
     it('should handle FETCH_ORDER_NUMBER_REQUEST', () => {
@@ -86,36 +64,18 @@ describe('order details reducer', () => {
                 type: types.FETCH_ORDER_NUMBER_REQUEST
             })
         ).toEqual({
-            isVisible: false,
+            ...initialState,
             isLoading: true,
-            hasError: false,
-            orderNumber: null,
-            currentOrders: []
         });
     });
     it('should handle FETCH_ORDER_NUMBER_SUCCESS', () => {
-        const order = [
-            {
-                _id: '12345',
-                ingredients: [
-                    'ingredient-1', 'ingredient-2', 'ingredient-3'
-                ],
-                status: 'done',
-                name: 'burger',
-                createdAt: 'created',
-                updateAt: 'update'
-            }
-        ]
         expect(
             orderDetailsReducer(undefined, {
                 type: types.FETCH_ORDER_NUMBER_SUCCESS,
                 currentOrders: order
             })
         ).toEqual({
-            isVisible: false,
-            isLoading: false,
-            hasError: false,
-            orderNumber: null,
+            ...initialState,
             currentOrders: order
         });
     });
@@ -125,11 +85,8 @@ describe('order details reducer', () => {
                 type: types.FETCH_ORDER_NUMBER_ERROR,
             })
         ).toEqual({
-            isVisible: false,
-            isLoading: false,
+            ...initialState,
             hasError: true,
-            orderNumber: null,
-            currentOrders: []
         });
     });
 })

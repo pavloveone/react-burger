@@ -1,104 +1,66 @@
-import { feedReducer } from "./feed";
+import { feedReducer, initialState } from "./feed";
 import * as types from '../actions/feed';
+import { errorMessage, orders, statusMessages } from "../../utils/constants-test";
 
 describe('feed reducer', () => {
     it('should return the initial state', () => {
         expect(
             feedReducer(undefined, {})
-        ).toEqual({
-            status: '',
-            connectionError: '',
-            orders: null
-        });
+        ).toEqual(initialState);
     });
     it('should handle WsConnecting', () => {
-        const statusMessage = 'Connecting...';
         expect(
             feedReducer(undefined, {
                 type: types.wsConnecting,
-                status: statusMessage
+                status: statusMessages.connecting
             })
         ).toEqual({
-            status: statusMessage,
-            connectionError: '',
-            orders: null
+            ...initialState,
+            status: statusMessages.connecting,
         });
     });
     it('should handle wsOpen', () => {
-        const statusMessage = 'Online';
         expect(
             feedReducer(undefined, {
                 type: types.wsOpen,
-                status: statusMessage
+                status: statusMessages.online
             })
         ).toEqual({
-            status: statusMessage,
-            connectionError: '',
-            orders: null
+            ...initialState,
+            status: statusMessages.online,
         });
     });
     it('should handle wsClose', () => {
-        const statusMessage = 'Offline';
         expect(
             feedReducer(undefined, {
                 type: types.wsClose,
-                status: statusMessage
+                status: statusMessages.offline
             })
         ).toEqual({
-            status: statusMessage,
-            connectionError: '',
-            orders: null
+            ...initialState,
+            status: statusMessages.offline,
         });
     });
     it('should handle wsError', () => {
-        const errorMessage = 'Error';
         expect(
             feedReducer(undefined, {
                 type: types.wsError,
                 payload: errorMessage
             })
         ).toEqual({
-            status: '',
+            ...initialState,
             connectionError: errorMessage,
-            orders: null
         });
     });
     it('should handle wsMessage', () => {
-        const orders = {
-            total: 10,
-            totalToday: 5,
-            orders : [
-                {
-                    _id: '123',
-                    ingredients: [
-                        'ingredient-1', 'ingredient-2',
-                    ],
-                    status: 'done',
-                    name: 'burger',
-                    number: '2',
-                    createdAt: 'string',
-                    updatedAt: 'string',
-                },
-                {
-                    _id: '321',
-                    ingredients: [
-                        'ingredient-1', 'ingredient-5',
-                    ],
-                    status: 'pending',
-                    name: 'burger-2',
-                    createdAt: 'string1',
-                    updatedAt: 'string2',
-                }
-            ]
-        };
         expect(
             feedReducer(undefined, {
                 type: types.wsMessage,
                 payloady: orders
             })
         ).toEqual({
-            status: '',
-            connectionError: '',
+            ...initialState,
+            orders: undefined
         });
     });
 })

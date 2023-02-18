@@ -14,8 +14,7 @@ export type TOrdersListState = {
     userOrders: TOrders | null;
 }
 
-
-const initialState: TOrdersListState = {
+export const initialState: TOrdersListState = {
     status: '',
     connectionError: '',
     userOrders: null,
