@@ -14,7 +14,7 @@ type TConstructorListState = {
 }
 
 
-const initialState: TConstructorListState = {
+export const initialState: TConstructorListState = {
     ingredients: [],
     bun: []
 };

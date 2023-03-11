@@ -15,7 +15,7 @@ type TLoginListState = {
     userData: TUser;
 }
 
-const initialState: TLoginListState = {
+export const initialState: TLoginListState = {
     isLoading: false,
     hasError: false,
     isAuth: false,

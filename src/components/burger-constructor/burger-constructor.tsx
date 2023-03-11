@@ -17,7 +17,6 @@ import { CLOSE_ORDER, SHOW_ORDER } from '../../services/actions/order-details';
 import styles from './burger-constructor.module.css';
 import { useDrop } from "react-dnd";
 import { TIngredient } from "../../utils/types";
-import { Loading } from "../loading/loading";
 import { Spinner } from "../spinner/spinner";
 
 export const BurgerConstructor = () => {
@@ -34,8 +33,8 @@ export const BurgerConstructor = () => {
         accept: 'ingredient',
         drop(item: TIngredient) {
             addBun(item, dispatch)
-            }
-        })
+        }
+    })
 
     function handleOpenOrder() {
         
@@ -60,7 +59,7 @@ export const BurgerConstructor = () => {
     
 
     return (
-      <div className={styles.burger_constructor} ref={dragRef} >
+      <div className={styles.burger_constructor} ref={dragRef} data-testid='drop_box'>
           { bun.length > 0 && 
           <ConstructorElement
                 type="top"
@@ -84,7 +83,7 @@ export const BurgerConstructor = () => {
                 <p className={`${styles.price} text text_type_digits-medium`}>{getSum()}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button htmlType="button" type="primary" size="medium" onClick={handleOpenOrder} disabled={(bun.length > 0 && ingredientsConstructor.length > 0) ? false : true}>Оформить заказ</Button>
+            <Button htmlType="button" type="primary" size="medium" onClick={handleOpenOrder} disabled={(bun.length > 0 && ingredientsConstructor.length > 0) ? false : true} data-testid='button'>Оформить заказ</Button>
         </div>
         {isVisible && orderNumber &&(
             <Modal onClose={handleCloseOrder} >

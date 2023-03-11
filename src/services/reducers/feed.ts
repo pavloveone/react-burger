@@ -8,7 +8,7 @@ export type TOrdersListState = {
     orders: TOrders | null;
 }
 
-const initialState: TOrdersListState = {
+export const initialState: TOrdersListState = {
     status: '',
     connectionError: '',
     orders: null,

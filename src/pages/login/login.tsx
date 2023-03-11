@@ -38,11 +38,13 @@ export const Login = (): JSX.Element => {
                     placeholder="E-mail"
                     extraClass="mb-6"
                     onChange={e => setEmail(e.target.value)}
+                    data-testid='email_input'
                 />
                 <PasswordInput
                     value={password}
                     extraClass="mb-6"
                     onChange={e => setPassword(e.target.value)}
+                    data-testid='password_input'
                 />
                 <Button style={{width: '128px', marginBottom: '80px'}} htmlType="submit" type="primary" size="medium">
                     Войти

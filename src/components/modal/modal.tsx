@@ -34,9 +34,11 @@ export function Modal ({header, onClose, children}:TModalProps): JSX.Element {
         <>
             <div className={styles.container}>
                 {header ? (
-                <div className={`${styles.header} p-10`}>
+                <div className={`${styles.header} p-10`} >
                     <h2 className={`${styles.title} text text_type_main-large`}>{header}</h2>
-                    <CloseIcon type="primary" onClick={onClose}/>
+                    <div data-testid='close'>
+                    <CloseIcon type="primary" onClick={onClose} />
+                    </div>
                 </div>
                 ) : (
                 <div className={styles.button}>

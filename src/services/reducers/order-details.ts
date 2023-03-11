@@ -19,7 +19,7 @@ type TOrderDetailsListState = {
     currentOrders: Array<TOrderInfo>;
 }
 
-const initialState: TOrderDetailsListState = {
+export const initialState: TOrderDetailsListState = {
     isVisible: false,
     isLoading: false,
     hasError: false,

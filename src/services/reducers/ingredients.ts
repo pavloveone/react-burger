@@ -12,7 +12,7 @@ type TIngredientsListState = {
     hasError: boolean;
 }
 
-const initialState: TIngredientsListState = {
+export const initialState: TIngredientsListState = {
     ingredients: [],
     isLoading: false,
     hasError: false

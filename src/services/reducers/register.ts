@@ -12,7 +12,7 @@ type TRegisterListState = {
 	userData: TUser;
 }
 
-const initialState: TRegisterListState = {
+export const initialState: TRegisterListState = {
     isLoading: false,
 	hasError: false,
     userData: {}

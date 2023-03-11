@@ -15,7 +15,7 @@ type TProfileListState = {
     userProfile: TUser;
 }
 
-const initialState: TProfileListState = {
+export const initialState: TProfileListState = {
     isLoading: false,
     hasError: false,
     userProfile: {},
